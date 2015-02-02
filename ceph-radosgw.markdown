@@ -3,7 +3,7 @@ http://docs.ceph.com/docs/master/install/install-ceph-gateway/ 官方的配置�
 详细步骤指南
 
 
-# 安装apache和fastcgi
+安装apache和fastcgi
 
         sudo yum install httpd mod_fastcgi
         sudo vim /etc/httpd/conf/httpd.conf
@@ -13,7 +13,7 @@ http://docs.ceph.com/docs/master/install/install-ceph-gateway/ 官方的配置�
 
         sudo /etc/init.d/httpd restart
 
-# 安装SSL（勿信官方文档）
+安装SSL（勿信官方文档）
 
 先安装mod_ssl和openssl
 
