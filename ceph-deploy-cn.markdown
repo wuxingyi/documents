@@ -62,7 +62,6 @@
 	
 ## 修改ceph.conf文件
 
-其中ms nocrc是给cpu受限的机器使用
 
 如果确定osd的文件系统是xfs, filestore xattr use omap 为false. 同时filestore journal writeahead为true
 
@@ -83,7 +82,6 @@
 	osd pool default min size = 2
 	osd pool default pg num = 128
 	osd pool default pgp num = 128
-	ms nocrc=true
 	public network = x.x.x.x/x
 	cluster network = x.x.x.x/x
 
