@@ -10,7 +10,7 @@
 编辑文件/etc/yum.repos.d/ceph.repo
 
 	[ceph-updates]
-	baseurl=http://10.150.140.95/update/
+	baseurl=http://10.182.200.24/update/
 	name=Ceph packages
 	enabled=1
 	priority=1
@@ -18,6 +18,7 @@
 
 ## 配置ntp
 
+    就算是配置好了ntp服务，经过长时间运行，系统也可能出现时钟skew的情况，此时重启ntp服务即可
 
 ## 增加新用户cephadmin
 
