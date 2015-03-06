@@ -1,2 +1,2 @@
 all:
-	pandoc -s -t slidy ceph.markdown > ceph.html
+	pandoc --self-contained -s -t slidy ceph.markdown > ceph.html

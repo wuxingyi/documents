@@ -1,0 +1,103 @@
+# Agenda
+
+* CEPH存储
+* 云存储
+
+# Ceph存储
+	
+1. S3对外存储
+2. 转码成品库
+3. Openstack + RBD
+4. 编辑部门视频备份
+	
+# 对外S3 存储(CEPH)
+
+* 目前客户包括亮风台,爱唱, 乐视
+* SDK 整理
+* S3 文档编写
+* S3 工具开发(console tools, web portal)
+
+![](./s3.png)
+
+# 成品库存储(CEPH)
+
+* Wuzei HTTP Server(5% faster than Ceph S3 gateway)
+* striprados
+
+![](./castlyrock.png)
+
+# 备份存储(CEPH)
+
+* 替换HDFS + VSFtpd 集群
+* Erasure Code
+* 1.5 storage 
+
+![](./ftp.png)
+
+# Openstack + RBD
+
+![](./rbd.png)
+
+
+# Ceph 监控
+
+![](./grafana.png)
+
+
+# Ceph Community
+
+	3373249 Fix ReplicatedPG do_xattr_cmp_u64
+	9b9a682 msg/Pipe: set dscp as CS6 for heartbeat socket
+	1483a43 msg/simple: remove redundant calling of setsockopt
+	4aa02f8 osd: add an option to prioritize heartbeat traffic
+	78a15ee Fix libstriprados::remove, use strtoll insdead of strtol
+	24eb564 Remove pidfile and asok after stopping ceph
+	fe6679d Fix libstriprados::stat, use strtoll insdead of strtol
+	7533245 Fix rados_shutdown hang forever when using radosstriper
+
+
+# Ceph TODO
+
+* Java Striprados JNA 开发
+* Ceph 存储与CTO 结合
+* 完善S3工具,文档, 响应乐视致新的需求, 与GCP结合
+* Ceph成品库扩容到200台(与转码合作)
+* Wuzei 开发小文件Cache
+
+# 云存储业务
+
+* [片源上传] 上传机/HTML5 => 控制中心 => 本地上传机 => 本地HDFS
+* [云转码]   云存储 => 转码云 => 成品库 => CDN
+
+# 云存储集群
+
+* 太原节点集群
+* 成都电信集群
+* 武汉电信集群
+* 沈阳联通集群
+* 苏州桥集群
+* 青岛联通集群
+* 上海电信集群
+* 北京HP集群
+* 北京HP备用集群
+* 北京云视频集群
+* 超过4PB容量, 已经使用2.8PB
+
+# 云存储 What We Did (Part 1)
+
+* 2014.11 接手
+* 服务器扩容
+* 集群健康状态修复，坏块处理 
+* 集群监控更新,增强
+
+# 云存储 What We Did (Part 2)
+
+* 控制中心,上传机, 新Feature开发
+* 上传机, 续传BUG修复
+* 北京HP备用集群DEAD NODE非常多
+
+# 云存储 TODO
+
+* 优化传输路径, 简化逻辑, 提高运维自动化程度
+* 剥离成品库
+* 新上线的云存储采用CEPH, 克服HDFS集群NameNode压力过大
