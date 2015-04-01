@@ -86,6 +86,9 @@
 	public network = x.x.x.x/x
 	cluster network = x.x.x.x/x
 
+    [mon]
+    mon compact on start = true
+    
 	[osd]
 	osd max backfills = 1
 	osd backfill scan min = 16
