@@ -10,11 +10,17 @@
 编辑文件/etc/yum.repos.d/ceph.repo
 
 	[ceph-updates]
-	baseurl=http://10.182.200.24/update/
-	name=Ceph packages
-	enabled=1
-	priority=1
-	gpgcheck=0
+    gpgcheck=0
+    enabled=1
+    name=Letv Cloud's Ceph packages
+    priority=1
+    baseurl=http://10.200.93.170/ceph/el6/update/
+    [letv-ceph]
+    gpgcheck=0
+    enabled=1
+    name=Letv Cloud's Ceph packages
+    priority=1
+    baseurl=http://10.200.93.170/ceph/el6/update/
 
 ## 配置ntp
 
