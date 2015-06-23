@@ -35,6 +35,7 @@
 	5.5)	设置和修改用户quota:
 
 		5.5.1.	请参考http://ceph.com/docs/master/radosgw/adminops/#set-user-quota
+		5.5.2.  设置quota时，必须带上enabled=true来使能quota
 
 	6.6)	获取用户的quota：
 
