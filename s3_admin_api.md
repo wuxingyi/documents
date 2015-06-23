@@ -1,7 +1,7 @@
 #  S3 ADMIN API说明
 
 1. 所有的admin API使用的endpoint都必须以/admin/开头，否则s3会认为这是普通的上传下载API。
-2. 对于所有GET请求，请添加`?format=json`，这样server端会返回比较好处理的json串。
+2. 对于所有PUT或GET请求，请添加`?format=json`，这样server端会返回比较好处理的json串。
 3. 认证算法：S3 ADMIN API需要对每一个HTTP请求的签名进行验证，验证算法请参考：http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/RESTAuthentication.html, 在我们提供的demo中会有对此算法的实现。
 4. 名词解释：
 
