@@ -2,13 +2,13 @@
 
 linux下磁盘性能测试工具有很多种，例如fio, iozone, 还有dd, 查询设置磁盘参数的工具hdparm, 磁盘smart功能工具smartctl等等，下面分别介绍一下。
 
-##FIO
+## FIO
 
 fio 是一个 I/O 工具用来对硬件进行压力测试和验证，支持13种不同的I/O引擎，包括：sync, mmap, libaio等等, I/O priorities (for newer Linux kernels), rate I/O, forked or threaded jobs, 等等。fio可以使用job描述文本作为输入进行测试，也可以使用命令行进行测试。
 
 fio可以在直接测试块设备，也可以基于文件测试。直接在块设备上测试可以不受文件系统的干扰。如果在文件系统上测试，文件系统的碎片问题可能会影响到测试结果。
 
-###FIO测试命令例子
+### FIO测试命令例子
     fio -directory=.  --sync=1  -rw=write -iodepth=1  -bs=4k -size=1G -numjobs=1 -runtime=30 -group_reporting -name=mytest -exit_all
 
 说明
@@ -65,7 +65,7 @@ rw参数设置
 
 有write, read, randwrite, randread等等。
 
-###FIO输出
+### FIO输出
 
     mytest: (g=0): rw=write, bs=4K-4K/4K-4K/4K-4K, ioengine=sync, iodepth=1
     fio-2.0.13
@@ -101,11 +101,11 @@ rw参数设置
 
     write: io=4932.0KB, bw=168205 B/s, iops=41 , runt= 30025msec
 
-####IOPS
+#### IOPS
 
 即每秒的输入输出量(或读写次数)，是衡量磁盘性能的主要指标之一。IOPS是指单位时间内系统能处理的I/O请求数量，一般以每秒处理的I/O请求数量为单位，I/O请求通常为读或写数据操作请求。
 
-####IOPS计算方法
+#### IOPS计算方法
 
  传统磁盘本质上一种机械装置，如FC, SAS, SATA磁盘，转速通常为5400/7200/10K/15K rpm不等。影响磁盘的关键因素是磁盘服务时间，即磁盘完成一个I/O请求所花费的时间，它由寻道时间、旋转延迟和数据传输时间三部分构成。
 
@@ -127,7 +127,7 @@ IOPS的参考数据https://en.wikipedia.org/wiki/IOPS
 
 其他的参数的解释后续再增加
 
-##IOzone
+## IOzone
 
 IOzone是一个文件系统测试基准工具。可以测试不同的操作系统中文件系统的读写性能。可以通过 write, re-write, read, re-read, random read, random write, random mix, backwards read, record rewirte, strided read, fwrite, frewrite, fread, freread, mmap, async I/0 等不同的模式下的硬盘的性能。
 
@@ -171,7 +171,7 @@ f   后面指定文件名
 o   指定sync操作
 
 
-##dd命令
+## dd命令
 
 dd 命令主要是设置iflag=direct,sync oflag=direct,sync分别是direct IO, 同步读写IO的方式。例如
 
@@ -180,18 +180,18 @@ dd 命令主要是设置iflag=direct,sync oflag=direct,sync分别是direct IO, �
     记录了1024+0 的写出
     4294967296字节(4.3 GB)已复制，75.707 秒，56.7 MB/秒
 
-##hdparm
+## hdparm
 
 hdparm是一个工具用来显示与设定IDE或SCSI硬盘的参数。例如可以设置开关磁盘cache(有的时候可能一些原因部分硬盘不支持),可以设置硬盘某个block为坏快，可以修复某些种类的坏快，可以设置ncq等。
 
-##smartctl
+## smartctl
 
 硬盘smart是硬盘里跑的一个监控工具，用来检测和报告磁盘运行时候的健康参数。smartctl工具可以从硬盘读出这些参数。具体可以参考wiki. https://en.wikipedia.org/wiki/S.M.A.R.T.
 
 
 
 
-#线上机器测试结果
+# 线上机器测试结果
 
 其中机器配置
 
