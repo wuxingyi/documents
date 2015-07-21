@@ -1,4 +1,4 @@
-#磁盘性能测试
+# 磁盘性能测试
 
 linux下磁盘性能测试工具有很多种，例如fio, iozone, 还有dd, 查询设置磁盘参数的工具hdparm, 磁盘smart功能工具smartctl等等，下面分别介绍一下。
 
