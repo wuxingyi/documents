@@ -106,8 +106,8 @@
 	journal max write bytes = 32M
 	journal queue max bytes = 32M
 	mon osd down out interval  = 900
-	osd heartbeat interval = 10
-	osd heartbeat grace = 30
+	osd heartbeat interval = 15
+	osd heartbeat grace = 40
 
 
 
