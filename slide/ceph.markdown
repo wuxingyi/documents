@@ -1,4 +1,4 @@
-# ceph
+# Ceph
 
 A unified distributed storage system
 

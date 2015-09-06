@@ -92,8 +92,8 @@
 	public network = x.x.x.x/x
 	cluster network = x.x.x.x/x
 
-    [mon]
-    mon compact on start = true
+	[mon]
+	mon compact on start = true
     
 	[osd]
 	osd max backfills = 1
@@ -106,6 +106,8 @@
 	journal max write bytes = 32M
 	journal queue max bytes = 32M
 	mon osd down out interval  = 900
+	osd heartbeat interval = 10
+	osd heartbeat grace = 30
 
 
 
@@ -126,7 +128,16 @@
 
 状态是HEALTH_ERR,无osd，mon节点都已经加入
 
+
+
 # 手动安装OSD节点
+
+
+## 检查硬盘情况
+
+1. megacli64 检查Raid卡状态,确保是Cached, WriteBack, No Cache if no BBU
+
+2. yum install disktest 测试硬盘性能
 
 所有osd节点用手动安装的方式, 使用root用户
 
@@ -143,13 +154,15 @@
 准备ceph osd文件夹
 	
 	mkdir /var/lib/ceph/osd/ceph-{osd-number}
-	mkfs -t xfs /dev/disk
-	mount -o noatime /dev/disk /var/lib/ceph/osd/ceph-{osd-number}
+	#如果是普通硬盘
+	mkfs -t xfs -i size=2048 /dev/disk
+	#如果是RAID0
+	mkfs -t xfs -i size=2048 -d su=64k -d sw=2 /dev/disk
+	mount -o noatime,nodiratime,inode64 /dev/disk /var/lib/ceph/osd/ceph-{osd-number}
 
 在文件夹内建立osd keyring等数据
 	
 	ceph-osd -i {osd-num} --mkfs --mkkey
-
 
 检查文件夹/var/lib/ceph/osd/ceph-{osd-number}内容, 并建立sysvinit
 

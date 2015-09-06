@@ -46,6 +46,7 @@
 
 	object:
 		public-read
+
 	CDN可以读取
 
 	bucket:
