@@ -394,11 +394,3 @@ pgsnum = (osd数量 * 100) / 副本数 向上对齐
 	net.ipv4.tcp_tw_reuse = 1
 	net.ipv4.tcp_fin_timeout = 10
 
-	#Disable TCP slow start on idle connections
-	net.ipv4.tcp_slow_start_after_idle = 0
-
-ceph radosgw apache 打开keepalive后,设置内核参数(测试中)
-
-	net.ipv4.tcp_keepalive_probes = 20
-	net.ipv4.tcp_keepalive_intvl = 60
-	net.ipv4.tcp_keepalive_time = 600
