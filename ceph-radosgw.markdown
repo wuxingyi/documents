@@ -8,7 +8,18 @@ http://docs.ceph.com/docs/master/install/install-ceph-gateway/ 官方的配置�
         sudo yum install httpd mod_fastcgi
         sudo vim /etc/httpd/conf/httpd.conf
 
-找到ServerName去掉注释并修改为 ServerName ceph_mon
+
+修改/etc/init.d/httpd文件
+
+改为HTTPD=/usr/sbin/httpd.worker, 用线程模型启动
+
+修改/etc/httpd/conf/httpd.conf
+
+	LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+	LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D" combined
+
+在日志中记录响应时间
+
 重启Apache服务
 
         sudo /etc/init.d/httpd restart
