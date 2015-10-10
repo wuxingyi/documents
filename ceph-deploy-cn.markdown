@@ -335,6 +335,16 @@ pgsnum = (osd数量 * 100) / 副本数 向上对齐
 		
 		service ceph start mds.0
 		
+## 在radosgw中创建创建erasure code pool
+
+1.创建ec的profile:
+
+        ceph osd erasure-code-profile set myprofile k=4 m=2 ruleset-failure-domain=host plugin=isa
+		
+2.创建pool:
+
+        ceph osd pool create poolname pg_num pgp_num erasure myprofile
+
 
 ## 在cephfs中使用erasure code pool的部署：
 
