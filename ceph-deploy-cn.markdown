@@ -335,7 +335,7 @@ pgsnum = (osd数量 * 100) / 副本数 向上对齐
 		
 		service ceph start mds.0
 		
-## 在radosgw中创建创建erasure code pool
+## 在radosgw中创建erasure code pool
 
 1.创建ec的profile:
 
