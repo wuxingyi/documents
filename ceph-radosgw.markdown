@@ -18,11 +18,11 @@ http://docs.ceph.com/docs/master/install/install-ceph-gateway/ 官方的配置�
 	LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
 	LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O %T %D" combined
 	
+在日志中记录响应时间
+
 修改/etc/httpd/conf/httpd.conf
 
     KeepAlive On
-
-在日志中记录响应时间
 
 重启Apache服务
 
