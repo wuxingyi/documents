@@ -403,4 +403,10 @@ pgsnum = (osd数量 * 100) / 副本数 向上对齐
 	net.ipv4.tcp_max_tw_buckets = 2000000
 	net.ipv4.tcp_tw_reuse = 1
 	net.ipv4.tcp_fin_timeout = 10
+	
+# 使用ssd做journal
+
+    #将osd.x的日志的位置设置为/data/slotb/journal_x
+    [osd.x]
+        osd_journal = /data/slotb/journal_x
 
