@@ -108,6 +108,7 @@
 	mon osd down out interval  = 900
 	osd heartbeat interval = 180
 	osd heartbeat grace = 360
+	mon_osd_min_down_reporters = 6
 
 
 
