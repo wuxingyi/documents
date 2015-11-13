@@ -103,11 +103,15 @@
     osd heartbeat grace = 360
 
 
-# 如果使用使用ssd做journal，则每个host上的ceph.conf都略有不同，因为journal的配置是针对每个osd的：
+
+## 根据之前会议的结论，每台机器是10 HDD（两两做RAID 0） + 2 SSD, ssd做journal，其中一块SSD作为2个OSD的journal，另一块作为3个OSD的journal：
+
+## 如果使用使用ssd做journal，则每个host上的ceph.conf都略有不同，因为journal的配置是针对每个osd的：
 
     #将osd.x的日志的位置设置为/data/slotb/journal_x
     [osd.x]
         osd_journal = /data/slotb/journal_x
+        
 
 ## 安装monitor节点
     
@@ -178,7 +182,7 @@
 
 启动ceph osd
 
-    /etc/init.d/ceph start osd
+    /etc/init.d/ceph start osd.{osd-number}
 
 检查是否加入集群
 
