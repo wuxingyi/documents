@@ -188,3 +188,8 @@
 
     ceph osd tree
     ceph -s
+    
+注意事项：
+
+    1.monitor节点一开始就使用ceph-deploy部署好三个，比后来手工加要简单得多
+    
