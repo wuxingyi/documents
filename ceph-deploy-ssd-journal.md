@@ -188,4 +188,6 @@
 注意事项：
 
     1.monitor节点一开始就使用ceph-deploy部署好三个，比后来手工加要简单得多
+    2.采用手工部署时，为保证机器重启时osd能够也随之重启，需要根据mount参数修改/etc/fstab
+    3.部署完成后，添加自动启动：chkconfig ceph on
     
