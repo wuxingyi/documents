@@ -172,10 +172,6 @@
 
     ceph auth list
 
-加入osd，权值1代表1T，所有如果是500G硬盘，就为0.5
-    
-    ceph osd crush add osd.{osd-num} {weight} root=default host={机器名}
-
 检查osd列表
     
     ceph osd tree
