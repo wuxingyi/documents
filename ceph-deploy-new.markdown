@@ -9,7 +9,8 @@ http://download.ceph.com/rpm-hammer/el6/noarch/
 
 ##配置ceph-deploy
 
-修改配置文件~/.cephdeploy.conf，添加以下内容，注意区分内外网机器的baseurl不同
+修改配置文件~/.cephdeploy.conf，添加以下内容，注意区分内外网机器的baseurl不同,
+如果要上最新的hammer版本代码，要将URL路径里的ceph替换为ceph-hammer
 
     [ceph]
     name=ceph
