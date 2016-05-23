@@ -101,5 +101,21 @@ asdfadsfasdfasdo
     ceph-disk -v activate --mark-init sysvinit --mount /dev/vg/lv4
     ceph-disk -v activate --mark-init sysvinit --mount /dev/vg/lv5
     ceph-disk -v activate --mark-init sysvinit --mount /dev/vg/lv6
-    
+
+ceph tcp tunning
+    net.core.rmem_max = 33554432
+    net.core.wmem_max = 33554432
+    net.core.rmem_default = 33554432
+    net.core.wmem_default = 33554432
+    net.core.optmem_max = 40960
+    net.ipv4.tcp_rmem = 4096 87380 33554432
+    net.ipv4.tcp_wmem = 4096 65536 33554432
+
+    net.core.somaxconn = 1024
+    net.core.netdev_max_backlog = 50000
+    net.ipv4.tcp_max_syn_backlog = 30000
+    net.ipv4.tcp_max_tw_buckets = 2000000
+    net.ipv4.tcp_tw_reuse = 1
+    net.ipv4.tcp_fin_timeout = 10
+
     
