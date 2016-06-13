@@ -22,6 +22,7 @@ nobackfill和norecover标志禁止进行数据的rebalance，在用户流量较�
 4.```ceph daemon osd.0 config show/get/set/diff```
 这几个命令行可以显示/获取/更行某个osd的配置项。
 注意：这几个命令行只能运行于osd所在的服务器上，不能远程运行。
+通过```ceph daemon osd.0 config set debug_osd 20/20```可以设置osd.0的日志级别为20/20，查看osd的最完整日志。
 
 5.```ceph osd pool stats```
 这条命令行可以查看每一个pool的IO情况，包括client IO和recovery IO，因此比```ceph -s```命令行得出的数据要高明许多，另外也可以指定poolname来查看某个pool的IO情况。
@@ -58,6 +59,44 @@ osdmap e120 pool 'rbd' (8) object 'benchmark_data_ceph54_361925_object482' -> pg
 13.```ceph daemon osd.0 dump_reservations```
 查看osd的backfill和recovery的槽位情况，即有哪几个osd处于等待槽位，这对于了解正在做backfill的pg进而估算backfill需要耗费的时间比较有帮助。
 
+14.```ceph pg repair <pgid>```
+修复inconsistent的pg
+
+15.```osd pool set <poolname> size/min_size/pg_num/pgp_num```
+设置pool的size和pg个数参数，减少min_size为1在三个副本中的某一个数据还在的情况下，可以解决incomplete pg的问题，但是在数据不全的情况下，incomplete pg的问题只能依靠```ceph_objectstore_tool```尝试解决(事实上也不一定能百分之百解决)。
+扩充pg能够让每个osd里的数据更加均匀，但是扩充pg_num和扩充pgp_num表现上是不一样的，扩充pg_num时，尽管每个osd上的pg个数都会增加，但是新增加的pg并不会在osd上重新分布，比如之前是1个pg，负责的osd为(0,1,2)，此时如果扩充pg_num为2，此时两个pg都仍然是映射到(0,1,2)而不会在整个crushmap上重新映射，另外，表现上扩充pg_num就是在current目录下新建一个目录，并且把原pg的一半内容挪到新pg上，可想而知，扩pg需要filestore层的很多hard link操作，因此会耗费一定时间，因此，扩充pg_num不应在业务量高的时候做。扩充pgp_num之后，就会实现新pg的重新分布，比如上述1扩为2的情况，可能新pg就会映射到(2,3,4)上，并且会引起数据的backfill。
+总结如下：
+一、扩pg_num不会带来数据迁移，但是会引起filestore的文件操作，并且不像backfill或者recover可以暂停，这个过程是不可中断的，并且新增的pg个数越多，这些新pg也会需要做经历creating和peering阶段，对于系统CPU和内存都有消耗，因此不要在高业务量的情况下进行操作。建议：扩充pg时，必须小步走，一次不要扩太多。
+二、扩pgp_num时，会引起数据的迁移，请合理使用```nobackfill```来控制迁移的节奏。
+
+16.```rados pgls -p <poolname> -pg <pgid>```
+通过这条命令可以list出一个pg内的所有对象，而不需要像```rados ls```那样把整个pool都list出来。
+
+17.```ceph health detail```
+通过这条命令可以查看出集群的运行状态，包括发生slow request的osd，出现clock skew的monitor等等，方便后续决策。
+
+18.```ceph_objectstore_tool```
+这个命令行工具是由ceph-test包提供的，是大杀器，在面临极端情况下(最坏的情况就是出现incomplete pg的情况)十分有用。
+通过这个命令行，除了可以进行对象的操作之外，还可以对非常危险的pg元数据进行操作，另外也可以查看一个pg的pg log，也可以进行pg数据的import和export，还可以挽救incomplete的pg，但是务必慎重使用，因为可能会造成整个filestore或者journal损坏。
+因此，线上环境下，使用这个命令时，请务必跟开发人员沟通好，明确危险性。
+
+19.```rados stat -p <poolname> <objectname>```
+通过这条命令行可以查看对象的写入时间和对象大小等参数。
+
+20.```ceph osd getcrushmap -o map``` ```ceph osd setcrushmap -i map```
+前者表示获取crushmap并保存到本地map文件中，后者表示将本地已编译的二进制map文件设置为新的crushmap。
+
+21.```crushtool -d map -o txt``````crushtool -c txt -o map```
+crushmap在osd上是使用二进制进行存取的，而我们队crushmap进行编辑操作需要使用文本格式，前者将二进制的crushmap解码为ASCII文本，后者将ASCII版本的crushmap编码为二进制。
+
+22.```rados listomapkeys/listomapvals/getomapval```
+omap是rados存储数据的一种形式，采用key/value的方式进行存储，rbd中关于image的元数据即是使用omap进行存储的。
+
+23.```rados listxattr/getxattr```
+xattr是rados存储数据的一种形式，底层使用的是文件系统的扩展属性进行存储的，rbd中基本上没有使用rados的xattr进行存储，但是在rgw大量使用到了xattr，但是底层的filestore还是大量的使用了文件系统扩展属性，对于这些扩展属性，可以通过```attr -g```进行获取。
+
+24.```ceph auth```
+```ceph auth```这一族命令行都是用于cephx认证相关的，```ceph auth list```用户查看所有entity的keyring，```ceph auth caps```用于给一个entity增加权限。```auth export```用于到处keyring到本地文件。
 
 
 ## 1、部署上线
