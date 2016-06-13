@@ -5,47 +5,59 @@ ceph是一个复杂的分布式存储系统，运维操作也比较繁杂，为�
 
 
 1.```ceph tell osd.* injectargs “--config value”```
+
 该命令行可对批量osd进行配置项的更新操作，其中，```* ```表示所有的osd，也可使用某一个osd的编号来更新这个osd的配置,```--config```表示某一个配置项，```value```表示配置项的值，例如更新所有osd的```osd_max_backfills```配置项为1的命令行如下：
 
 ```
 ceph tell osd.* injectargs "--osd_max_backfills 1"
 ```
 2.```ceph osd set nodown/noout/nobackfill/norecover/noscrub/nodeep-scrub```
+
 这几个命令行的目的是分别是：禁止标志osd为down状态，禁止down的osd被monitor标志位out，禁止进行backfill，禁止进行recover，禁止进行noscrub，禁止进行deep scrub。相应的可以使用：```ceph osd unset nodown/noout/nobackfill/norecover/noscrub/nodeep-scrub```来取消这几项配置。
 建议系统设置noout，避免无谓的数据迁移；
 nobackfill和norecover标志禁止进行数据的rebalance，在用户流量较大的情况下可以暂时关闭，在用户请求量下降的情况下在unset；
 从线上运行的情况下，线上并没有出现过inconsistent的pg的情况，并且deep scrub会消耗较多的资源，可酌情开启或关闭deep scrub。
 
 3.```ceph osd df```
+
 该命令行可查看每个osd的磁盘使用情况，并查看磁盘的平均使用率以及使用率最高的osd的磁盘用量，是衡量是否需要进行扩容的重要指标。
 
 4.```ceph daemon osd.0 config show/get/set/diff```
+
 这几个命令行可以显示/获取/更行某个osd的配置项。
 注意：这几个命令行只能运行于osd所在的服务器上，不能远程运行。
 通过```ceph daemon osd.0 config set debug_osd 20/20```可以设置osd.0的日志级别为20/20，查看osd的最完整日志。
 
 5.```ceph osd pool stats```
+
 这条命令行可以查看每一个pool的IO情况，包括client IO和recovery IO，因此比```ceph -s```命令行得出的数据要高明许多，另外也可以指定poolname来查看某个pool的IO情况。
 
 6.```ceph osd find```
+
 查看某一个osd所运行的host以及这个osd所处的crushmap的位置。
 
 7.```ceph --show-config```
+
 查询某一个ceph配置项的默认值
 
 8.```ceph pg map```
+
 查看一个pg映射的osd集合。
 
 9.```ceph pg query```
+
 查看某个pg的状态，这些状态包括了pg_info_t和pg_stat_t内容，也包含了recovery state machine的运行状态，另外，对于正在peering的pg，可以通过peering_blocked_by来查看具体peering是被哪个osd所阻塞的。
 
 10.```ceph osd out osd.0```
+
 表示将osd.0 out掉，原本存储于osd.0的数据都会重新找一个副本进行存储，并且如果用户不显示的使用```ceph osd in osd.0```将osd加入进来，那么即使osd处于up状态也不会有任何数据写入进来。
 
 11.```ceph osd perf```
+
 查看系统中所有osd的日志commit延时和文件系统的apply延时，是检测磁盘是否正常运行的重要指标，commit延时一般在10毫秒一下，而apply延时一般在100毫秒一下，否则改磁盘就处于不佳的状态了。
 
 12.```ceph osd map objectname```
+
 这个命令与```ceph pg map```都可以查询一个对象映射的osd集合，但是还有一个更精巧的运用场景，即它可以用户查询一个对象在filestore上的存储位置，比如:
 
 ```
@@ -57,48 +69,62 @@ osdmap e120 pool 'rbd' (8) object 'benchmark_data_ceph54_361925_object482' -> pg
 在这个命令行中，```4f7490ff```为```benchmark_data_ceph54_361925_object482```这个对象的哈希值，而在filestore中，是按照哈希值的逆排序来存储文件的，所以它存储的位置为DIR_F/DIR_F,当然随着这个DIR_F里的文件越来越多，就会进一步split出新的目录来，那时候，这个文件就会存储在DIR_F/DIR_F/DIR_0这个目录中了。
 
 13.```ceph daemon osd.0 dump_reservations```
+
 查看osd的backfill和recovery的槽位情况，即有哪几个osd处于等待槽位，这对于了解正在做backfill的pg进而估算backfill需要耗费的时间比较有帮助。
 
 14.```ceph pg repair <pgid>```
+
 修复inconsistent的pg
 
 15.```osd pool set <poolname> size/min_size/pg_num/pgp_num```
+
 设置pool的size和pg个数参数，减少min_size为1在三个副本中的某一个数据还在的情况下，可以解决incomplete pg的问题，但是在数据不全的情况下，incomplete pg的问题只能依靠```ceph_objectstore_tool```尝试解决(事实上也不一定能百分之百解决)。
 扩充pg能够让每个osd里的数据更加均匀，但是扩充pg_num和扩充pgp_num表现上是不一样的，扩充pg_num时，尽管每个osd上的pg个数都会增加，但是新增加的pg并不会在osd上重新分布，比如之前是1个pg，负责的osd为(0,1,2)，此时如果扩充pg_num为2，此时两个pg都仍然是映射到(0,1,2)而不会在整个crushmap上重新映射，另外，表现上扩充pg_num就是在current目录下新建一个目录，并且把原pg的一半内容挪到新pg上，可想而知，扩pg需要filestore层的很多hard link操作，因此会耗费一定时间，因此，扩充pg_num不应在业务量高的时候做。扩充pgp_num之后，就会实现新pg的重新分布，比如上述1扩为2的情况，可能新pg就会映射到(2,3,4)上，并且会引起数据的backfill。
 总结如下：
+
 一、扩pg_num不会带来数据迁移，但是会引起filestore的文件操作，并且不像backfill或者recover可以暂停，这个过程是不可中断的，并且新增的pg个数越多，这些新pg也会需要做经历creating和peering阶段，对于系统CPU和内存都有消耗，因此不要在高业务量的情况下进行操作。建议：扩充pg时，必须小步走，一次不要扩太多。
 二、扩pgp_num时，会引起数据的迁移，请合理使用```nobackfill```来控制迁移的节奏。
 
 16.```rados pgls -p <poolname> -pg <pgid>```
+
 通过这条命令可以list出一个pg内的所有对象，而不需要像```rados ls```那样把整个pool都list出来。
 
 17.```ceph health detail```
+
 通过这条命令可以查看出集群的运行状态，包括发生slow request的osd，出现clock skew的monitor等等，方便后续决策。
 
 18.```ceph_objectstore_tool```
+
 这个命令行工具是由ceph-test包提供的，是大杀器，在面临极端情况下(最坏的情况就是出现incomplete pg的情况)十分有用。
 通过这个命令行，除了可以进行对象的操作之外，还可以对非常危险的pg元数据进行操作，另外也可以查看一个pg的pg log，也可以进行pg数据的import和export，还可以挽救incomplete的pg，但是务必慎重使用，因为可能会造成整个filestore或者journal损坏。
 因此，线上环境下，使用这个命令时，请务必跟开发人员沟通好，明确危险性。
 
 19.```rados stat -p <poolname> <objectname>```
+
 通过这条命令行可以查看对象的写入时间和对象大小等参数。
 
 20.```ceph osd getcrushmap -o map``` ```ceph osd setcrushmap -i map```
+
 前者表示获取crushmap并保存到本地map文件中，后者表示将本地已编译的二进制map文件设置为新的crushmap。
 
 21.```crushtool -d map -o txt``````crushtool -c txt -o map```
+
 crushmap在osd上是使用二进制进行存取的，而我们队crushmap进行编辑操作需要使用文本格式，前者将二进制的crushmap解码为ASCII文本，后者将ASCII版本的crushmap编码为二进制。
 
 22.```rados listomapkeys/listomapvals/getomapval```
+
 omap是rados存储数据的一种形式，采用key/value的方式进行存储，rbd中关于image的元数据即是使用omap进行存储的。
 
 23.```rados listxattr/getxattr```
+
 xattr是rados存储数据的一种形式，底层使用的是文件系统的扩展属性进行存储的，rbd中基本上没有使用rados的xattr进行存储，但是在rgw大量使用到了xattr，但是底层的filestore还是大量的使用了文件系统扩展属性，对于这些扩展属性，可以通过```attr -g```进行获取。
 
 24.```ceph auth```
+
 ```ceph auth```这一族命令行都是用于cephx认证相关的，```ceph auth list```用户查看所有entity的keyring，```ceph auth caps```用于给一个entity增加权限。```auth export```用于到处keyring到本地文件。
 
 25.```ceph osd reweight 0 0.9```
+
 将osd.0的weight降低为0.9，这种情况下，因为osd.0的crush weight并没有改变，所以osd.0上的很多数据都大概率会迁移到osd.0所在host的其他osd上，因此使用这条命令时，应该注意观察本host上的其他osd的磁盘使用率，如果是只有一个osd到了near full报警，而且有其他osd已经到了80%左右，那么这种reweight就是毫无意思的，因为大概率会出现拆东墙补西墙的情况，另外一个osd会冒出来报near full。
 
 ## 二、有关ceph的日志
@@ -125,6 +151,7 @@ ceph的日志包括osd的日志和monitor的日志，位于```/var/log/ceph```�
 这类问题处理时比较简单，并且不会影响数据安全，包括：
 
 1.osd的crush weight与其实际容量不符：
+
 这个问题是在部署时出现的，此时系统尚未正式写入数据，但这类问题必须得到快速处理，如果存在这些问题，则必须先解决才能接入正式的生产环境。
 这个问题在上线的时候出现过，现象就是一块12TB的磁盘，通过
 ```ceph osd tree```命令行看到的crush weight为1。这个问题可以通过手动修改crushmap来快速解决问题：
@@ -138,6 +165,7 @@ ceph osd setcrushmap -i map #设置crushmap
 ```
 
 2.osd重启时打印Resource temporarily unavailable:
+
 打印的日志形如：
 
 > lock_fsid failed to lock /root/cephcode/src/dev/osd0/fsid, is another ceph-osd still running? (11) Resource temporarily unavailable
@@ -145,24 +173,31 @@ ceph osd setcrushmap -i map #设置crushmap
 这说明在stop的时候osd并没有死，此时需要手工杀死此osd，如果`kill`也杀不掉就`kill -9`杀之。
 
 3.ceph -s报“too few pgs per osd”
+
 ceph报这一问题的条件是每个osd上的pg个数小于20个，而根据我们目前的最佳实践，为每个osd数据的相对均匀，我们都会要求每个osd承载200个pg左右，因此这个问题在线上出现的概率几乎为0。如果出现是因为扩容了十倍以上的osd导致每个osd上的pg个数小于20，那么就必须采用```一、运维必备命令行```中提到的扩容pg_num和pgp_num进行操作了。
 
 4.内存不足导致osd进程因pthread_create失败而退出
+
 这个问题在线上出现过，某个osd因为pthread_create失败而打断言并退出，后来看了是因为系统内存不足，重启osd之后，问题就解决了。
 
 5.EC环境下，进行recovery时看不到recover IO
+
 这个问题已经在giant上修复，考虑到rbd并不会使用到EC，所以这个问题不会再出现。
 
 6.degraded或者misplaced的objects为负数
+
 这个问题是ceph统计上的bug，比如出现```-2630/2182927064 objects degraded```，2182927064是这个pool中所有的对象个数*副本数，-2603这个负数可以理解为有些副本本应被clean掉，即它们是多出来的，所以成了负数，总之，这个问题都可以放任不管，待backfill完成之后，就没有负数了。
 
 7.pg状态为active后加degraded、remapped、remapped、backfilling、wait_backfill、recovering、wait_recover、undersized等状态
+
 这是做recover/backfill过程中的中间状态，只有pg是active的就没有问题，无需干预。
 
 二、关注级别
+
 这类问题需要运维人员根据实际情况作出一些处理，但危险性基本可控。
 
 1.磁盘坏道或其他磁盘故障导致osd无法启动
+
 首先明确在```/var/log/messages```中能够看到磁盘硬件故障的信息，如果已明确，通知IDC更换磁盘，如果IDC短期内没有办法更换磁盘，那么就应该把这个osd out掉，避免有数据处于降级状态。IDC更换磁盘成功之后，执行以下操作(以下以osd.12为例讨论)：
 
 ```
@@ -182,6 +217,7 @@ ceph osd in osd.12
 ```
 
 2.monitor出现clock skew
+
 这个问题可大可小，必须要区分对待，因此把这个问题放到了关注级别。因为默认是0.05秒skew就报警，如果是通过```ceph health detail```得到的clock skew时间是一个稍大的数字比如0.1或者0.5之类的，那么重启不从重启ntpd都可以。但线上出现过长达220天的clock skew，这种情况下如果重启ntpd，一般都会带来非常严重的cephx认证失败，造成大量的osd down，大量的pg出现peering状态，从而造成整个集群的服务不可用。出现这一问题，应该首先设置osd为nodown：
 
 ```
@@ -190,6 +226,7 @@ ceph osd set nodown
 目的是为了防止大量osd down掉，然后再重启ntpd，重启完了也需要继续关注osd和集群的状态。
 
 3.出现inconsistent的pg
+
 根据线上rgw运行情况，几乎没有出现inconsistent pg的情况，但是rbd出现过多次因为磁盘坏道导致读不到primary osd上的副本而出现的inconsistent pg的情况，这个首先参考```磁盘坏道或其他磁盘故障导致osd无法启动```把osd创建并加进来，待数据迁移完了之后运行：
 
 ```
@@ -199,6 +236,7 @@ ceph pg repair pgid   #pgid为出现inconsistent的pgid
 事实上，因为所有的副本都已经被拷贝了，并且不存在读不到某一个副本的情况，所以待repair完，pg将会是摆脱inconsistent状态。
 
 4.osd占用过多内存或CPU资源
+
 这个也要分情况进行处理，此处重点区分两种情况：一是做backfill时，另一种是常规时间。
 在做backfill的时候，osd会需要占用一些内存来存储迁入或者迁出的数据，但是内存占用一般不会超过2GB，如果超过2GB很多，那说明数据迁移太猛了，应该降低一下迁移的速度(前文提到过怎样增减osd的迁移速度)，CPU方面主要是看15分钟的load average，rgw的数据迁移一般控制在load average在6左右，具体要跟存储服务器的核数来定。
 在常规时间，内存一般在1GB左右，5分钟load average一般都在0附近，如果超出很多，则需要关注是否跟别的问题相关，因为在大部分情况下，耗费CPU和内存是现象，而问题的根源则需要再进一步深究。
@@ -206,6 +244,7 @@ rgw场景下曾经出现过一次因为某一个对象的omap过大，而ceph在
 总之，占用过多CPU和内存时，首先需要判断的是是否是处于backfill状态，如果是就降迁移速度，否则，就需要综合各种因素来判读。
 
 5.出现near full的osd
+
 默认情况下，osd的磁盘使用率超过了85%之后，即会报出near full的warning。首先应该极力避免将集群的使用率达到如此高的程度，这就需要对集群的超售比做出限制，并规划好进行扩容的比例，rgw集群一般在60%左右就会进行扩容。
 如果出现了near full的osd，首先看是否是这个osd一枝独秀，即达到85%的osd是否只有这一个或一两个，并且其他所有的osd的使用率都远低于85%，如果是这样，可以一下命令行降低一下osd的weight:
 
@@ -215,9 +254,11 @@ ceph osd reweight 0 0.9
 如果有多个osd都是near full状态，那就找尽快扩容吧。
 
 6.某些pg出现backfill_toofull状态
+
 backfill_toofull出现时，数据将不能正常backfill到已经过满的osd上，在处理上，这个问题跟前面的```出现near full的osd```一样，不能reweight就扩容吧。
 
 7.osd因为心跳不达而suicide
+
 目前线上集群已经配置了一个非常宽容的心跳检测条件：
 
 ```
@@ -229,16 +270,20 @@ mon osd min down reports = 4
 这导致出现心跳问题的概率降到非常低了，如果出现了这种情况，首先还是检查是否用户IO负载过重或者数据迁移速度是否过快，一般而言重启就能解决问题。
 
 8.数据不均匀，max/avg超过1.4
+
 通过配置每个osd承载200个pg，一般而言max/avg都在1.2到1.3左右，即最满的osd与平均值的比例在1.2到1.3之间，如果超过1.4了，那就代表数据严重不均匀了，这个时候需要考虑是不是因为集群扩容导致每个osd承载的osd的个数减少了，如果是的话，就需要增加pg个数了。
 在rbd场景下，数据不均匀性可能会比存储大文件的rgw集群严重，因为对于rbd而言，可能仅仅写文件的开头一些字节，从而存储了很多小的文件，这个需要到线上验证。
 
 9.某些osd的commit时间百毫秒以上
+
 commit时间可以通过```ceph osd perf```获得，如果这个值特别大，超过百毫秒以上，说明如果是单块磁盘这样，说明这块磁盘性能严重降低了，如果大部分磁盘都这样，则需要联系开发人员进行性能分析来判断了。
 
 10.某些osd出现了slow request
+
 这个时候需要查日志，看看slow request的延迟时间，前面提到的clock skew也会造成slow request，如果没有clock skew，那么就看出现slow request的osd的个数，如果是仅仅一两个osd出现，那么可以不处理，或者是重启这个slow request的osd。
 
 11.简单版的incomplete的pg
+
 这种情况的简单之处在于，尽管当前的acting set已经小于min_size了，但是acting set中至少有一个osd，这种incomplete的特征就是```ceph health detail```可以看到：
 
 ```
@@ -255,6 +300,7 @@ ceph osd pool set rbd min_size 1
 严重级别操作具有危险性，特别是涉及到操作pg的元数据，因此需要谨慎。
 
 1.恶劣版的incomplete pg
+
 这种情况下，集群已经处于错误状态，此时肯定是有osd处于down状态，如果能把down的osd全部拉起来，那么就不存在什么问题了，down的pg在重新peering之后应该能恢复。
 如果发现多个osd不能启动，首先应该做的是确认osd不能启动的原因，原因可能有磁盘硬件故障和ceph本身的bug。如果是ceph本身的bug，则需参考```四、疑难杂症```中的```1.挂掉的osd重启之后仍然打断言```收集信息做进一步分析。
 如果是硬件故障导致数据已经无法恢复，则通过```ceph pg 10.0 query```查看出past_intervals内的所有osd，并尝试查看这些osd上是否有这个pg 10.0的数据，如果有，那么可以看看这个目录中文件的个数，那么可以把这些数据当做是这个pg的最终版本的数据，即把这个osd当做authority，这可能会造成丢失一部分数据，类似于git的revert到历史上的一个版本，通过下面命令行即可：
@@ -270,13 +316,16 @@ ceph_objectstore_tool --op mark-complete --pgid 7.0 --data osd1 --journal osd1.j
 这条命令行结果仅仅是pg可写，原有的数据全部丢失了。
 
 2.出现full的osd
+
 在有osd的磁盘使用率超过95%的情况下，monitor会报full，并且系统变成不可读写，处于ERROR状态。
 前面提到了，在osd进行near full状态之前就需要进行扩容，在出现了full的osd之后，能做的就是把full的osd关掉并out掉，然后删除这个osd上的部分pg，在使用率低于95%之后即可把osd拉起来并设置为in状态，并参考near full状态下的处理进行操作。
 
 3.多台存储服务器同时宕机
+
 通知IDC启动服务器，尝试启动osd并进行处理
 
 4.网络抖动等导致的心跳异常，并因此引起的membership剧烈变动
+
 此时需要进行一下设置：
 
 ```
@@ -285,20 +334,24 @@ ceph osd set noup
 ceph osd set noout
 ```
 5.时钟严重不同步导致的cephx验证失败
+
 前面已有提到，此时需要在重启ntpd前做以下配置：
 ```
 ceph osd set nodown
 ```
 6.EC场景下osd成组的死亡
+
 这个问题在rgw使用EC的环境下出现过，原因在于同时处理同名文件的删除和上传时，文件删除操作导致偏移变成0，而文件上传操作仍然以之前的偏移进行文件写入，EC认为这个不为0所以core dump了。EC采用使用第一个osd进行对象的切分和分发，在第一个osd core dump之后，写入会重新进行retry并把下一个osd也搞core dump，最终导致这个pg为incomplete，如果这些core dump的osd全部被out掉了，那么再retry又可以把新补位的osd也搞core dump，最终的结果就是所有的osd只剩下```min_size-1```个。
 所幸，这个bug已经修了。
 
 7.来自librbd的bug
+
 可能需要重启虚拟机，通过虚拟机迁移方式应该也可行，但没有验证过
 
 四、疑难杂症
 
 1.挂掉的osd重启之后仍然打断言
+
 出现了前面都没提到的原因，导致osd重启后打断言并启动失败，那么需要提高osd的日志等级，收集日志，并联系开发人员处理.
 提高日志等级的方式是在```/etc/init.d/ceph.conf```的```[osd.0]```段下配置日志等级，形如：
 
