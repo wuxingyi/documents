@@ -1,7 +1,7 @@
 # ceph运维手册
 ceph是一个复杂的分布式存储系统，运维操作也比较繁杂，为了简化运维操作，本手册首先总结了最常见最实用的ceph命令行，用以方便的对集群进行管理和故障排除。另外，在部署上线、配置项管理、版本升级、系统扩容、磁盘故障、网络故障处理等各个环节都有可能出现一些问题，本手册收集了来自社区相关文档的说明，邮件列表对于这些问题的讨论，以及我们线上出现的问题的总结。
 
-## 常用命令行总结
+## 一、运维必备命令行
 
 
 1.```ceph tell osd.* injectargs “--config value”```
@@ -98,11 +98,33 @@ xattr是rados存储数据的一种形式，底层使用的是文件系统的扩�
 24.```ceph auth```
 ```ceph auth```这一族命令行都是用于cephx认证相关的，```ceph auth list```用户查看所有entity的keyring，```ceph auth caps```用于给一个entity增加权限。```auth export```用于到处keyring到本地文件。
 
+25.```ceph osd reweight 0 0.9```
+将osd.0的weight降低为0.9，这种情况下，因为osd.0的crush weight并没有改变，所以osd.0上的很多数据都大概率会迁移到osd.0所在host的其他osd上，因此使用这条命令时，应该注意观察本host上的其他osd的磁盘使用率，如果是只有一个osd到了near full报警，而且有其他osd已经到了80%左右，那么这种reweight就是毫无意思的，因为大概率会出现拆东墙补西墙的情况，另外一个osd会冒出来报near full。
 
-## 1、部署上线
-这类问题是在部署时出现的，此时系统尚未正式写入数据，但这类问题必须得到快速处理，如果存在这些问题，则必须先解决才能接入正式的生产环境。
+## 二、有关ceph的日志
+ceph的日志包括osd的日志和monitor的日志，位于```/var/log/ceph```目录下，osd的日志文件名称是ceph-osd.0.log，monitor日志名称是ceph-mon.a.log，默认情况下7天做一次log rotate。
+可以通过调高日志级别来数据更详细的日志，但是要注意monitor和osd在最高日志级别下日志写入非常快，别把分区刷满了。
+另外，ceph的日志是分模块进行的，合理使用debug_osd和debug_filestore能够知道osd daemon做的所有事情，只需使用下面的命令行即可：
 
+```
+	ceph daemon osd.0 config set debug_osd 20/20
+	ceph daemon osd.0 config set debug_filestore 20/20
+```
+
+类似的，对于monitor，设置debug_mon日志等级为20/20即可。
+需要注意的是，对于rados和rbd命令行，其实也是可以设置debug参数的，比如使用使用如下命令行可以查看到完整的client和monitor、osd交互的过程：
+
+```
+	rados ls -p rbd --debug_objecter 20/20 --debug_rados 20/20 --debug_client 20/20
+```
+
+除了以上直接有ceph提供的日志之外，```/var/log/messages```会提供关于ntpd和磁盘驱动方面的日志信息，ceph monitor的运行依赖于准确的时钟，如果monitor运行不正常导致osd member ship大幅抖动，可以从日志中找找看有没有有关ntpd的信息。另外，磁盘坏道会导致osd coredump，此时也可以从日志文件中找到信息。
+
+## 三、ceph常见问题分级及处理方式
+### 一、简单级别
+这类问题处理时比较简单，并且不会影响数据安全，包括：
 1.osd的crush weight与其实际容量不符：
+这个问题是在部署时出现的，此时系统尚未正式写入数据，但这类问题必须得到快速处理，如果存在这些问题，则必须先解决才能接入正式的生产环境。
 这个问题在上线的时候出现过，现象就是一块12TB的磁盘，通过
 ```ceph osd tree```命令行看到的crush weight为1。这个问题可以通过手动修改crushmap来快速解决问题：
 	
@@ -121,7 +143,166 @@ ceph osd setcrushmap -i map #设置crushmap
 
 这说明在stop的时候osd并没有死，此时需要手工杀死此osd，如果`kill`也杀不掉就`kill -9`杀之。
 
-3.osd
-现将ceph问题区分为两种类型，关注级别的问题可通过较简单的操作进行处理，而致命问题需要可能需要通过详细研究日志、搜索社区类似问题、查看代码等方式解决。
-需要注意的是，这些问题都需要通过完善的监控和报警机制才发现和处理，对于osd down、monitor down等
+3.ceph -s报“too few pgs per osd”
+ceph报这一问题的条件是每个osd上的pg个数小于20个，而根据我们目前的最佳实践，为每个osd数据的相对均匀，我们都会要求每个osd承载200个pg左右，因此这个问题在线上出现的概率几乎为0。如果出现是因为扩容了十倍以上的osd导致每个osd上的pg个数小于20，那么就必须采用```一、运维必备命令行```中提到的扩容pg_num和pgp_num进行操作了。
+
+4.内存不足导致osd进程因pthread_create失败而退出
+这个问题在线上出现过，某个osd因为pthread_create失败而打断言并退出，后来看了是因为系统内存不足，重启osd之后，问题就解决了。
+
+5.EC环境下，进行recovery时看不到recover IO
+这个问题已经在giant上修复，考虑到rbd并不会使用到EC，所以这个问题不会再出现。
+
+6.degraded或者misplaced的objects为负数
+这个问题是ceph统计上的bug，比如出现```-2630/2182927064 objects degraded```，2182927064是这个pool中所有的对象个数*副本数，-2603这个负数可以理解为有些副本本应被clean掉，即它们是多出来的，所以成了负数，总之，这个问题都可以放任不管，待backfill完成之后，就没有负数了。
+
+7.pg状态为active后加degraded、remapped、remapped、backfilling、wait_backfill、recovering、wait_recover、undersized等状态
+这是做recover/backfill过程中的中间状态，只有pg是active的就没有问题，无需干预。
+
+二、关注级别
+这类问题需要运维人员根据实际情况作出一些处理，但危险性基本可控。
+1.磁盘坏道或其他磁盘故障导致osd无法启动
+首先明确在```/var/log/messages```中能够看到磁盘硬件故障的信息，如果已明确，通知IDC更换磁盘，如果IDC短期内没有办法更换磁盘，那么就应该把这个osd out掉，避免有数据处于降级状态。IDC更换磁盘成功之后，执行以下操作(以下以osd.12为例讨论)：
+
+```
+ceph osd rm osd.12 #这一步操作不能少
+ceph osd create    #必须保证这一步返回的是12，如果是小于12的数字，那就多create几次知道12为止
+cd /var/lib/ceph/osd/ceph-12
+ceph-osd -i 12 --mkfs
+touch /var/lib/ceph/osd/ceph-12/sysvinit
+ceph auth export osd.12 > /var/lib/ceph/osd/ceph-12/keyring
+/etc/init.d/ceph start osd.12
+```
+
+对于被手动out掉的osd，应该手动把它设置为in状态:
+
+```
+ceph osd in osd.12
+```
+
+2.monitor出现clock skew
+这个问题可大可小，必须要区分对待，因此把这个问题放到了关注级别。因为默认是0.05秒skew就报警，如果是通过```ceph health detail```得到的clock skew时间是一个稍大的数字比如0.1或者0.5之类的，那么重启不从重启ntpd都可以。但线上出现过长达220天的clock skew，这种情况下如果重启ntpd，一般都会带来非常严重的cephx认证失败，造成大量的osd down，大量的pg出现peering状态，从而造成整个集群的服务不可用。出现这一问题，应该首先设置osd为nodown：
+
+```
+ceph osd set nodown
+```
+目的是为了防止大量osd down掉，然后再重启ntpd，重启完了也需要继续关注osd和集群的状态。
+
+3.出现inconsistent的pg
+根据线上rgw运行情况，几乎没有出现inconsistent pg的情况，但是rbd出现过多次因为磁盘坏道导致读不到primary osd上的副本而出现的inconsistent pg的情况，这个首先参考```磁盘坏道或其他磁盘故障导致osd无法启动```把osd创建并加进来，待数据迁移完了之后运行：
+
+```
+ceph pg repair pgid   #pgid为出现inconsistent的pgid
+```
+
+事实上，因为所有的副本都已经被拷贝了，并且不存在读不到某一个副本的情况，所以待repair完，pg将会是摆脱inconsistent状态。
+
+4.osd占用过多内存或CPU资源
+这个也要分情况进行处理，此处重点区分两种情况：一是做backfill时，另一种是常规时间。
+在做backfill的时候，osd会需要占用一些内存来存储迁入或者迁出的数据，但是内存占用一般不会超过2GB，如果超过2GB很多，那说明数据迁移太猛了，应该降低一下迁移的速度(前文提到过怎样增减osd的迁移速度)，CPU方面主要是看15分钟的load average，rgw的数据迁移一般控制在load average在6左右，具体要跟存储服务器的核数来定。
+在常规时间，内存一般在1GB左右，5分钟load average一般都在0附近，如果超出很多，则需要关注是否跟别的问题相关，因为在大部分情况下，耗费CPU和内存是现象，而问题的根源则需要再进一步深究。
+rgw场景下曾经出现过一次因为某一个对象的omap过大，而ceph在删除对象时，会在一个事务中把整个omap全部load到内存中，导致耗光了系统的内存而core dump，为此我们还打了个patch让删除这个对象时不删omap。
+总之，占用过多CPU和内存时，首先需要判断的是是否是处于backfill状态，如果是就降迁移速度，否则，就需要综合各种因素来判读。
+
+5.出现near full的osd
+默认情况下，osd的磁盘使用率超过了85%之后，即会报出near full的warning。首先应该极力避免将集群的使用率达到如此高的程度，这就需要对集群的超售比做出限制，并规划好进行扩容的比例，rgw集群一般在60%左右就会进行扩容。
+如果出现了near full的osd，首先看是否是这个osd一枝独秀，即达到85%的osd是否只有这一个或一两个，并且其他所有的osd的使用率都远低于85%，如果是这样，可以一下命令行降低一下osd的weight:
+
+```
+ceph osd reweight 0 0.9
+```
+如果有多个osd都是near full状态，那就找尽快扩容吧。
+
+6.某些pg出现backfill_toofull状态
+backfill_toofull出现时，数据将不能正常backfill到已经过满的osd上，在处理上，这个问题跟前面的```出现near full的osd```一样，不能reweight就扩容吧。
+
+7.osd因为心跳不达而suicide
+目前线上集群已经配置了一个非常宽容的心跳检测条件：
+
+```
+osd_heartbeat_grace = 500
+osd_heartbeat_interval = 180
+mon osd min down reporters = 3
+mon osd min down reports = 4
+```
+这导致出现心跳问题的概率降到非常低了，如果出现了这种情况，首先还是检查是否用户IO负载过重或者数据迁移速度是否过快，一般而言重启就能解决问题。
+
+8.数据不均匀，max/avg超过1.4
+通过配置每个osd承载200个pg，一般而言max/avg都在1.2到1.3左右，即最满的osd与平均值的比例在1.2到1.3之间，如果超过1.4了，那就代表数据严重不均匀了，这个时候需要考虑是不是因为集群扩容导致每个osd承载的osd的个数减少了，如果是的话，就需要增加pg个数了。
+在rbd场景下，数据不均匀性可能会比存储大文件的rgw集群严重，因为对于rbd而言，可能仅仅写文件的开头一些字节，从而存储了很多小的文件，这个需要到线上验证。
+
+9.某些osd的commit时间百毫秒以上
+commit时间可以通过```ceph osd perf```获得，如果这个值特别大，超过百毫秒以上，说明如果是单块磁盘这样，说明这块磁盘性能严重降低了，如果大部分磁盘都这样，则需要联系开发人员进行性能分析来判断了。
+
+10.某些osd出现了slow request
+这个时候需要查日志，看看slow request的延迟时间，前面提到的clock skew也会造成slow request，如果没有clock skew，那么就看出现slow request的osd的个数，如果是仅仅一两个osd出现，那么可以不处理，或者是重启这个slow request的osd。
+
+11.简单版的incomplete的pg
+这种情况的简单之处在于，尽管当前的acting set已经小于min_size了，但是acting set中至少有一个osd，这种incomplete的特征就是```ceph health detail```可以看到：
+
+```
+pg 10.0 is incomplete, acting [0](reducing pool rbd min_size from 2 may help; search ceph.com/docs for 'incomplete')
+```
+如果其他osd在想尽办法之后仍然无法恢复，可以改变min_size的方式将pg恢复过来：
+
+```
+ceph osd pool set rbd min_size 1
+```
+之后，就是通过把起不来的osd out掉，此时crush算法会重新选择另外两个osd存储这个pg，这样数据会重新进入到backfill状态并最终恢复。
+
+三、严重级别
+严重级别操作具有危险性，特别是涉及到操作pg的元数据，因此需要谨慎。
+1.恶劣版的incomplete pg
+这种情况下，集群已经处于错误状态，此时肯定是有osd处于down状态，如果能把down的osd全部拉起来，那么就不存在什么问题了，down的pg在重新peering之后应该能恢复。
+如果发现多个osd不能启动，首先应该做的是确认osd不能启动的原因，原因可能有磁盘硬件故障和ceph本身的bug。如果是ceph本身的bug，则需参考```四、疑难杂症```中的```1.挂掉的osd重启之后仍然打断言```收集信息做进一步分析。
+如果是硬件故障导致数据已经无法恢复，则通过```ceph pg 10.0 query```查看出past_intervals内的所有osd，并尝试查看这些osd上是否有这个pg 10.0的数据，如果有，那么可以看看这个目录中文件的个数，那么可以把这些数据当做是这个pg的最终版本的数据，即把这个osd当做authority，这可能会造成丢失一部分数据，类似于git的revert到历史上的一个版本，通过下面命令行即可：
+
+```
+ceph_objectstore_tool --op mark-complete --pgid 7.0 --data osd1 --journal osd1.journal
+```
+如果都没有，那就可以宣布这个pg上的数据已经丢失，incomplete的pg不可读写，为了让这个pg可写，可以通过下面的命令行将这个pg设置为complete：
+
+```
+ceph_objectstore_tool --op mark-complete --pgid 7.0 --data osd1 --journal osd1.journal
+```
+这条命令行结果仅仅是pg可写，原有的数据全部丢失了。
+
+2.出现full的osd
+在有osd的磁盘使用率超过95%的情况下，monitor会报full，并且系统变成不可读写，处于ERROR状态。
+前面提到了，在osd进行near full状态之前就需要进行扩容，在出现了full的osd之后，能做的就是把full的osd关掉并out掉，然后删除这个osd上的部分pg，在使用率低于95%之后即可把osd拉起来并设置为in状态，并参考near full状态下的处理进行操作。
+
+3.多台存储服务器同时宕机
+通知IDC启动服务器，尝试启动osd并进行处理
+
+4.网络抖动等导致的心跳异常，并因此引起的membership剧烈变动
+此时需要进行一下设置：
+
+```
+ceph osd set nodown
+ceph osd set noup
+ceph osd set noout
+```
+5.时钟严重不同步导致的cephx验证失败
+前面已有提到，此时需要在重启ntpd前做以下配置：
+```
+ceph osd set nodown
+```
+6.EC场景下osd成组的死亡
+这个问题在rgw使用EC的环境下出现过，原因在于同时处理同名文件的删除和上传时，文件删除操作导致偏移变成0，而文件上传操作仍然以之前的偏移进行文件写入，EC认为这个不为0所以core dump了。EC采用使用第一个osd进行对象的切分和分发，在第一个osd core dump之后，写入会重新进行retry并把下一个osd也搞core dump，最终导致这个pg为incomplete，如果这些core dump的osd全部被out掉了，那么再retry又可以把新补位的osd也搞core dump，最终的结果就是所有的osd只剩下```min_size-1```个。
+所幸，这个bug已经修了。
+
+7.来自librbd的bug
+可能需要重启虚拟机，通过虚拟机迁移方式应该也可行，但没有验证过
+
+四、疑难杂症
+1.挂掉的osd重启之后仍然打断言
+出现了前面都没提到的原因，导致osd重启后打断言并启动失败，那么需要提高osd的日志等级，收集日志，并联系开发人员处理.
+提高日志等级的方式是在```/etc/init.d/ceph.conf```的```[osd.0]```段下配置日志等级，形如：
+
+```
+[osd.0]
+debug_osd = 20/20
+debug_filestore = 20/20
+```
+注意要在问题解决之后把上述配置删除，因为过高的日志等级既降低性能，也可能会把var分区占满。
+
 
