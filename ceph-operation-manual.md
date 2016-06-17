@@ -1,7 +1,39 @@
 # ceph运维手册
 ceph是一个复杂的分布式存储系统，运维操作也比较繁杂，为了简化运维操作，本手册首先总结了最常见最实用的ceph命令行，用以方便的对集群进行管理和故障排除。另外，在部署上线、配置项管理、版本升级、系统扩容、磁盘故障、网络故障处理等各个环节都有可能出现一些问题，本手册收集了来自社区相关文档的说明，邮件列表对于这些问题的讨论，以及我们线上出现的问题的总结。
 
-## 一、运维必备命令行
+## 一、ceph中的基本概念
+1.```monitor```
+```monitor```主要有三项职责：一是负责集群member ship管理即颁发osd map和pg map，维护集群状态，二是作为cephx(类kerboros的鉴权协议)的KDC，鉴定各个组件的keyring，三是作为查询入口，接收用户对集群的状态查询。
+monitor集群一般至少需要三个成员，在更大的集群中可能需要更多的monitor，请设置monitor个数为奇数个。
+monitor会进行形式上的选举，但总是rank最低的monitor获胜，而在所有的monitor都使用默认的6789端口的情况下，rank最低的总是IP地址最小的monitor。
+monitor使用keyvalueDB来存储其数据。
+
+2.```osd```
+```osd```是运行于存储服务器一个守护进程，通常一个```osd```管理一块磁盘。每个osd可以承载多个pg，承载同一个pg的多个osd互称为```peer```，这也是osd启动或者pg创建之时，经历的```peering```状态的由来，peering过程就是通过将多个peer存储的pg_info_t信息合成出一份权威的pg_info_t。
+peer之间需要通过心跳来探测对方是否存活，如果发现某个peer在一定时间内多次探测均无回应，则向monitor举报该peer为down状态，此时monitor并不会立刻将该osd设置为down状态，而是需要收集足够多的这种举报信息之后才设置该osd为down状态。
+对于一个osd而言，其职责的就是管理其```资产```，即由CRUSH映射而承载的各个pg。
+
+3.```pg```
+pg是一组对象的集合，是集群的最重要```资产```。通过这一逻辑概念，简化了数据的replication和rebalance，同时也使得每个osd不需要对每个对象都维持一个peer列表，简化了心跳流程。
+```osd```和```pg```的关系是：每个osd可以承载多个pg，每个pg都会通过CRUSH算法的映射到多个osd上(在多副本的情况)。
+pg内的replication和pg的rebalance是最复杂的部分，replication指将数据复制到多个peer，rebalance则是指pg的迁移。如果pg从一个osd迁移走了，那么这个osd会自动的将这个pg的数据删除，这个自动的过程称为```clean```。
+每个pg都运行在一个recovery state machine(数据恢复状态机)，这个状态机维护了二十种pg状态以及各个状态下的时间响应，最理想情况下，pg应该处于```active+clean```，当进行数据迁移时，可能会处于多种中间状态，但只要pg是处于```active```状态，那么数据读写操作都不会有问题，```degraded```状态说明有数据的副本数没有达到```pool size```，而```incomplete```通常指pg中的某些对象没有达到```pool min_size```。
+
+4.```acting set```与```up set```
+```acting set```是```当前```维护pg的一组osd，而```up set```指的是```将来```维护pg的一组osd，可以通过```ceph pg query```获取命令行查看，在进行数据rebalance时也可以通过```ceph health detail```查看。通常而言两者是一样的，而如果集群磁盘扩容或者pg扩容导致数据pg迁移时，```将来```的osd并不具有全量的数据，因此不能处理读请求，而```当前```的osd组合具有全量的数据，因此只有```当前```的osd组合能够进行读请求，对于写入请求，也是写到```当前```osd组合中，后续再迁入到```将来```osd组合，因此下线机器的时候必须主要保持足够数据的```acting set```的个数，否则新写入的数据将会处于```degraded```(降级)状态。
+当两个osd组合不一致时，pg都会处于```remapped```状态，而且```acting set```通常称为```pg_temp```，即这个组合类似于```看守内阁```，等数据迁完之后，```acting set```将转变成```up set```。
+当```acting set```与```up set```不一致时，pg内尚未被迁移到```up set```的对象都处于**```misplaced```**状态。
+
+5.```osd map```
+```osd map```反映了集群中各个osd的状态，状态包括了两个维度：UP/DOWN和IN/OUT，UP/DOWN状态表征的是osd是否存活(更深层次决定于是否网络可达)，IN/OUT表征的是是否承载pg。在没有通过```ceph osd set noout```的情况下，处于DOWN状态的osd会自动转为OUT状态。在OUT状态下，CRUSH会认为这个osd无法恢复而重新选择其他副本。
+是由monitor颁布的，但monitor并不是独裁者，monitor是充分收集osd上报的信息之后才会做出决策发布新的```osd map```，这些信息包括osd启动时的```BOOT```信息以及osd根据心跳结果上报的peer不可达信息等。
+
+6.```CRUSH map```与```CRUSH rule```
+```CRUSH map```维护的是整个存储集群的硬件拓扑结构(维度包括DC,ROOM,PDU,RACK,HOST,OSD等)，这个结构是一个森林，可以包含多颗树，比如树根表示不同类型的存储介质。根据每一块磁盘的容量，再逐级上溯到树根，可以得出一棵树的各级存储的```CRUSH weight```，在前面的```osd map```中，可以通过设置osd的状态为```OUT```来设置```osd weight```为0，但是这个osd还在```CRUSH map```中，因此整个HOST的```CRUSH weight```不变，因此设置一个osd为```OUT```时，通常会造成同HOST上的其他osd承担更多pg。
+```CRSUH rule```是选取osd的规则，区别包括是使用多副本还是EC、从哪颗树选取osd等。
+
+
+## 二、运维必备命令行
 1.```ceph tell osd.* injectargs “--config value”```
 该命令行可对批量osd进行配置项的更新操作，其中，```* ```表示所有的osd，也可使用某一个osd的编号来更新这个osd的配置,```--config```表示某一个配置项，```value```表示配置项的值，例如更新所有osd的```osd_max_backfills```配置项为1的命令行如下：
 
@@ -77,7 +109,7 @@ xattr是rados存储数据的一种形式，底层使用的是文件系统的扩�
 25.```ceph osd reweight 0 0.9```
 将osd.0的weight降低为0.9，这种情况下，因为osd.0的crush weight并没有改变，所以osd.0上的很多数据都大概率会迁移到osd.0所在host的其他osd上，因此使用这条命令时，应该注意观察本host上的其他osd的磁盘使用率，如果是只有一个osd到了near full报警，而且有其他osd已经到了80%左右，那么这种reweight就是毫无意思的，因为大概率会出现拆东墙补西墙的情况，另外一个osd会冒出来报near full。
 
-## 二、有关ceph的日志
+## 三、有关ceph的日志
 ceph的日志包括osd的日志和monitor的日志，位于```/var/log/ceph```目录下，osd的日志文件名称是ceph-osd.0.log，monitor日志名称是ceph-mon.a.log，默认情况下7天做一次log rotate。
 可以通过调高日志级别来数据更详细的日志，但是要注意monitor和osd在最高日志级别下日志写入非常快，别把分区刷满了。
 另外，ceph的日志是分模块进行的，合理使用debug_osd和debug_filestore能够知道osd daemon做的所有事情，只需使用下面的命令行即可：
@@ -96,7 +128,7 @@ ceph的日志包括osd的日志和monitor的日志，位于```/var/log/ceph```�
 
 除了以上直接有ceph提供的日志之外，```/var/log/messages```会提供关于ntpd和磁盘驱动方面的日志信息，ceph monitor的运行依赖于准确的时钟，如果monitor运行不正常导致osd member ship大幅抖动，可以从日志中找找看有没有有关ntpd的信息。另外，磁盘坏道会导致osd coredump，此时也可以从日志文件中找到信息。
 
-## 三、ceph常见问题分级及处理方式
+## 四、ceph常见问题分级及处理方式
 ### 一、简单级别
 这类问题处理时比较简单，并且不会影响数据安全，包括：
 1.osd的crush weight与其实际容量不符：
@@ -282,5 +314,13 @@ debug_osd = 20/20
 debug_filestore = 20/20
 ```
 注意要在问题解决之后把上述配置删除，因为过高的日志等级既降低性能，也可能会把var分区占满。
+
+## 五、ceph的监控与报警 
+ceph并不是一个很好运维的存储系统，因此需要一些监控和报警来帮助运维人员进行运维工作。
+1.monitor、osd状态短信电话告警
+需要部署watchceph并发信给ops-noc来实现monitor、osd状态变化时的告警。watchceph会关注检测是否有osd down，monitor down以及near full的osd，当出现这些情况时，会触发短信告警，以便及时处理。
+2.常规监控
+需要关注的监控项包括：数据使用量、osd数据均匀性、client/recovery io大小(包括iops和带宽两个维度)、是否有非active的pg、misplaced的对象个数、misplaced的对象比例、各个存储节点的load average、各个存储节点的网卡流量、各个磁盘的disk utitity等
+
 
 
