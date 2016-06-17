@@ -32,6 +32,9 @@ pg内的replication和pg的rebalance是最复杂的部分，replication指将数
 ```CRUSH map```维护的是整个存储集群的硬件拓扑结构(维度包括DC,ROOM,PDU,RACK,HOST,OSD等)，这个结构是一个森林，可以包含多颗树，比如树根表示不同类型的存储介质。根据每一块磁盘的容量，再逐级上溯到树根，可以得出一棵树的各级存储的```CRUSH weight```，在前面的```osd map```中，可以通过设置osd的状态为```OUT```来设置```osd weight```为0，但是这个osd还在```CRUSH map```中，因此整个HOST的```CRUSH weight```不变，因此设置一个osd为```OUT```时，通常会造成同HOST上的其他osd承担更多pg。
 ```CRSUH rule```是选取osd的规则，区别包括是使用多副本还是EC、从哪颗树选取osd等。
 
+7.```file```、```attribute```和```omap```
+对于一个分布式存储系统，最终还是要写到本地的，```file```、```attribute```和```omap```三者组合起来构成了本地存储，```file```表示存储本地文件系统的文件，```attribute```表示附加在本地文件系统文件上的扩展属性，```omap```则是存储于key-value DB上的键值对，一般而言大部分数据都是写入到```file```中，而一些key-value则可存储于```attribute```或```omap```中，因为文件系统的扩展属性有存储量的限制，并且高度依赖于底层文件系统的实现，因此现在更倾向于一些元数据于omap之中，比如rbd的应用场景下，就使用omap存储了size，object_prefix等很多元数据。
+
 
 ## 二、运维必备命令行
 1.```ceph tell osd.* injectargs “--config value”```
@@ -77,8 +80,8 @@ osdmap e120 pool 'rbd' (8) object 'benchmark_data_ceph54_361925_object482' -> pg
 在这个命令行中，```4f7490ff```为```benchmark_data_ceph54_361925_object482```这个对象的哈希值，而在filestore中，是按照哈希值的逆排序来存储文件的，所以它存储的位置为DIR_F/DIR_F,当然随着这个DIR_F里的文件越来越多，就会进一步split出新的目录来，那时候，这个文件就会存储在DIR_F/DIR_F/DIR_0这个目录中了。
 13.```ceph daemon osd.0 dump_reservations```
 查看osd的backfill和recovery的槽位情况，即有哪几个osd处于等待槽位，这对于了解正在做backfill的pg进而估算backfill需要耗费的时间比较有帮助。
-14.```ceph pg repair <pgid>```
-修复inconsistent的pg
+14.```ceph pg repair <pgid>```与```ceph osd repair <osdid>```
+修复inconsistent的pg，前者是对一个pg触发repair操作，后者则是对一个osd承载的所有pg做repair。
 15.```osd pool set <poolname> size/min_size/pg_num/pgp_num```
 设置pool的size和pg个数参数，减少min_size为1在三个副本中的某一个数据还在的情况下，可以解决incomplete pg的问题，但是在数据不全的情况下，incomplete pg的问题只能依靠```ceph_objectstore_tool```尝试解决(事实上也不一定能百分之百解决)。
 扩充pg能够让每个osd里的数据更加均匀，但是扩充pg_num和扩充pgp_num表现上是不一样的，扩充pg_num时，尽管每个osd上的pg个数都会增加，但是新增加的pg并不会在osd上重新分布，比如之前是1个pg，负责的osd为(0,1,2)，此时如果扩充pg_num为2，此时两个pg都仍然是映射到(0,1,2)而不会在整个crushmap上重新映射，另外，表现上扩充pg_num就是在current目录下新建一个目录，并且把原pg的一半内容挪到新pg上，可想而知，扩pg需要filestore层的很多hard link操作，因此会耗费一定时间，因此，扩充pg_num不应在业务量高的时候做。扩充pgp_num之后，就会实现新pg的重新分布，比如上述1扩为2的情况，可能新pg就会映射到(2,3,4)上，并且会引起数据的backfill。
