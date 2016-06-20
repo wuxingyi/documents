@@ -169,6 +169,10 @@ ceph报这一问题的条件是每个osd上的pg个数小于20个，而根据我
 7.pg状态为active后加degraded、remapped、remapped、backfilling、wait_backfill、recovering、wait_recover、undersized等状态
 这是做recover/backfill过程中的中间状态，只有pg是active的就没有问题，无需干预。
 
+8.monitor所在磁盘空间不足
+默认情况下，monitor都会把数据写到/var/lib/ceph/mon目录下，如果日志、coredump等存储没有跟monitor目录分开，则可能会出现monitor空间不足的情况，一般报错都形如“mon.bj-yz2-ceph-12-102 low disk space -- 29% avail”，此时就需要删除相关coredump文件和日志文件。
+
+
 二、关注级别
 
 这类问题需要运维人员根据实际情况作出一些处理，但危险性基本可控。
