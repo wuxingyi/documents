@@ -23,10 +23,11 @@ pg内的replication和pg的rebalance是最复杂的部分，replication指将数
 ```acting set```是```当前```维护pg的一组osd，而```up set```指的是```将来```维护pg的一组osd，可以通过```ceph pg query```获取命令行查看，在进行数据rebalance时也可以通过```ceph health detail```查看。通常而言两者是一样的，而如果集群磁盘扩容或者pg扩容导致数据pg迁移时，```将来```的osd并不具有全量的数据，因此不能处理读请求，而```当前```的osd组合具有全量的数据，因此只有```当前```的osd组合能够进行读请求，对于写入请求，也是写到```当前```osd组合中，后续再迁入到```将来```osd组合，因此下线机器的时候必须主要保持足够数据的```acting set```的个数，否则新写入的数据将会处于```degraded```(降级)状态。
 当两个osd组合不一致时，pg都会处于```remapped```状态，而且```acting set```通常称为```pg_temp```，即这个组合类似于```看守内阁```，等数据迁完之后，```acting set```将转变成```up set```。
 当```acting set```与```up set```不一致时，pg内尚未被迁移到```up set```的对象都处于**```misplaced```**状态。
+**```注意```**: 在进行backfill的时候，如果有新的数据写入，那么这部分数据只会写到当前的acting set中，如果acting size < pool size，那么这部分数据从出生开始就是出于降级状态的。
 
 5.```osd map```
 ```osd map```反映了集群中各个osd的状态，状态包括了两个维度：UP/DOWN和IN/OUT，UP/DOWN状态表征的是osd是否存活(更深层次决定于是否网络可达)，IN/OUT表征的是是否承载pg。在没有通过```ceph osd set noout```的情况下，处于DOWN状态的osd会自动转为OUT状态。在OUT状态下，CRUSH会认为这个osd无法恢复而重新选择其他副本。
-是由monitor颁布的，但monitor并不是独裁者，monitor是充分收集osd上报的信息之后才会做出决策发布新的```osd map```，这些信息包括osd启动时的```BOOT```信息以及osd根据心跳结果上报的peer不可达信息等。
+是由monitor颁布的，但monitor并不是独裁者，monitor是充分收集osd上报的消息之后才会做出决策发布新的```osd map```，这些消息包括osd启动时的```BOOT```消息、osd进程挂掉时发送的```DOWN```消息以及osd根据心跳结果上报的peer不可达消息等。
 
 6.```CRUSH map```与```CRUSH rule```
 ```CRUSH map```维护的是整个存储集群的硬件拓扑结构(维度包括DC,ROOM,PDU,RACK,HOST,OSD等)，这个结构是一个森林，可以包含多颗树，比如树根表示不同类型的存储介质。根据每一块磁盘的容量，再逐级上溯到树根，可以得出一棵树的各级存储的```CRUSH weight```，在前面的```osd map```中，可以通过设置osd的状态为```OUT```来设置```osd weight```为0，但是这个osd还在```CRUSH map```中，因此整个HOST的```CRUSH weight```不变，因此设置一个osd为```OUT```时，通常会造成同HOST上的其他osd承担更多pg。
@@ -130,6 +131,7 @@ ceph的日志包括osd的日志和monitor的日志，位于```/var/log/ceph```�
 ```
 
 除了以上直接有ceph提供的日志之外，```/var/log/messages```会提供关于ntpd和磁盘驱动方面的日志信息，ceph monitor的运行依赖于准确的时钟，如果monitor运行不正常导致osd member ship大幅抖动，可以从日志中找找看有没有有关ntpd的信息。另外，磁盘坏道会导致osd coredump，此时也可以从日志文件中找到信息。
+另外，在centos 7环境下，osd启动失败的日志有可能会写到```/var/log/messages```。
 
 ## 四、ceph常见问题分级及处理方式
 ### 一、简单级别
@@ -171,7 +173,14 @@ ceph报这一问题的条件是每个osd上的pg个数小于20个，而根据我
 
 8.monitor所在磁盘空间不足
 默认情况下，monitor都会把数据写到/var/lib/ceph/mon目录下，如果日志、coredump等存储没有跟monitor目录分开，则可能会出现monitor空间不足的情况，一般报错都形如“mon.bj-yz2-ceph-12-102 low disk space -- 29% avail”，此时就需要删除相关coredump文件和日志文件。
+如果是因为monitor写的文件过大，则需要在```ceph.conf```中添加一下配置并重启monitor：
 
+```
+[mon]
+mon compact on start = true
+```
+如果monitor使用的空间较大，那么做compaction会消耗较长时间。
+如果monitor的sst文件存储过多，会造成monitor越来越慢，而线上数据显示一次compact能够把原来20G的monitor磁盘占用缩减至不到1G，所以说监控minitor占用的空间并在超过一定空间之后通过重启monitor进行compact，是非常有用的。
 
 二、关注级别
 
@@ -330,4 +339,7 @@ ceph并不是一个很好运维的存储系统，因此需要一些监控和报�
 需要关注的监控项包括：数据使用量、osd数据均匀性、client/recovery io大小(包括iops和带宽两个维度)、是否有非active的pg、misplaced的对象个数、misplaced的对象比例、各个存储节点的load average、各个存储节点的网卡流量、各个磁盘的disk utitity等
 
 
+## 六、ceph运维中的危险操作总结
+1、跨大版本升级
+尽管社区会对各个大版本升级做测试并给出升级步骤，但是仅限于社区发布的大版本之间的升级，我们经常会从upstream backport很多patch回来，导致出现问题
 
