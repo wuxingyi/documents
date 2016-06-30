@@ -36,6 +36,13 @@ pg内的replication和pg的rebalance是最复杂的部分，replication指将数
 7.```file```、```attribute```和```omap```
 对于一个分布式存储系统，最终还是要写到本地的，```file```、```attribute```和```omap```三者组合起来构成了本地存储，```file```表示存储本地文件系统的文件，```attribute```表示附加在本地文件系统文件上的扩展属性，```omap```则是存储于key-value DB上的键值对，一般而言大部分数据都是写入到```file```中，而一些key-value则可存储于```attribute```或```omap```中，因为文件系统的扩展属性有存储量的限制，并且高度依赖于底层文件系统的实现，因此现在更倾向于一些元数据于omap之中，比如rbd的应用场景下，就使用omap存储了size，object_prefix等很多元数据。
 
+8.```pg log```
+ceph使用```pg log```来保证多副本之间的一致性。```pg log```用来记录做了什么操作，比如修改，删除等，而每一条记录里包含了对象信息，还有版本。ceph使用版本控制的方式来标记一个PG内的每一次更新，每个版本包括一个(epoch，version)来组成：其中epoch是osdmap的版本，每当有OSD状态变化如增加删除等时，epoch就递增；version是PG内每次更新操作的版本号，由PG内的Primary OSD进行分配的。
+在```peering```过程中，Primary OSD会向其他osd请求```pg log```并用于合并出一份权威的```pg log```。
+
+8.```unfound```对象
+```unfound```对象是在```log-based recovery```的源osd失效时出现的，此时待recover的节点已经知道了缺失哪些```pg log```，并由此知道缺失哪些对象，这些对象此时是处于待recover节点的```missing```列表中的，在recover尚未完成而源osd已经失效的情况下，待recover节点便将此时的```missing```列表中的全部对象置为```unfound```。
+有```unfound对象```的情况下，pg实际是处于```active+recovering+degraded```状态的，尽管recover没有完成，但是只要不命中```unfound```对象，其他对象都是可读的，并且此时pg是可写的，但是如果读写```unfound对象```，都会造成```slow request```，并长时间block住，这也是一种相当严重的状况，但是比整个pg处于incomplete、down或卡在peering状态导致完全不可读写要稍微好一些。
 
 ## 二、运维必备命令行
 1.```ceph tell osd.* injectargs “--config value”```
