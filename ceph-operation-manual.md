@@ -39,6 +39,7 @@ pg内的replication和pg的rebalance是最复杂的部分，replication指将数
 8.```pg log```
 ceph使用```pg log```来保证多副本之间的一致性。```pg log```用来记录做了什么操作，比如修改，删除等，而每一条记录里包含了对象信息，还有版本。ceph使用版本控制的方式来标记一个PG内的每一次更新，每个版本包括一个(epoch，version)来组成：其中epoch是osdmap的版本，每当有OSD状态变化如增加删除等时，epoch就递增；version是PG内每次更新操作的版本号，由PG内的Primary OSD进行分配的。
 在```peering```过程中，Primary OSD会向其他osd请求```pg log```并用于合并出一份权威的```pg log```。
+```pg log```以前是(2013年前)使用文件系统attribue来存储的，现在的版本已经是使用omap来存储。
 
 8.```unfound```对象
 ```unfound```对象是在```log-based recovery```的源osd失效时出现的，此时待recover的节点已经知道了缺失哪些```pg log```，并由此知道缺失哪些对象，这些对象此时是处于待recover节点的```missing```列表中的，在recover尚未完成而源osd已经失效的情况下，待recover节点便将此时的```missing```列表中的全部对象置为```unfound```。
