@@ -29,9 +29,10 @@ pg内的replication和pg的rebalance是最复杂的部分，replication指将数
 ```osd map```反映了集群中各个osd的状态，状态包括了两个维度：UP/DOWN和IN/OUT，UP/DOWN状态表征的是osd是否存活(更深层次决定于是否网络可达)，IN/OUT表征的是是否承载pg。在没有通过```ceph osd set noout```的情况下，处于DOWN状态的osd会自动转为OUT状态。在OUT状态下，CRUSH会认为这个osd无法恢复而重新选择其他副本。
 是由monitor颁布的，但monitor并不是独裁者，monitor是充分收集osd上报的消息之后才会做出决策发布新的```osd map```，这些消息包括osd启动时的```BOOT```消息、osd进程挂掉时发送的```DOWN```消息以及osd根据心跳结果上报的peer不可达消息等。
 
-6.```CRUSH map```与```CRUSH rule```
+6.```CRUSH map```、```CRUSH rule```与```CRUSH 算法```
 ```CRUSH map```维护的是整个存储集群的硬件拓扑结构(维度包括DC,ROOM,PDU,RACK,HOST,OSD等)，这个结构是一个森林，可以包含多颗树，比如树根表示不同类型的存储介质。根据每一块磁盘的容量，再逐级上溯到树根，可以得出一棵树的各级存储的```CRUSH weight```，在前面的```osd map```中，可以通过设置osd的状态为```OUT```来设置```osd weight```为0，但是这个osd还在```CRUSH map```中，因此整个HOST的```CRUSH weight```不变，因此设置一个osd为```OUT```时，通常会造成同HOST上的其他osd承担更多pg。
 ```CRSUH rule```是选取osd的规则，区别包括是使用多副本还是EC、从哪颗树选取osd等。
+现在默认使用的```CRUSH算法```是```straw```，建议使用```straw2```。
 
 7.```file```、```attribute```和```omap```
 对于一个分布式存储系统，最终还是要写到本地的，```file```、```attribute```和```omap```三者组合起来构成了本地存储，```file```表示存储本地文件系统的文件，```attribute```表示附加在本地文件系统文件上的扩展属性，```omap```则是存储于key-value DB上的键值对，一般而言大部分数据都是写入到```file```中，而一些key-value则可存储于```attribute```或```omap```中，因为文件系统的扩展属性有存储量的限制，并且高度依赖于底层文件系统的实现，因此现在更倾向于一些元数据于omap之中，比如rbd的应用场景下，就使用omap存储了size，object_prefix等很多元数据。
