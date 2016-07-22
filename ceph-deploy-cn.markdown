@@ -109,6 +109,7 @@
 	osd heartbeat interval = 180
 	osd heartbeat grace = 360
 	mon_osd_min_down_reporters = 6
+	osd_heartbeat_use_min_delay_socket = True
 
 
 
