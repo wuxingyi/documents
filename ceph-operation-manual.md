@@ -7,6 +7,7 @@ ceph是一个复杂的分布式存储系统，运维操作也比较繁杂，为�
 monitor集群一般至少需要三个成员，在更大的集群中可能需要更多的monitor，请设置monitor个数为奇数个。
 monitor会进行形式上的选举，但总是rank最低的monitor获胜，而在所有的monitor都使用默认的6789端口的情况下，rank最低的总是IP地址最小的monitor。
 monitor使用keyvalueDB来存储其数据。
+为了提高服务的可用性，通常的做法是把服务器放到不同的机柜上，这样可以防止多个机柜掉电，但是如果在部署时就把monitor放到同一个机柜上，那么仍然不能达到足够高的可用性，因此部署时应该把monitor也放到不同的机柜上。
 
 2.```osd```
 ```osd```是运行于存储服务器一个守护进程，通常一个```osd```管理一块磁盘。每个osd可以承载多个pg，承载同一个pg的多个osd互称为```peer```，这也是osd启动或者pg创建之时，经历的```peering```状态的由来，peering过程就是通过将多个peer存储的pg_info_t信息合成出一份权威的pg_info_t。
@@ -45,6 +46,10 @@ ceph使用```pg log```来保证多副本之间的一致性。```pg log```用来�
 8.```unfound```对象
 ```unfound```对象是在```log-based recovery```的源osd失效时出现的，此时待recover的节点已经知道了缺失哪些```pg log```，并由此知道缺失哪些对象，这些对象此时是处于待recover节点的```missing```列表中的，在recover尚未完成而源osd已经失效的情况下，待recover节点便将此时的```missing```列表中的全部对象置为```unfound```。
 有```unfound对象```的情况下，pg实际是处于```active+recovering+degraded```状态的，尽管recover没有完成，但是只要不命中```unfound```对象，其他对象都是可读的，并且此时pg是可写的，但是如果读写```unfound对象```，都会造成```slow request```，并长时间block住，这也是一种相当严重的状况，但是比整个pg处于incomplete、down或卡在peering状态导致完全不可读写要稍微好一些。
+
+9.```slow request```
+```slow request```产生的原因在于，对于一个读写Op，complete的标准是先commit到journal，在apply到文件系统，primary osd在收到各个副本的commit和apply消息之后才会标志这个Op已经complete。在primary osd上会对Op进行计时，如果在30s仍未complete，就能够在```ceph -s```命令行上看到```slow request```。
+primary osd不能及时收到commit和apply的原因有很多，比如其中一个secondary osd已经core dump了，而在core dump时，只能通过心跳缓慢发现这个osd已经down了并反映在osd map中(如果最终osd被标志为down状态，那么这个Op会被重新requeue，如能及时complete，那么```slow request```会消失)，在这之前，primary osd还是在苦苦等待此osd的回应的，这是一种产生```slow request```的原因；其他原因包括osd负载过重导致commit/apply慢以及网络状态不佳导致的消息延时等。
 
 ## 二、运维必备命令行
 1.```ceph tell osd.* injectargs “--config value”```
@@ -350,5 +355,5 @@ ceph并不是一个很好运维的存储系统，因此需要一些监控和报�
 
 ## 六、ceph运维中的危险操作总结
 1、跨大版本升级
-尽管社区会对各个大版本升级做测试并给出升级步骤，但是仅限于社区发布的大版本之间的升级，我们经常会从upstream backport很多patch回来，导致出现问题
+尽管社区会对各个大版本升级做测试并给出升级步骤，但是仅限于社区发布的大版本之间的升级，我们经常会从upstream backport很多patch回来，导致出现问题。
 
