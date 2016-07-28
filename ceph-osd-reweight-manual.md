@@ -3,12 +3,16 @@
 
 ## 1.命令行
   1.ceph osd reweight-by-pg 101 test
+
   调整osd的weight，使得拥有最多pg的osd拥有的pg个数与平均pg个数的比例为101/100。这个101是因为这个参数为必须大于100的整数，101能保证次优的pg分布。另外，这个命令行需要制定poolname，即test。
   2.ceph osd test-reweight-by-pg 101 test
+
   这一命令行的作用是只进行reweight的计算，但是不修改weight，通过这条命令行可以看到reweight操作的预期影响。
   3.ceph osd utilization
+
   它可以展示当前拥有最多/最少pg的osd，以及偏离情况。
   4.ceph osd df
+
   它可以展示各个osd的实际磁盘使用量，因为尽管pg较为均为，但磁盘使用量均匀才是我们的最终目标，因此它展示的数据均匀与否才是reweight操作是否有效的唯一标准。
 
 ## 2.使用
