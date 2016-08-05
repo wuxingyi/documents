@@ -19,8 +19,10 @@
   它可以展示各个osd的实际磁盘使用量，因为尽管pg较为均为，但磁盘使用量均匀才是我们的最终目标，因此它展示的数据均匀与否才是reweight操作是否有效的唯一标准。
 
 ## 2.使用
-  1.在某些场景下，osd可能会只有一个pool，比如HDD的.rgw.buckets以及VaaS的video，而在另外一些场景下，可能会有多个pool，比如rbd使用场景下，需要有vms、images及volumes等多个pool。对于多个pool的情况，使用reweight时，采取的方式是按照预期数据量大小顺序来进行调整，因为对后面的pool的weight调整，会影响之前已经调整好的pool的weight。比如根据经验来看，images和vms会拥有较少的数据量，而volumes这个pool通常会具有较多的数据量，因此reweight的顺序就应该是volumes->vms->images。事实上，一种更为妥当的方式时，只调整具有决定性作用的pool即可，因为像images这样的pool，数据量实际上跟volumes这种pool差一两个数量级。
+  1.在某些场景下，osd可能会只有一个pool，比如HDD的.rgw.buckets以及VaaS的video，而在另外一些场景下，可能会有多个pool，比如rbd使用场景下，需要有vms、images及volumes等多个pool。对于多个pool的情况，使用reweight时，采取的方式是按照预期数据量大小顺序来进行调整，因为对后面的pool的weight调整，会影响之前已经调整好的pool的weight。比如根据经验来看，images和vms会拥有较少的数据量，而volumes这个pool通常会具有较多的数据量，因此reweight的顺序就应该是volumes->vms->images。事实上，一种更为妥当的方式时，只调整具有决定性作用的pool即可，因为像images这样的pool，数据量实际上跟volumes这种pool差一两个数量级，另外，为了让reweight结果更加直观，应先创建volumes这个pool，并完成reweight，然后再创建其它pool。
+
   2.进行reweight时，一次操作很大概率是不能够将数据完美分布的，所有reweight操作需要进行多次, 并通过前述ceph osd utilization命令行观察pg是否已经分布较为均匀。在pool创建完之后，最合理的方式是通过rados bench向这个pool中写入一定量的数据(比如总容量的5%)，在reweight操作之后，即可以通过ceph osd df命令行观察数据的分布情况。
+
   
 ## 3.数据均匀的标准
 前面提到，只有通过ceph osd df看到的数据均匀，才是真正的数据均匀。一般而言，达到最大与平均之比为1.05左右即可认为调整成功。

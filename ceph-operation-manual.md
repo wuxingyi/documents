@@ -8,6 +8,7 @@ monitor集群一般至少需要三个成员，在更大的集群中可能需要�
 monitor会进行形式上的选举，但总是rank最低的monitor获胜，而在所有的monitor都使用默认的6789端口的情况下，rank最低的总是IP地址最小的monitor。
 monitor使用keyvalueDB来存储其数据。
 为了提高服务的可用性，通常的做法是把服务器放到不同的机柜上，这样可以防止多个机柜掉电，但是如果在部署时就把monitor放到同一个机柜上，那么仍然不能达到足够高的可用性，因此部署时应该把monitor也放到不同的机柜上。
+注意：不要同时重启多个monitor，而是在每个monitor重启并且加入到quorum之后，再启动其它monitor。
 
 2.```osd```
 ```osd```是运行于存储服务器一个守护进程，通常一个```osd```管理一块磁盘。每个osd可以承载多个pg，承载同一个pg的多个osd互称为```peer```，这也是osd启动或者pg创建之时，经历的```peering```状态的由来，peering过程就是通过将多个peer存储的pg_info_t信息合成出一份权威的pg_info_t。
