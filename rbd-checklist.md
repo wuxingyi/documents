@@ -1,4 +1,5 @@
 #rbd上线checklist
+
 1.monitor是否已经分布于多个rack
 2.crushmap是否已经根据rack、host进行了修改
 3.是否已经将root=default改成了相应的az名
