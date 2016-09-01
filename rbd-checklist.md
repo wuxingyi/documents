@@ -23,3 +23,5 @@
 11.各个节点时钟是否能够完全一致
 
 12.是否已经添加了watchceph监控项，用以进行短信、电话告警
+
+13.是否对ceph-osd@.service设置了taskset CPU限制
