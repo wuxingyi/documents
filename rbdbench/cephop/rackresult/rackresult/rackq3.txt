@@ -1,0 +1,962 @@
+[compute-96-10] Executing task 'rackbenchq3'
+[compute-96-11] Executing task 'rackbenchq3'
+[compute-96-12] Executing task 'rackbenchq3'
+[compute-96-13] Executing task 'rackbenchq3'
+[compute-96-14] Executing task 'rackbenchq3'
+[compute-96-15] Executing task 'rackbenchq3'
+[compute-96-16] Executing task 'rackbenchq3'
+[compute-96-17] Executing task 'rackbenchq3'
+[compute-96-18] Executing task 'rackbenchq3'
+[compute-96-19] Executing task 'rackbenchq3'
+[compute-96-10] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-10] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-10] out: fio-2.13
+[compute-96-14] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-14] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-14] out: fio-2.13
+[compute-96-16] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-16] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-16] out: fio-2.13
+[compute-96-18] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-18] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-18] out: fio-2.13
+[compute-96-19] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-19] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-19] out: fio-2.13
+[compute-96-11] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-11] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-11] out: fio-2.13
+[compute-96-17] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-17] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-17] out: fio-2.13
+[compute-96-13] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-13] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-13] out: fio-2.13
+[compute-96-15] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-15] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-15] out: fio-2.13
+[compute-96-12] run: fio -iodepth=21 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=60G -numjobs=1 -runtime=60 -pool=rackbench3 -rbdname=$(hostname -s) -clientname=admin -group_reporting -name=mytest
+[compute-96-12] out: mytest: (g=0): rw=randwrite, bs=4K-4K/4K-4K/4K-4K, ioengine=rbd, iodepth=21
+[compute-96-12] out: fio-2.13
+[compute-96-10] out: Starting 1 thread
+[compute-96-10] out: rbd engine: RBD version: 0.1.10
+[compute-96-13] out: Starting 1 thread
+[compute-96-13] out: rbd engine: RBD version: 0.1.10
+[compute-96-16] out: Starting 1 thread
+[compute-96-16] out: rbd engine: RBD version: 0.1.10
+[compute-96-19] out: Starting 1 thread
+[compute-96-19] out: rbd engine: RBD version: 0.1.10
+[compute-96-14] out: Starting 1 thread
+[compute-96-14] out: rbd engine: RBD version: 0.1.10
+[compute-96-18] out: Starting 1 thread
+[compute-96-18] out: rbd engine: RBD version: 0.1.10
+[compute-96-11] out: Starting 1 thread
+[compute-96-11] out: rbd engine: RBD version: 0.1.10
+[compute-96-17] out: Starting 1 thread
+[compute-96-17] out: rbd engine: RBD version: 0.1.10
+[compute-96-15] out: Starting 1 thread
+[compute-96-15] out: rbd engine: RBD version: 0.1.10
+[compute-96-12] out: Starting 1 thread
+[compute-96-12] out: rbd engine: RBD version: 0.1.10
+[compute-96-10] out: Jobs: 1 (f=1)
+[compute-96-13] out: Jobs: 1 (f=1)
+[compute-96-14] out: Jobs: 1 (f=1)
+[compute-96-16] out: Jobs: 1 (f=1)
+[compute-96-19] out: Jobs: 1 (f=1)
+[compute-96-18] out: Jobs: 1 (f=1)
+[compute-96-11] out: Jobs: 1 (f=1)
+[compute-96-17] out: Jobs: 1 (f=1)
+[compute-96-15] out: Jobs: 1 (f=1)
+[compute-96-12] out: Jobs: 1 (f=1)
+[compute-96-10] out: Jobs: 1 (f=1)
+[compute-96-13] out: Jobs: 1 (f=1)
+[compute-96-14] out: Jobs: 1 (f=1)
+[compute-96-16] out: Jobs: 1 (f=1)
+[compute-96-19] out: Jobs: 1 (f=1)
+[compute-96-18] out: Jobs: 1 (f=1)
+[compute-96-11] out: Jobs: 1 (f=1)
+[compute-96-17] out: Jobs: 1 (f=1)
+[compute-96-15] out: Jobs: 1 (f=1)
+[compute-96-12] out: Jobs: 1 (f=1)
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22716KB/0KB /s] [0/5679/0 iops] [eta 00m:57s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22308KB/0KB /s] [0/5577/0 iops] [eta 00m:57s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22432KB/0KB /s] [0/5608/0 iops] [eta 00m:57s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22712KB/0KB /s] [0/5678/0 iops] [eta 00m:57s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/18440KB/0KB /s] [0/4610/0 iops] [eta 00m:57s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/19204KB/0KB /s] [0/4801/0 iops] [eta 00m:57s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/23472KB/0KB /s] [0/5868/0 iops] [eta 00m:57s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/19888KB/0KB /s] [0/4972/0 iops] [eta 00m:57s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22264KB/0KB /s] [0/5566/0 iops] [eta 00m:57s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [5.0% done] [0KB/22988KB/0KB /s] [0/5747/0 iops] [eta 00m:57s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/18152KB/0KB /s] [0/4538/0 iops] [eta 00m:56s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/18880KB/0KB /s] [0/4720/0 iops] [eta 00m:56s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/19432KB/0KB /s] [0/4858/0 iops] [eta 00m:56s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/20756KB/0KB /s] [0/5189/0 iops] [eta 00m:56s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/17000KB/0KB /s] [0/4250/0 iops] [eta 00m:56s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/17804KB/0KB /s] [0/4451/0 iops] [eta 00m:56s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/17940KB/0KB /s] [0/4485/0 iops] [eta 00m:56s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/18492KB/0KB /s] [0/4623/0 iops] [eta 00m:56s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/18784KB/0KB /s] [0/4696/0 iops] [eta 00m:56s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [6.7% done] [0KB/18616KB/0KB /s] [0/4654/0 iops] [eta 00m:56s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/6720KB/0KB /s] [0/1680/0 iops] [eta 00m:55s] 
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/6228KB/0KB /s] [0/1557/0 iops] [eta 00m:55s] 
+Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/5628KB/0KB /s] [0/1407/0 iops] [eta 00m:55s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/5880KB/0KB /s] [0/1470/0 iops] [eta 00m:55s] 
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/5040KB/0KB /s] [0/1260/0 iops] [eta 00m:55s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/4884KB/0KB /s] [0/1221/0 iops] [eta 00m:55s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/5084KB/0KB /s] [0/1271/0 iops] [eta 00m:55s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/4928KB/0KB /s] [0/1232/0 iops] [eta 00m:55s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/4992KB/0KB /s] [0/1248/0 iops] [eta 00m:55s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [8.3% done] [0KB/4664KB/0KB /s] [0/1166/0 iops] [eta 00m:55s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/12772KB/0KB /s] [0/3193/0 iops] [eta 00m:54s]
+[compute-96-14] out: [compute-96-13] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/15172KB/0KB /s] [0/3793/0 iops] [eta 00m:54s]
+Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/14888KB/0KB /s] [0/3722/0 iops] [eta 00m:54s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/14976KB/0KB /s] [0/3744/0 iops] [eta 00m:54s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/12544KB/0KB /s] [0/3136/0 iops] [eta 00m:54s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/13500KB/0KB /s] [0/3375/0 iops] [eta 00m:54s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/15568KB/0KB /s] [0/3892/0 iops] [eta 00m:54s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/14524KB/0KB /s] [0/3631/0 iops] [eta 00m:54s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/15780KB/0KB /s] [0/3945/0 iops] [eta 00m:54s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [10.0% done] [0KB/15856KB/0KB /s] [0/3964/0 iops] [eta 00m:54s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/20612KB/0KB /s] [0/5153/0 iops] [eta 00m:53s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/22144KB/0KB /s] [0/5536/0 iops] [eta 00m:53s]
+Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/21516KB/0KB /s] [0/5379/0 iops] [eta 00m:53s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/22088KB/0KB /s] [0/5522/0 iops] [eta 00m:53s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/19631KB/0KB /s] [0/4907/0 iops] [eta 00m:53s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/19112KB/0KB /s] [0/4778/0 iops] [eta 00m:53s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/19948KB/0KB /s] [0/4987/0 iops] [eta 00m:53s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/20920KB/0KB /s] [0/5230/0 iops] [eta 00m:53s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/21140KB/0KB /s] [0/5285/0 iops] [eta 00m:53s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [11.7% done] [0KB/22032KB/0KB /s] [0/5508/0 iops] [eta 00m:53s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/16584KB/0KB /s] [0/4146/0 iops] [eta 00m:52s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/17156KB/0KB /s] [0/4289/0 iops] [eta 00m:52s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/16852KB/0KB /s] [0/4213/0 iops] [eta 00m:52s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/17052KB/0KB /s] [0/4263/0 iops] [eta 00m:52s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/14960KB/0KB /s] [0/3740/0 iops] [eta 00m:52s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/13692KB/0KB /s] [0/3423/0 iops] [eta 00m:52s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/13812KB/0KB /s] [0/3453/0 iops] [eta 00m:52s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/14472KB/0KB /s] [0/3618/0 iops] [eta 00m:52s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/15236KB/0KB /s] [0/3809/0 iops] [eta 00m:52s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [13.3% done] [0KB/16128KB/0KB /s] [0/4032/0 iops] [eta 00m:52s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9668KB/0KB /s] [0/2417/0 iops] [eta 00m:51s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9160KB/0KB /s] [0/2290/0 iops] [eta 00m:51s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9764KB/0KB /s] [0/2441/0 iops] [eta 00m:51s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9848KB/0KB /s] [0/2462/0 iops] [eta 00m:51s] 
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/7920KB/0KB /s] [0/1980/0 iops] [eta 00m:51s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/8088KB/0KB /s] [0/2022/0 iops] [eta 00m:51s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/8832KB/0KB /s] [0/2208/0 iops] [eta 00m:51s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/8492KB/0KB /s] [0/2123/0 iops] [eta 00m:51s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9296KB/0KB /s] [0/2324/0 iops] [eta 00m:51s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [15.0% done] [0KB/9256KB/0KB /s] [0/2314/0 iops] [eta 00m:51s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/10368KB/0KB /s] [0/2592/0 iops] [eta 00m:50s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/12116KB/0KB /s] [0/3029/0 iops] [eta 00m:50s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/11856KB/0KB /s] [0/2964/0 iops] [eta 00m:50s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/11080KB/0KB /s] [0/2770/0 iops] [eta 00m:50s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/10672KB/0KB /s] [0/2668/0 iops] [eta 00m:50s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/13004KB/0KB /s] [0/3251/0 iops] [eta 00m:50s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/10588KB/0KB /s] [0/2647/0 iops] [eta 00m:50s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/11772KB/0KB /s] [0/2943/0 iops] [eta 00m:50s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/11552KB/0KB /s] [0/2888/0 iops] [eta 00m:50s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [16.7% done] [0KB/12304KB/0KB /s] [0/3076/0 iops] [eta 00m:50s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/17532KB/0KB /s] [0/4383/0 iops] [eta 00m:49s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/16668KB/0KB /s] [0/4167/0 iops] [eta 00m:49s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/16704KB/0KB /s] [0/4176/0 iops] [eta 00m:49s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/18208KB/0KB /s] [0/4552/0 iops] [eta 00m:49s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/15372KB/0KB /s] [0/3843/0 iops] [eta 00m:49s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/15036KB/0KB /s] [0/3759/0 iops] [eta 00m:49s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/17200KB/0KB /s] [0/4300/0 iops] [eta 00m:49s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/16772KB/0KB /s] [0/4193/0 iops] [eta 00m:49s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/15784KB/0KB /s] [0/3946/0 iops] [eta 00m:49s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [18.3% done] [0KB/17616KB/0KB /s] [0/4404/0 iops] [eta 00m:49s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19332KB/0KB /s] [0/4833/0 iops] [eta 00m:48s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19176KB/0KB /s] [0/4794/0 iops] [eta 00m:48s]
+Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/18776KB/0KB /s] [0/4694/0 iops] [eta 00m:48s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19036KB/0KB /s] [0/4759/0 iops] [eta 00m:48s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/17864KB/0KB /s] [0/4466/0 iops] [eta 00m:48s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/18640KB/0KB /s] [0/4660/0 iops] [eta 00m:48s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19140KB/0KB /s] [0/4785/0 iops] [eta 00m:48s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19204KB/0KB /s] [0/4801/0 iops] [eta 00m:48s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/19484KB/0KB /s] [0/4871/0 iops] [eta 00m:48s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [20.0% done] [0KB/20124KB/0KB /s] [0/5031/0 iops] [eta 00m:48s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/14608KB/0KB /s] [0/3652/0 iops] [eta 00m:47s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/14788KB/0KB /s] [0/3697/0 iops] [eta 00m:47s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/15624KB/0KB /s] [0/3906/0 iops] [eta 00m:47s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/15492KB/0KB /s] [0/3873/0 iops] [eta 00m:47s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/14520KB/0KB /s] [0/3630/0 iops] [eta 00m:47s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/14592KB/0KB /s] [0/3648/0 iops] [eta 00m:47s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/16288KB/0KB /s] [0/4072/0 iops] [eta 00m:47s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/16656KB/0KB /s] [0/4164/0 iops] [eta 00m:47s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/14956KB/0KB /s] [0/3739/0 iops] [eta 00m:47s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [21.7% done] [0KB/15700KB/0KB /s] [0/3925/0 iops] [eta 00m:47s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/13968KB/0KB /s] [0/3492/0 iops] [eta 00m:46s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14936KB/0KB /s] [0/3734/0 iops] [eta 00m:46s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/13776KB/0KB /s] [0/3444/0 iops] [eta 00m:46s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14856KB/0KB /s] [0/3714/0 iops] [eta 00m:46s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14400KB/0KB /s] [0/3600/0 iops] [eta 00m:46s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14632KB/0KB /s] [0/3658/0 iops] [eta 00m:46s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14820KB/0KB /s] [0/3705/0 iops] [eta 00m:46s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14588KB/0KB /s] [0/3647/0 iops] [eta 00m:46s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/14956KB/0KB /s] [0/3739/0 iops] [eta 00m:46s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [23.3% done] [0KB/15384KB/0KB /s] [0/3846/0 iops] [eta 00m:46s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/17068KB/0KB /s] [0/4267/0 iops] [eta 00m:45s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/16632KB/0KB /s] [0/4158/0 iops] [eta 00m:45s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/17620KB/0KB /s] [0/4405/0 iops] [eta 00m:45s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/19096KB/0KB /s] [0/4774/0 iops] [eta 00m:45s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/17164KB/0KB /s] [0/4291/0 iops] [eta 00m:45s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/17544KB/0KB /s] [0/4386/0 iops] [eta 00m:45s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/18112KB/0KB /s] [0/4528/0 iops] [eta 00m:45s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/18432KB/0KB /s] [0/4608/0 iops] [eta 00m:45s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/16768KB/0KB /s] [0/4192/0 iops] [eta 00m:45s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [25.0% done] [0KB/17088KB/0KB /s] [0/4272/0 iops] [eta 00m:45s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/19908KB/0KB /s] [0/4977/0 iops] [eta 00m:44s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/18560KB/0KB /s] [0/4640/0 iops] [eta 00m:44s]
+[compute-96-14] out: [compute-96-13] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/19772KB/0KB /s] [0/4943/0 iops] [eta 00m:44s]
+Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/21812KB/0KB /s] [0/5453/0 iops] [eta 00m:44s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/22416KB/0KB /s] [0/5604/0 iops] [eta 00m:44s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/19256KB/0KB /s] [0/4814/0 iops] [eta 00m:44s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/20388KB/0KB /s] [0/5097/0 iops] [eta 00m:44s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/21012KB/0KB /s] [0/5253/0 iops] [eta 00m:44s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/21164KB/0KB /s] [0/5291/0 iops] [eta 00m:44s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [26.7% done] [0KB/20812KB/0KB /s] [0/5203/0 iops] [eta 00m:44s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/20576KB/0KB /s] [0/5144/0 iops] [eta 00m:43s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/18472KB/0KB /s] [0/4618/0 iops] [eta 00m:43s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/21708KB/0KB /s] [0/5427/0 iops] [eta 00m:43s]
+Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/20804KB/0KB /s] [0/5201/0 iops] [eta 00m:43s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/21704KB/0KB /s] [0/5426/0 iops] [eta 00m:43s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/18544KB/0KB /s] [0/4636/0 iops] [eta 00m:43s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/19936KB/0KB /s] [0/4984/0 iops] [eta 00m:43s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/20768KB/0KB /s] [0/5192/0 iops] [eta 00m:43s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/21420KB/0KB /s] [0/5355/0 iops] [eta 00m:43s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [28.3% done] [0KB/20304KB/0KB /s] [0/5076/0 iops] [eta 00m:43s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/19912KB/0KB /s] [0/4978/0 iops] [eta 00m:42s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/18464KB/0KB /s] [0/4616/0 iops] [eta 00m:42s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/21132KB/0KB /s] [0/5283/0 iops] [eta 00m:42s]
+Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/20536KB/0KB /s] [0/5134/0 iops] [eta 00m:42s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/21464KB/0KB /s] [0/5366/0 iops] [eta 00m:42s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/17800KB/0KB /s] [0/4450/0 iops] [eta 00m:42s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/20200KB/0KB /s] [0/5050/0 iops] [eta 00m:42s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/20244KB/0KB /s] [0/5061/0 iops] [eta 00m:42s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/22036KB/0KB /s] [0/5509/0 iops] [eta 00m:42s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [30.0% done] [0KB/20084KB/0KB /s] [0/5021/0 iops] [eta 00m:42s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/19544KB/0KB /s] [0/4886/0 iops] [eta 00m:41s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/19428KB/0KB /s] [0/4857/0 iops] [eta 00m:41s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/21264KB/0KB /s] [0/5316/0 iops] [eta 00m:41s]
+Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/20688KB/0KB /s] [0/5172/0 iops] [eta 00m:41s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/22824KB/0KB /s] [0/5706/0 iops] [eta 00m:41s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/18264KB/0KB /s] [0/4566/0 iops] [eta 00m:41s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/20184KB/0KB /s] [0/5046/0 iops] [eta 00m:41s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/21100KB/0KB /s] [0/5275/0 iops] [eta 00m:41s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/21276KB/0KB /s] [0/5319/0 iops] [eta 00m:41s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [31.7% done] [0KB/19144KB/0KB /s] [0/4786/0 iops] [eta 00m:41s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/10372KB/0KB /s] [0/2593/0 iops] [eta 00m:40s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/9304KB/0KB /s] [0/2326/0 iops] [eta 00m:40s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/8740KB/0KB /s] [0/2185/0 iops] [eta 00m:40s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/8600KB/0KB /s] [0/2150/0 iops] [eta 00m:40s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/9764KB/0KB /s] [0/2441/0 iops] [eta 00m:40s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/8340KB/0KB /s] [0/2085/0 iops] [eta 00m:40s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/9612KB/0KB /s] [0/2403/0 iops] [eta 00m:40s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/8972KB/0KB /s] [0/2243/0 iops] [eta 00m:40s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/9080KB/0KB /s] [0/2270/0 iops] [eta 00m:40s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [33.3% done] [0KB/9152KB/0KB /s] [0/2288/0 iops] [eta 00m:40s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/16356KB/0KB /s] [0/4089/0 iops] [eta 00m:39s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/15296KB/0KB /s] [0/3824/0 iops] [eta 00m:39s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/17772KB/0KB /s] [0/4443/0 iops] [eta 00m:39s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/17360KB/0KB /s] [0/4340/0 iops] [eta 00m:39s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/18400KB/0KB /s] [0/4600/0 iops] [eta 00m:39s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/15728KB/0KB /s] [0/3932/0 iops] [eta 00m:39s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/16332KB/0KB /s] [0/4083/0 iops] [eta 00m:39s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/17756KB/0KB /s] [0/4439/0 iops] [eta 00m:39s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/17128KB/0KB /s] [0/4282/0 iops] [eta 00m:39s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [35.0% done] [0KB/17112KB/0KB /s] [0/4278/0 iops] [eta 00m:39s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11256KB/0KB /s] [0/2814/0 iops] [eta 00m:38s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11536KB/0KB /s] [0/2884/0 iops] [eta 00m:38s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11900KB/0KB /s] [0/2975/0 iops] [eta 00m:38s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/12448KB/0KB /s] [0/3112/0 iops] [eta 00m:38s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/12660KB/0KB /s] [0/3165/0 iops] [eta 00m:38s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11808KB/0KB /s] [0/2952/0 iops] [eta 00m:38s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11656KB/0KB /s] [0/2914/0 iops] [eta 00m:38s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11688KB/0KB /s] [0/2922/0 iops] [eta 00m:38s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/11612KB/0KB /s] [0/2903/0 iops] [eta 00m:38s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [36.7% done] [0KB/12160KB/0KB /s] [0/3040/0 iops] [eta 00m:38s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/11800KB/0KB /s] [0/2950/0 iops] [eta 00m:37s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/11536KB/0KB /s] [0/2884/0 iops] [eta 00m:37s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/13424KB/0KB /s] [0/3356/0 iops] [eta 00m:37s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/12200KB/0KB /s] [0/3050/0 iops] [eta 00m:37s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/13084KB/0KB /s] [0/3271/0 iops] [eta 00m:37s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/10328KB/0KB /s] [0/2582/0 iops] [eta 00m:37s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/11132KB/0KB /s] [0/2783/0 iops] [eta 00m:37s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/13240KB/0KB /s] [0/3310/0 iops] [eta 00m:37s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/13580KB/0KB /s] [0/3395/0 iops] [eta 00m:37s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [38.3% done] [0KB/13656KB/0KB /s] [0/3414/0 iops] [eta 00m:37s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/14176KB/0KB /s] [0/3544/0 iops] [eta 00m:36s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/12956KB/0KB /s] [0/3239/0 iops] [eta 00m:36s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/13860KB/0KB /s] [0/3465/0 iops] [eta 00m:36s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/11984KB/0KB /s] [0/2996/0 iops] [eta 00m:36s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/13204KB/0KB /s] [0/3301/0 iops] [eta 00m:36s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/12748KB/0KB /s] [0/3187/0 iops] [eta 00m:36s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/13020KB/0KB /s] [0/3255/0 iops] [eta 00m:36s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/12444KB/0KB /s] [0/3111/0 iops] [eta 00m:36s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/12964KB/0KB /s] [0/3241/0 iops] [eta 00m:36s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [40.0% done] [0KB/12680KB/0KB /s] [0/3170/0 iops] [eta 00m:36s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/13784KB/0KB /s] [0/3446/0 iops] [eta 00m:35s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/13212KB/0KB /s] [0/3303/0 iops] [eta 00m:35s]
+[compute-96-13] out: [compute-96-14] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/15900KB/0KB /s] [0/3975/0 iops] [eta 00m:35s]
+Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/15012KB/0KB /s] [0/3753/0 iops] [eta 00m:35s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/15748KB/0KB /s] [0/3937/0 iops] [eta 00m:35s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/13168KB/0KB /s] [0/3292/0 iops] [eta 00m:35s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/14408KB/0KB /s] [0/3602/0 iops] [eta 00m:35s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/16572KB/0KB /s] [0/4143/0 iops] [eta 00m:35s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/16320KB/0KB /s] [0/4080/0 iops] [eta 00m:35s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [41.7% done] [0KB/16204KB/0KB /s] [0/4051/0 iops] [eta 00m:35s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/2388KB/0KB /s] [0/597/0 iops] [eta 00m:34s]  
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/984KB/0KB /s] [0/246/0 iops] [eta 00m:34s]   
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/1036KB/0KB /s] [0/259/0 iops] [eta 00m:34s]  
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/756KB/0KB /s] [0/189/0 iops] [eta 00m:34s]   
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/324KB/0KB /s] [0/81/0 iops] [eta 00m:34s]    
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/768KB/0KB /s] [0/192/0 iops] [eta 00m:34s]   
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/64KB/0KB /s] [0/16/0 iops] [eta 00m:34s]     
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/124KB/0KB /s] [0/31/0 iops] [eta 00m:34s]    
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/16KB/0KB /s] [0/4/0 iops] [eta 00m:34s]      
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [43.3% done] [0KB/0KB/0KB /s] [0/0/0 iops] [eta 00m:34s]       
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/16116KB/0KB /s] [0/4029/0 iops] [eta 00m:33s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/17344KB/0KB /s] [0/4336/0 iops] [eta 00m:33s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/18492KB/0KB /s] [0/4623/0 iops] [eta 00m:33s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/16536KB/0KB /s] [0/4134/0 iops] [eta 00m:33s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/17624KB/0KB /s] [0/4406/0 iops] [eta 00m:33s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/15532KB/0KB /s] [0/3883/0 iops] [eta 00m:33s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/16176KB/0KB /s] [0/4044/0 iops] [eta 00m:33s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/16236KB/0KB /s] [0/4059/0 iops] [eta 00m:33s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/17428KB/0KB /s] [0/4357/0 iops] [eta 00m:33s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [45.0% done] [0KB/17324KB/0KB /s] [0/4331/0 iops] [eta 00m:33s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/13852KB/0KB /s] [0/3463/0 iops] [eta 00m:32s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/15660KB/0KB /s] [0/3915/0 iops] [eta 00m:32s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/15576KB/0KB /s] [0/3894/0 iops] [eta 00m:32s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/15608KB/0KB /s] [0/3902/0 iops] [eta 00m:32s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/16828KB/0KB /s] [0/4207/0 iops] [eta 00m:32s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/17944KB/0KB /s] [0/4486/0 iops] [eta 00m:32s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/15760KB/0KB /s] [0/3940/0 iops] [eta 00m:32s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/18368KB/0KB /s] [0/4592/0 iops] [eta 00m:32s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/15924KB/0KB /s] [0/3981/0 iops] [eta 00m:32s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [46.7% done] [0KB/16508KB/0KB /s] [0/4127/0 iops] [eta 00m:32s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/18744KB/0KB /s] [0/4686/0 iops] [eta 00m:31s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/19760KB/0KB /s] [0/4940/0 iops] [eta 00m:31s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/20948KB/0KB /s] [0/5237/0 iops] [eta 00m:31s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/21024KB/0KB /s] [0/5256/0 iops] [eta 00m:31s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/18680KB/0KB /s] [0/4670/0 iops] [eta 00m:31s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/16924KB/0KB /s] [0/4231/0 iops] [eta 00m:31s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/18732KB/0KB /s] [0/4683/0 iops] [eta 00m:31s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/19336KB/0KB /s] [0/4834/0 iops] [eta 00m:31s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/20648KB/0KB /s] [0/5162/0 iops] [eta 00m:31s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [48.3% done] [0KB/18656KB/0KB /s] [0/4664/0 iops] [eta 00m:31s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/16792KB/0KB /s] [0/4198/0 iops] [eta 00m:30s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/15880KB/0KB /s] [0/3970/0 iops] [eta 00m:30s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/18220KB/0KB /s] [0/4555/0 iops] [eta 00m:30s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/16820KB/0KB /s] [0/4205/0 iops] [eta 00m:30s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/17672KB/0KB /s] [0/4418/0 iops] [eta 00m:30s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/16968KB/0KB /s] [0/4242/0 iops] [eta 00m:30s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/17692KB/0KB /s] [0/4423/0 iops] [eta 00m:30s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/17952KB/0KB /s] [0/4488/0 iops] [eta 00m:30s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/16440KB/0KB /s] [0/4110/0 iops] [eta 00m:30s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [50.0% done] [0KB/16508KB/0KB /s] [0/4127/0 iops] [eta 00m:30s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12608KB/0KB /s] [0/3152/0 iops] [eta 00m:29s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12024KB/0KB /s] [0/3006/0 iops] [eta 00m:29s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12572KB/0KB /s] [0/3143/0 iops] [eta 00m:29s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12936KB/0KB /s] [0/3234/0 iops] [eta 00m:29s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12136KB/0KB /s] [0/3034/0 iops] [eta 00m:29s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12100KB/0KB /s] [0/3025/0 iops] [eta 00m:29s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12016KB/0KB /s] [0/3004/0 iops] [eta 00m:29s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12452KB/0KB /s] [0/3113/0 iops] [eta 00m:29s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12244KB/0KB /s] [0/3061/0 iops] [eta 00m:29s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [51.7% done] [0KB/12192KB/0KB /s] [0/3048/0 iops] [eta 00m:29s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/19996KB/0KB /s] [0/4999/0 iops] [eta 00m:28s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/18316KB/0KB /s] [0/4579/0 iops] [eta 00m:28s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/20108KB/0KB /s] [0/5027/0 iops] [eta 00m:28s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/18652KB/0KB /s] [0/4663/0 iops] [eta 00m:28s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/17464KB/0KB /s] [0/4366/0 iops] [eta 00m:28s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/18256KB/0KB /s] [0/4564/0 iops] [eta 00m:28s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/17948KB/0KB /s] [0/4487/0 iops] [eta 00m:28s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/18324KB/0KB /s] [0/4581/0 iops] [eta 00m:28s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/19036KB/0KB /s] [0/4759/0 iops] [eta 00m:28s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [53.3% done] [0KB/18112KB/0KB /s] [0/4528/0 iops] [eta 00m:28s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/8148KB/0KB /s] [0/2037/0 iops] [eta 00m:27s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/9304KB/0KB /s] [0/2326/0 iops] [eta 00m:27s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/9480KB/0KB /s] [0/2370/0 iops] [eta 00m:27s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/10544KB/0KB /s] [0/2636/0 iops] [eta 00m:27s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/7288KB/0KB /s] [0/1822/0 iops] [eta 00m:27s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/8128KB/0KB /s] [0/2032/0 iops] [eta 00m:27s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/11220KB/0KB /s] [0/2805/0 iops] [eta 00m:27s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/9384KB/0KB /s] [0/2346/0 iops] [eta 00m:27s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/11832KB/0KB /s] [0/2958/0 iops] [eta 00m:27s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [55.0% done] [0KB/11272KB/0KB /s] [0/2818/0 iops] [eta 00m:27s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/14836KB/0KB /s] [0/3709/0 iops] [eta 00m:26s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/15116KB/0KB /s] [0/3779/0 iops] [eta 00m:26s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/15716KB/0KB /s] [0/3929/0 iops] [eta 00m:26s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/16516KB/0KB /s] [0/4129/0 iops] [eta 00m:26s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/14108KB/0KB /s] [0/3527/0 iops] [eta 00m:26s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/13732KB/0KB /s] [0/3433/0 iops] [eta 00m:26s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/14736KB/0KB /s] [0/3684/0 iops] [eta 00m:26s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/13988KB/0KB /s] [0/3497/0 iops] [eta 00m:26s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/15216KB/0KB /s] [0/3804/0 iops] [eta 00m:26s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [56.7% done] [0KB/14884KB/0KB /s] [0/3721/0 iops] [eta 00m:26s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/14356KB/0KB /s] [0/3589/0 iops] [eta 00m:25s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/16936KB/0KB /s] [0/4234/0 iops] [eta 00m:25s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/14712KB/0KB /s] [0/3678/0 iops] [eta 00m:25s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/16488KB/0KB /s] [0/4122/0 iops] [eta 00m:25s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/15880KB/0KB /s] [0/3970/0 iops] [eta 00m:25s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/17332KB/0KB /s] [0/4333/0 iops] [eta 00m:25s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/13076KB/0KB /s] [0/3269/0 iops] [eta 00m:25s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/14708KB/0KB /s] [0/3677/0 iops] [eta 00m:25s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/17688KB/0KB /s] [0/4422/0 iops] [eta 00m:25s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [58.3% done] [0KB/15732KB/0KB /s] [0/3933/0 iops] [eta 00m:25s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/8968KB/0KB /s] [0/2242/0 iops] [eta 00m:24s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7436KB/0KB /s] [0/1859/0 iops] [eta 00m:24s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7476KB/0KB /s] [0/1869/0 iops] [eta 00m:24s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7700KB/0KB /s] [0/1925/0 iops] [eta 00m:24s] 
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7456KB/0KB /s] [0/1864/0 iops] [eta 00m:24s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/6364KB/0KB /s] [0/1591/0 iops] [eta 00m:24s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/6116KB/0KB /s] [0/1529/0 iops] [eta 00m:24s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/6760KB/0KB /s] [0/1690/0 iops] [eta 00m:24s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7148KB/0KB /s] [0/1787/0 iops] [eta 00m:24s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [60.0% done] [0KB/7732KB/0KB /s] [0/1933/0 iops] [eta 00m:24s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/8560KB/0KB /s] [0/2140/0 iops] [eta 00m:23s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/11180KB/0KB /s] [0/2795/0 iops] [eta 00m:23s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/9976KB/0KB /s] [0/2494/0 iops] [eta 00m:23s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/9752KB/0KB /s] [0/2438/0 iops] [eta 00m:23s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/7736KB/0KB /s] [0/1934/0 iops] [eta 00m:23s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/11252KB/0KB /s] [0/2813/0 iops] [eta 00m:23s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/8476KB/0KB /s] [0/2119/0 iops] [eta 00m:23s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/10424KB/0KB /s] [0/2606/0 iops] [eta 00m:23s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/9524KB/0KB /s] [0/2381/0 iops] [eta 00m:23s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [61.7% done] [0KB/10572KB/0KB /s] [0/2643/0 iops] [eta 00m:23s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/16968KB/0KB /s] [0/4242/0 iops] [eta 00m:22s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/17480KB/0KB /s] [0/4370/0 iops] [eta 00m:22s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/17088KB/0KB /s] [0/4272/0 iops] [eta 00m:22s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/18064KB/0KB /s] [0/4516/0 iops] [eta 00m:22s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/15720KB/0KB /s] [0/3930/0 iops] [eta 00m:22s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/17776KB/0KB /s] [0/4444/0 iops] [eta 00m:22s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/16804KB/0KB /s] [0/4201/0 iops] [eta 00m:22s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/15956KB/0KB /s] [0/3989/0 iops] [eta 00m:22s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/16116KB/0KB /s] [0/4029/0 iops] [eta 00m:22s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [63.3% done] [0KB/18068KB/0KB /s] [0/4517/0 iops] [eta 00m:22s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/14200KB/0KB /s] [0/3550/0 iops] [eta 00m:21s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/13192KB/0KB /s] [0/3298/0 iops] [eta 00m:21s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/13720KB/0KB /s] [0/3430/0 iops] [eta 00m:21s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/11860KB/0KB /s] [0/2965/0 iops] [eta 00m:21s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/13532KB/0KB /s] [0/3383/0 iops] [eta 00m:21s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/12184KB/0KB /s] [0/3046/0 iops] [eta 00m:21s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/12380KB/0KB /s] [0/3095/0 iops] [eta 00m:21s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/12716KB/0KB /s] [0/3179/0 iops] [eta 00m:21s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/12528KB/0KB /s] [0/3132/0 iops] [eta 00m:21s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [65.0% done] [0KB/11792KB/0KB /s] [0/2948/0 iops] [eta 00m:21s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/6572KB/0KB /s] [0/1643/0 iops] [eta 00m:20s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/6324KB/0KB /s] [0/1581/0 iops] [eta 00m:20s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/5720KB/0KB /s] [0/1430/0 iops] [eta 00m:20s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/5556KB/0KB /s] [0/1389/0 iops] [eta 00m:20s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/6576KB/0KB /s] [0/1644/0 iops] [eta 00m:20s] 
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/6628KB/0KB /s] [0/1657/0 iops] [eta 00m:20s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/5512KB/0KB /s] [0/1378/0 iops] [eta 00m:20s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/6464KB/0KB /s] [0/1616/0 iops] [eta 00m:20s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/5924KB/0KB /s] [0/1481/0 iops] [eta 00m:20s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [66.7% done] [0KB/5724KB/0KB /s] [0/1431/0 iops] [eta 00m:20s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/12948KB/0KB /s] [0/3237/0 iops] [eta 00m:19s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/14312KB/0KB /s] [0/3578/0 iops] [eta 00m:19s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/16004KB/0KB /s] [0/4001/0 iops] [eta 00m:19s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/13620KB/0KB /s] [0/3405/0 iops] [eta 00m:19s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/15008KB/0KB /s] [0/3752/0 iops] [eta 00m:19s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/13544KB/0KB /s] [0/3386/0 iops] [eta 00m:19s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/14360KB/0KB /s] [0/3590/0 iops] [eta 00m:19s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/15140KB/0KB /s] [0/3785/0 iops] [eta 00m:19s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/15436KB/0KB /s] [0/3859/0 iops] [eta 00m:19s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [68.3% done] [0KB/14924KB/0KB /s] [0/3731/0 iops] [eta 00m:19s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/12764KB/0KB /s] [0/3191/0 iops] [eta 00m:18s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/11712KB/0KB /s] [0/2928/0 iops] [eta 00m:18s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/10188KB/0KB /s] [0/2547/0 iops] [eta 00m:18s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/10356KB/0KB /s] [0/2589/0 iops] [eta 00m:18s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/8928KB/0KB /s] [0/2232/0 iops] [eta 00m:18s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/9412KB/0KB /s] [0/2353/0 iops] [eta 00m:18s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/10048KB/0KB /s] [0/2512/0 iops] [eta 00m:18s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/10152KB/0KB /s] [0/2538/0 iops] [eta 00m:18s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/11872KB/0KB /s] [0/2968/0 iops] [eta 00m:18s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [70.0% done] [0KB/9204KB/0KB /s] [0/2301/0 iops] [eta 00m:18s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/14344KB/0KB /s] [0/3586/0 iops] [eta 00m:17s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/15348KB/0KB /s] [0/3837/0 iops] [eta 00m:17s]
+[compute-96-14] out: [compute-96-13] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/15308KB/0KB /s] [0/3827/0 iops] [eta 00m:17s]
+Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/16272KB/0KB /s] [0/4068/0 iops] [eta 00m:17s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/17132KB/0KB /s] [0/4283/0 iops] [eta 00m:17s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/16144KB/0KB /s] [0/4036/0 iops] [eta 00m:17s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/17972KB/0KB /s] [0/4493/0 iops] [eta 00m:17s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/17208KB/0KB /s] [0/4302/0 iops] [eta 00m:17s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/16496KB/0KB /s] [0/4124/0 iops] [eta 00m:17s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [71.7% done] [0KB/16764KB/0KB /s] [0/4191/0 iops] [eta 00m:17s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/19492KB/0KB /s] [0/4873/0 iops] [eta 00m:16s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/20460KB/0KB /s] [0/5115/0 iops] [eta 00m:16s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/21448KB/0KB /s] [0/5362/0 iops] [eta 00m:16s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/20164KB/0KB /s] [0/5041/0 iops] [eta 00m:16s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/19052KB/0KB /s] [0/4763/0 iops] [eta 00m:16s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/22440KB/0KB /s] [0/5610/0 iops] [eta 00m:16s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/19652KB/0KB /s] [0/4913/0 iops] [eta 00m:16s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/21060KB/0KB /s] [0/5265/0 iops] [eta 00m:16s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/21044KB/0KB /s] [0/5261/0 iops] [eta 00m:16s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [73.3% done] [0KB/21064KB/0KB /s] [0/5266/0 iops] [eta 00m:16s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/21000KB/0KB /s] [0/5250/0 iops] [eta 00m:15s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/18612KB/0KB /s] [0/4653/0 iops] [eta 00m:15s]
+[compute-96-14] out: [compute-96-13] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/21816KB/0KB /s] [0/5454/0 iops] [eta 00m:15s]
+Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/20600KB/0KB /s] [0/5150/0 iops] [eta 00m:15s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/17528KB/0KB /s] [0/4382/0 iops] [eta 00m:15s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/21532KB/0KB /s] [0/5383/0 iops] [eta 00m:15s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/17636KB/0KB /s] [0/4409/0 iops] [eta 00m:15s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/19768KB/0KB /s] [0/4942/0 iops] [eta 00m:15s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/19560KB/0KB /s] [0/4890/0 iops] [eta 00m:15s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [75.0% done] [0KB/19332KB/0KB /s] [0/4833/0 iops] [eta 00m:15s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/12452KB/0KB /s] [0/3113/0 iops] [eta 00m:14s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/11040KB/0KB /s] [0/2760/0 iops] [eta 00m:14s]
+[compute-96-14] out: [compute-96-13] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/13388KB/0KB /s] [0/3347/0 iops] [eta 00m:14s]
+Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/12092KB/0KB /s] [0/3023/0 iops] [eta 00m:14s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/11660KB/0KB /s] [0/2915/0 iops] [eta 00m:14s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/12632KB/0KB /s] [0/3158/0 iops] [eta 00m:14s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/13004KB/0KB /s] [0/3251/0 iops] [eta 00m:14s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/12588KB/0KB /s] [0/3147/0 iops] [eta 00m:14s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/13856KB/0KB /s] [0/3464/0 iops] [eta 00m:14s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [76.7% done] [0KB/13616KB/0KB /s] [0/3404/0 iops] [eta 00m:14s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12048KB/0KB /s] [0/3012/0 iops] [eta 00m:13s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/11748KB/0KB /s] [0/2937/0 iops] [eta 00m:13s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12328KB/0KB /s] [0/3082/0 iops] [eta 00m:13s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12408KB/0KB /s] [0/3102/0 iops] [eta 00m:13s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/10464KB/0KB /s] [0/2616/0 iops] [eta 00m:13s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12488KB/0KB /s] [0/3122/0 iops] [eta 00m:13s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12544KB/0KB /s] [0/3136/0 iops] [eta 00m:13s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/13276KB/0KB /s] [0/3319/0 iops] [eta 00m:13s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12684KB/0KB /s] [0/3171/0 iops] [eta 00m:13s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [78.3% done] [0KB/12564KB/0KB /s] [0/3141/0 iops] [eta 00m:13s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/18920KB/0KB /s] [0/4730/0 iops] [eta 00m:12s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/18744KB/0KB /s] [0/4686/0 iops] [eta 00m:12s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/19784KB/0KB /s] [0/4946/0 iops] [eta 00m:12s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/19456KB/0KB /s] [0/4864/0 iops] [eta 00m:12s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/17280KB/0KB /s] [0/4320/0 iops] [eta 00m:12s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/20396KB/0KB /s] [0/5099/0 iops] [eta 00m:12s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/19040KB/0KB /s] [0/4760/0 iops] [eta 00m:12s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/17340KB/0KB /s] [0/4335/0 iops] [eta 00m:12s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/19972KB/0KB /s] [0/4993/0 iops] [eta 00m:12s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [80.0% done] [0KB/17756KB/0KB /s] [0/4439/0 iops] [eta 00m:12s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/10260KB/0KB /s] [0/2565/0 iops] [eta 00m:11s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/10696KB/0KB /s] [0/2674/0 iops] [eta 00m:11s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/9292KB/0KB /s] [0/2323/0 iops] [eta 00m:11s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/10928KB/0KB /s] [0/2732/0 iops] [eta 00m:11s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/11208KB/0KB /s] [0/2802/0 iops] [eta 00m:11s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/8916KB/0KB /s] [0/2229/0 iops] [eta 00m:11s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/9948KB/0KB /s] [0/2487/0 iops] [eta 00m:11s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/10312KB/0KB /s] [0/2578/0 iops] [eta 00m:11s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/9416KB/0KB /s] [0/2354/0 iops] [eta 00m:11s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [81.7% done] [0KB/8456KB/0KB /s] [0/2114/0 iops] [eta 00m:11s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/15748KB/0KB /s] [0/3937/0 iops] [eta 00m:10s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/13176KB/0KB /s] [0/3294/0 iops] [eta 00m:10s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/17256KB/0KB /s] [0/4314/0 iops] [eta 00m:10s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/16720KB/0KB /s] [0/4180/0 iops] [eta 00m:10s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/14468KB/0KB /s] [0/3617/0 iops] [eta 00m:10s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/15496KB/0KB /s] [0/3874/0 iops] [eta 00m:10s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/14988KB/0KB /s] [0/3747/0 iops] [eta 00m:10s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/16968KB/0KB /s] [0/4242/0 iops] [eta 00m:10s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/17008KB/0KB /s] [0/4252/0 iops] [eta 00m:10s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [83.3% done] [0KB/16256KB/0KB /s] [0/4064/0 iops] [eta 00m:10s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/14144KB/0KB /s] [0/3536/0 iops] [eta 00m:09s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/12500KB/0KB /s] [0/3125/0 iops] [eta 00m:09s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/12404KB/0KB /s] [0/3101/0 iops] [eta 00m:09s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/12684KB/0KB /s] [0/3171/0 iops] [eta 00m:09s]
+[compute-96-16] out: [compute-96-18] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/13112KB/0KB /s] [0/3278/0 iops] [eta 00m:09s]
+Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/11228KB/0KB /s] [0/2807/0 iops] [eta 00m:09s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/11940KB/0KB /s] [0/2985/0 iops] [eta 00m:09s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/12116KB/0KB /s] [0/3029/0 iops] [eta 00m:09s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/11868KB/0KB /s] [0/2967/0 iops] [eta 00m:09s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [85.0% done] [0KB/11404KB/0KB /s] [0/2851/0 iops] [eta 00m:09s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/5828KB/0KB /s] [0/1457/0 iops] [eta 00m:08s] 
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/6796KB/0KB /s] [0/1699/0 iops] [eta 00m:08s] 
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7304KB/0KB /s] [0/1826/0 iops] [eta 00m:08s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7188KB/0KB /s] [0/1797/0 iops] [eta 00m:08s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/6404KB/0KB /s] [0/1601/0 iops] [eta 00m:08s] 
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7524KB/0KB /s] [0/1881/0 iops] [eta 00m:08s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7652KB/0KB /s] [0/1913/0 iops] [eta 00m:08s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7460KB/0KB /s] [0/1865/0 iops] [eta 00m:08s] 
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/7976KB/0KB /s] [0/1994/0 iops] [eta 00m:08s] 
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [86.7% done] [0KB/8140KB/0KB /s] [0/2035/0 iops] [eta 00m:08s] 
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/20104KB/0KB /s] [0/5026/0 iops] [eta 00m:07s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/21208KB/0KB /s] [0/5302/0 iops] [eta 00m:07s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/21104KB/0KB /s] [0/5276/0 iops] [eta 00m:07s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/19716KB/0KB /s] [0/4929/0 iops] [eta 00m:07s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/21112KB/0KB /s] [0/5278/0 iops] [eta 00m:07s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/19652KB/0KB /s] [0/4913/0 iops] [eta 00m:07s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/20852KB/0KB /s] [0/5213/0 iops] [eta 00m:07s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/20424KB/0KB /s] [0/5106/0 iops] [eta 00m:07s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/21244KB/0KB /s] [0/5311/0 iops] [eta 00m:07s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [88.3% done] [0KB/21324KB/0KB /s] [0/5331/0 iops] [eta 00m:07s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/12132KB/0KB /s] [0/3033/0 iops] [eta 00m:06s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/12736KB/0KB /s] [0/3184/0 iops] [eta 00m:06s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/13676KB/0KB /s] [0/3419/0 iops] [eta 00m:06s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/11772KB/0KB /s] [0/2943/0 iops] [eta 00m:06s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/13500KB/0KB /s] [0/3375/0 iops] [eta 00m:06s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/11972KB/0KB /s] [0/2993/0 iops] [eta 00m:06s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/13416KB/0KB /s] [0/3354/0 iops] [eta 00m:06s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/12304KB/0KB /s] [0/3076/0 iops] [eta 00m:06s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/12112KB/0KB /s] [0/3028/0 iops] [eta 00m:06s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [90.0% done] [0KB/12740KB/0KB /s] [0/3185/0 iops] [eta 00m:06s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/16940KB/0KB /s] [0/4235/0 iops] [eta 00m:05s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/14996KB/0KB /s] [0/3749/0 iops] [eta 00m:05s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/14504KB/0KB /s] [0/3626/0 iops] [eta 00m:05s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/14748KB/0KB /s] [0/3687/0 iops] [eta 00m:05s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/15748KB/0KB /s] [0/3937/0 iops] [eta 00m:05s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/15028KB/0KB /s] [0/3757/0 iops] [eta 00m:05s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/14992KB/0KB /s] [0/3748/0 iops] [eta 00m:05s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/14916KB/0KB /s] [0/3729/0 iops] [eta 00m:05s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/16172KB/0KB /s] [0/4043/0 iops] [eta 00m:05s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [91.7% done] [0KB/16224KB/0KB /s] [0/4056/0 iops] [eta 00m:05s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/11052KB/0KB /s] [0/2763/0 iops] [eta 00m:04s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/13124KB/0KB /s] [0/3281/0 iops] [eta 00m:04s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/13060KB/0KB /s] [0/3265/0 iops] [eta 00m:04s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/14140KB/0KB /s] [0/3535/0 iops] [eta 00m:04s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/12204KB/0KB /s] [0/3051/0 iops] [eta 00m:04s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/12132KB/0KB /s] [0/3033/0 iops] [eta 00m:04s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/13312KB/0KB /s] [0/3328/0 iops] [eta 00m:04s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/13300KB/0KB /s] [0/3325/0 iops] [eta 00m:04s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/14068KB/0KB /s] [0/3517/0 iops] [eta 00m:04s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [93.3% done] [0KB/13808KB/0KB /s] [0/3452/0 iops] [eta 00m:04s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/10468KB/0KB /s] [0/2617/0 iops] [eta 00m:03s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/9644KB/0KB /s] [0/2411/0 iops] [eta 00m:03s] 
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/10380KB/0KB /s] [0/2595/0 iops] [eta 00m:03s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/11136KB/0KB /s] [0/2784/0 iops] [eta 00m:03s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/9104KB/0KB /s] [0/2276/0 iops] [eta 00m:03s] 
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/9388KB/0KB /s] [0/2347/0 iops] [eta 00m:03s] 
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/9916KB/0KB /s] [0/2479/0 iops] [eta 00m:03s] 
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/10372KB/0KB /s] [0/2593/0 iops] [eta 00m:03s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/10296KB/0KB /s] [0/2574/0 iops] [eta 00m:03s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [95.0% done] [0KB/10316KB/0KB /s] [0/2579/0 iops] [eta 00m:03s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/15544KB/0KB /s] [0/3886/0 iops] [eta 00m:02s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/13908KB/0KB /s] [0/3477/0 iops] [eta 00m:02s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/13860KB/0KB /s] [0/3465/0 iops] [eta 00m:02s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/14236KB/0KB /s] [0/3559/0 iops] [eta 00m:02s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/12968KB/0KB /s] [0/3242/0 iops] [eta 00m:02s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/13048KB/0KB /s] [0/3262/0 iops] [eta 00m:02s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/12904KB/0KB /s] [0/3226/0 iops] [eta 00m:02s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/12808KB/0KB /s] [0/3202/0 iops] [eta 00m:02s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/14144KB/0KB /s] [0/3536/0 iops] [eta 00m:02s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [96.7% done] [0KB/12644KB/0KB /s] [0/3161/0 iops] [eta 00m:02s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/10984KB/0KB /s] [0/2746/0 iops] [eta 00m:01s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/12300KB/0KB /s] [0/3075/0 iops] [eta 00m:01s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13092KB/0KB /s] [0/3273/0 iops] [eta 00m:01s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13916KB/0KB /s] [0/3479/0 iops] [eta 00m:01s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13380KB/0KB /s] [0/3345/0 iops] [eta 00m:01s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/11592KB/0KB /s] [0/2898/0 iops] [eta 00m:01s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/12948KB/0KB /s] [0/3237/0 iops] [eta 00m:01s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13284KB/0KB /s] [0/3321/0 iops] [eta 00m:01s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13800KB/0KB /s] [0/3450/0 iops] [eta 00m:01s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [98.3% done] [0KB/13592KB/0KB /s] [0/3398/0 iops] [eta 00m:01s]
+[compute-96-10] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/12164KB/0KB /s] [0/3041/0 iops] [eta 00m:00s]
+[compute-96-14] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11972KB/0KB /s] [0/2993/0 iops] [eta 00m:00s]
+[compute-96-13] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11924KB/0KB /s] [0/2981/0 iops] [eta 00m:00s]
+[compute-96-16] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11968KB/0KB /s] [0/2992/0 iops] [eta 00m:00s]
+[compute-96-19] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/10600KB/0KB /s] [0/2650/0 iops] [eta 00m:00s]
+[compute-96-18] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/10348KB/0KB /s] [0/2587/0 iops] [eta 00m:00s]
+[compute-96-11] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11160KB/0KB /s] [0/2790/0 iops] [eta 00m:00s]
+[compute-96-17] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11404KB/0KB /s] [0/2851/0 iops] [eta 00m:00s]
+[compute-96-12] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/13268KB/0KB /s] [0/3317/0 iops] [eta 00m:00s]
+[compute-96-15] out: Jobs: 1 (f=1): [w(1)] [100.0% done] [0KB/11872KB/0KB /s] [0/2968/0 iops] [eta 00m:00s]
+[compute-96-10] out: 
+[compute-96-10] out: mytest: (groupid=0, jobs=1): err= 0: pid=36737: Fri Sep  9 14:09:41 2016
+[compute-96-10] out:   write: io=869820KB, bw=14496KB/s, iops=3624, runt= 60003msec
+[compute-96-10] out:     slat (usec): min=0, max=41, avg= 0.12, stdev= 0.46
+[compute-96-10] out:     clat (msec): min=1, max=1018, avg= 5.76, stdev=28.94
+[compute-96-10] out:      lat (msec): min=1, max=1018, avg= 5.76, stdev=28.94
+[compute-96-10] out:     clat percentiles (usec):
+[compute-96-10] out:      |  1.00th=[ 1944],  5.00th=[ 2448], 10.00th=[ 2672], 20.00th=[ 2960],
+[compute-96-10] out:      | 30.00th=[ 3184], 40.00th=[ 3408], 50.00th=[ 3664], 60.00th=[ 3952],
+[compute-96-10] out:      | 70.00th=[ 4448], 80.00th=[ 5344], 90.00th=[ 6496], 95.00th=[ 7456],
+[compute-96-10] out:      | 99.00th=[11328], 99.50th=[25472], 99.90th=[448512], 99.95th=[708608],
+[compute-96-10] out:      | 99.99th=[970752]
+[compute-96-10] out:     bw (KB  /s): min=  160, max=23144, per=100.00%, avg=15259.32, stdev=5388.14
+[compute-96-10] out:     lat (msec) : 2=1.22%, 4=59.79%, 10=37.62%, 20=0.83%, 50=0.07%
+[compute-96-10] out:     lat (msec) : 100=0.04%, 250=0.15%, 500=0.19%, 750=0.03%, 1000=0.04%
+[compute-96-10] out:     lat (msec) : 2000=0.01%
+[compute-96-10] out:   cpu          : usr=1.17%, sys=0.23%, ctx=21332, majf=0, minf=3012
+[compute-96-10] out:   IO depths    : 1=1.1%, 2=4.5%, 4=15.5%, 8=42.7%, 16=36.2%, 32=0.0%, >=64=0.0%
+[compute-96-10] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-10] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.7%, 32=3.5%, 64=0.0%, >=64=0.0%
+[compute-96-10] out:      issued    : total=r=0/w=217455/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-10] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-10] out: 
+[compute-96-10] out: Run status group 0 (all jobs):
+[compute-96-10] out:   WRITE: io=869820KB, aggrb=14496KB/s, minb=14496KB/s, maxb=14496KB/s, mint=60003msec, maxt=60003msec
+[compute-96-10] out: 
+[compute-96-10] out: Disk stats (read/write):
+[compute-96-10] out:   sda: ios=0/1061, merge=0/1161, ticks=0/190, in_queue=189, util=0.18%
+[compute-96-10] out: 
+
+[compute-96-13] out: 
+[compute-96-13] out: mytest: (groupid=0, jobs=1): err= 0: pid=26792: Fri Sep  9 14:09:41 2016
+[compute-96-13] out:   write: io=900056KB, bw=15001KB/s, iops=3750, runt= 60001msec
+[compute-96-13] out:     slat (usec): min=0, max=23, avg= 0.11, stdev= 0.41
+[compute-96-13] out:     clat (msec): min=1, max=1019, avg= 5.57, stdev=29.02
+[compute-96-13] out:      lat (msec): min=1, max=1019, avg= 5.57, stdev=29.02
+[compute-96-13] out:     clat percentiles (usec):
+[compute-96-13] out:      |  1.00th=[ 1960],  5.00th=[ 2352], 10.00th=[ 2576], 20.00th=[ 2832],
+[compute-96-13] out:      | 30.00th=[ 3024], 40.00th=[ 3216], 50.00th=[ 3472], 60.00th=[ 3760],
+[compute-96-13] out:      | 70.00th=[ 4320], 80.00th=[ 5216], 90.00th=[ 6240], 95.00th=[ 7136],
+[compute-96-13] out:      | 99.00th=[10560], 99.50th=[23936], 99.90th=[473088], 99.95th=[708608],
+[compute-96-13] out:      | 99.99th=[970752]
+[compute-96-13] out:     bw (KB  /s): min= 1000, max=23448, per=100.00%, avg=15949.25, stdev=5756.75
+[compute-96-13] out:     lat (msec) : 2=1.21%, 4=64.57%, 10=33.04%, 20=0.65%, 50=0.09%
+[compute-96-13] out:     lat (msec) : 100=0.04%, 250=0.14%, 500=0.17%, 750=0.04%, 1000=0.04%
+[compute-96-13] out:     lat (msec) : 2000=0.01%
+[compute-96-13] out:   cpu          : usr=1.17%, sys=0.23%, ctx=23238, majf=0, minf=5512
+[compute-96-13] out:   IO depths    : 1=1.1%, 2=4.4%, 4=15.3%, 8=42.8%, 16=36.4%, 32=0.0%, >=64=0.0%
+[compute-96-13] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-13] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.8%, 32=3.4%, 64=0.0%, >=64=0.0%
+[compute-96-13] out:      issued    : total=r=0/w=225014/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-13] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-13] out: 
+[compute-96-13] out: Run status group 0 (all jobs):
+[compute-96-13] out:   WRITE: io=900056KB, aggrb=15000KB/s, minb=15000KB/s, maxb=15000KB/s, mint=60001msec, maxt=60001msec
+[compute-96-13] out: 
+[compute-96-13] out: Disk stats (read/write):
+[compute-96-13] out:   sda: ios=0/47, merge=0/34, ticks=0/760, in_queue=760, util=1.27%
+[compute-96-19] out: 
+[compute-96-19] out: mytest: (groupid=0, jobs=1): err= 0: pid=34710: Fri Sep  9 14:09:41 2016
+[compute-96-19] out:   write: io=828884KB, bw=13814KB/s, iops=3453, runt= 60003msec
+[compute-96-19] out:     slat (usec): min=0, max=35, avg= 0.12, stdev= 0.45
+[compute-96-19] out:     clat (msec): min=1, max=1017, avg= 6.04, stdev=29.82
+[compute-96-19] out:      lat (msec): min=1, max=1017, avg= 6.05, stdev=29.82
+[compute-96-19] out:     clat percentiles (msec):
+[compute-96-19] out:      |  1.00th=[    3],  5.00th=[    3], 10.00th=[    3], 20.00th=[    4],
+[compute-96-19] out:      | 30.00th=[    4], 40.00th=[    4], 50.00th=[    4], 60.00th=[    5],
+[compute-96-19] out:      | 70.00th=[    5], 80.00th=[    6], 90.00th=[    7], 95.00th=[    8],
+[compute-96-19] out:      | 99.00th=[   13], 99.50th=[   29], 99.90th=[  510], 99.95th=[  824],
+[compute-96-19] out:      | 99.99th=[ 1004]
+[compute-96-19] out:     bw (KB  /s): min=  616, max=22168, per=100.00%, avg=14670.79, stdev=5193.29
+[compute-96-19] out:     lat (msec) : 2=0.85%, 4=52.46%, 10=44.99%, 20=1.14%, 50=0.11%
+[compute-96-19] out:     lat (msec) : 100=0.03%, 250=0.15%, 500=0.16%, 750=0.05%, 1000=0.04%
+[compute-96-19] out:     lat (msec) : 2000=0.01%
+[compute-96-19] out:   cpu          : usr=1.15%, sys=0.22%, ctx=19186, majf=0, minf=3028
+[compute-96-19] out:   IO depths    : 1=1.2%, 2=4.8%, 4=15.9%, 8=42.6%, 16=35.5%, 32=0.0%, >=64=0.0%
+[compute-96-19] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-19] out:      complete  : 0=0.0%, 4=94.7%, 8=0.1%, 16=1.6%, 32=3.5%, 64=0.0%, >=64=0.0%
+[compute-96-19] out:      issued    : total=r=0/w=207221/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-19] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-19] out: 
+[compute-96-19] out: Run status group 0 (all jobs):
+[compute-96-19] out:   WRITE: io=828884KB, aggrb=13814KB/s, minb=13814KB/s, maxb=13814KB/s, mint=60003msec, maxt=60003msec
+[compute-96-19] out: 
+[compute-96-19] out: Disk stats (read/write):
+[compute-96-19] out:   sda: ios=0/66, merge=0/32, ticks=0/1, in_queue=1, util=0.00%
+[compute-96-19] out: 
+
+[compute-96-13] out: 
+[compute-96-17] out: 
+[compute-96-17] out: mytest: (groupid=0, jobs=1): err= 0: pid=27977: Fri Sep  9 14:09:41 2016
+[compute-96-17] out:   write: io=867520KB, bw=14458KB/s, iops=3614, runt= 60001msec
+[compute-96-17] out:     slat (usec): min=0, max=41, avg= 0.12, stdev= 0.44
+[compute-96-17] out:     clat (msec): min=1, max=1017, avg= 5.77, stdev=29.38
+[compute-96-17] out:      lat (msec): min=1, max=1017, avg= 5.77, stdev=29.38
+[compute-96-17] out:     clat percentiles (usec):
+[compute-96-17] out:      |  1.00th=[ 1960],  5.00th=[ 2416], 10.00th=[ 2672], 20.00th=[ 2960],
+[compute-96-17] out:      | 30.00th=[ 3184], 40.00th=[ 3408], 50.00th=[ 3632], 60.00th=[ 3952],
+[compute-96-17] out:      | 70.00th=[ 4448], 80.00th=[ 5344], 90.00th=[ 6496], 95.00th=[ 7456],
+[compute-96-17] out:      | 99.00th=[10816], 99.50th=[23936], 99.90th=[485376], 99.95th=[716800],
+[compute-96-17] out:      | 99.99th=[970752]
+[compute-96-17] out:     bw (KB  /s): min=  496, max=23232, per=100.00%, avg=15218.62, stdev=5648.99
+[compute-96-17] out:     lat (msec) : 2=1.18%, 4=59.91%, 10=37.63%, 20=0.76%, 50=0.07%
+[compute-96-17] out:     lat (msec) : 100=0.04%, 250=0.14%, 500=0.17%, 750=0.05%, 1000=0.04%
+[compute-96-17] out:     lat (msec) : 2000=0.01%
+[compute-96-17] out:   cpu          : usr=1.18%, sys=0.23%, ctx=21084, majf=0, minf=3016
+[compute-96-17] out:   IO depths    : 1=1.1%, 2=4.6%, 4=15.5%, 8=42.7%, 16=36.1%, 32=0.0%, >=64=0.0%
+[compute-96-17] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-17] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.7%, 32=3.5%, 64=0.0%, >=64=0.0%
+[compute-96-17] out:      issued    : total=r=0/w=216880/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-17] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-17] out: 
+[compute-96-17] out: Run status group 0 (all jobs):
+[compute-96-17] out:   WRITE: io=867520KB, aggrb=14458KB/s, minb=14458KB/s, maxb=14458KB/s, mint=60001msec, maxt=60001msec
+[compute-96-17] out: 
+[compute-96-17] out: Disk stats (read/write):
+[compute-96-17] out:   sda: ios=0/49, merge=0/33, ticks=0/15, in_queue=15, util=0.02%
+
+[compute-96-17] out: 
+[compute-96-14] out: 
+[compute-96-14] out: mytest: (groupid=0, jobs=1): err= 0: pid=21885: Fri Sep  9 14:09:41 2016
+[compute-96-14] out:   write: io=889720KB, bw=14828KB/s, iops=3707, runt= 60002msec
+[compute-96-14] out:     slat (usec): min=0, max=32, avg= 0.12, stdev= 0.42
+[compute-96-14] out:     clat (msec): min=1, max=1000, avg= 5.63, stdev=28.79
+[compute-96-14] out:      lat (msec): min=1, max=1000, avg= 5.63, stdev=28.79
+[compute-96-14] out:     clat percentiles (usec):
+[compute-96-14] out:      |  1.00th=[ 1944],  5.00th=[ 2384], 10.00th=[ 2608], 20.00th=[ 2896],
+[compute-96-14] out:      | 30.00th=[ 3088], 40.00th=[ 3312], 50.00th=[ 3536], 60.00th=[ 3856],
+[compute-96-14] out:      | 70.00th=[ 4320], 80.00th=[ 5216], 90.00th=[ 6368], 95.00th=[ 7200],
+[compute-96-14] out:      | 99.00th=[10688], 99.50th=[31616], 99.90th=[473088], 99.95th=[708608],
+[compute-96-14] out:      | 99.99th=[970752]
+[compute-96-14] out:     bw (KB  /s): min=  168, max=23752, per=100.00%, avg=15472.30, stdev=5839.66
+[compute-96-14] out:     lat (msec) : 2=1.24%, 4=62.55%, 10=35.04%, 20=0.62%, 50=0.10%
+[compute-96-14] out:     lat (msec) : 100=0.05%, 250=0.14%, 500=0.17%, 750=0.04%, 1000=0.05%
+[compute-96-14] out:     lat (msec) : 2000=0.01%
+[compute-96-14] out:   cpu          : usr=1.20%, sys=0.26%, ctx=21935, majf=0, minf=4024
+[compute-96-14] out:   IO depths    : 1=1.0%, 2=4.5%, 4=15.4%, 8=42.8%, 16=36.4%, 32=0.0%, >=64=0.0%
+[compute-96-14] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-14] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.8%, 32=3.4%, 64=0.0%, >=64=0.0%
+[compute-96-14] out:      issued    : total=r=0/w=222430/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-14] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-14] out: 
+[compute-96-14] out: Run status group 0 (all jobs):
+[compute-96-14] out:   WRITE: io=889720KB, aggrb=14828KB/s, minb=14828KB/s, maxb=14828KB/s, mint=60002msec, maxt=60002msec
+[compute-96-14] out: 
+[compute-96-14] out: Disk stats (read/write):
+[compute-96-14] out:   sda: ios=0/58, merge=0/38, ticks=0/1, in_queue=1, util=0.00%
+[compute-96-16] out: [compute-96-15] out: 
+[compute-96-16] out: 
+mytest: (groupid=0, jobs=1): err= 0: pid=20241: Fri Sep  9 14:09:41 2016
+[compute-96-16] out: [compute-96-15] out:   write: io=917828KB, bw=15296KB/s, iops=3824, runt= 60004msec
+mytest: (groupid=0, jobs=1): err= 0: pid=19766: Fri Sep  9 14:09:41 2016
+[compute-96-16] out:     slat (usec): min=0, max=24, avg= 0.11, stdev= 0.38
+[compute-96-15] out: [compute-96-16] out:     clat (msec): min=1, max=1019, avg= 5.46, stdev=28.68
+  write: io=898816KB, bw=14980KB/s, iops=3744, runt= 60003msec
+[compute-96-16] out:      lat (msec): min=1, max=1019, avg= 5.46, stdev=28.68
+[compute-96-15] out: [compute-96-16] out:     slat (usec): min=0, max=41, avg= 0.12, stdev= 0.43
+    clat percentiles (usec):
+[compute-96-16] out: [compute-96-15] out:      |  1.00th=[ 1880],  5.00th=[ 2320], 10.00th=[ 2544], 20.00th=[ 2768],
+    clat (msec): min=1, max=1018, avg= 5.57, stdev=28.40
+[compute-96-16] out:      | 30.00th=[ 2992], 40.00th=[ 3184], 50.00th=[ 3376], 60.00th=[ 3696],
+[compute-96-15] out: [compute-96-16] out:      lat (msec): min=1, max=1018, avg= 5.57, stdev=28.40
+     | 70.00th=[ 4192], 80.00th=[ 5152], 90.00th=[ 6176], 95.00th=[ 7072],
+[compute-96-16] out: [compute-96-15] out:      | 99.00th=[10688], 99.50th=[18816], 99.90th=[485376], 99.95th=[708608],
+[compute-96-14] out:     clat percentiles (usec):
+[compute-96-16] out:      | 99.99th=[970752]
+[compute-96-15] out: [compute-96-16] out: 
+     |  1.00th=[ 1960],  5.00th=[ 2352], 10.00th=[ 2576], 20.00th=[ 2864],
+    bw (KB  /s): min=  440, max=23568, per=100.00%, avg=16244.04, stdev=5775.91
+[compute-96-16] out: [compute-96-15] out:     lat (msec) : 2=1.52%, 4=65.11%, 10=32.19%, 20=0.69%, 50=0.08%
+     | 30.00th=[ 3056], 40.00th=[ 3280], 50.00th=[ 3536], 60.00th=[ 3824],
+[compute-96-16] out:     lat (msec) : 100=0.03%, 250=0.14%, 500=0.15%, 750=0.05%, 1000=0.04%
+[compute-96-15] out: [compute-96-16] out:      | 70.00th=[ 4320], 80.00th=[ 5216], 90.00th=[ 6304], 95.00th=[ 7264],
+    lat (msec) : 2000=0.01%
+[compute-96-16] out: [compute-96-15] out:   cpu          : usr=1.25%, sys=0.18%, ctx=23862, majf=0, minf=3520
+     | 99.00th=[10688], 99.50th=[22656], 99.90th=[468992], 99.95th=[667648],
+[compute-96-16] out:   IO depths    : 1=1.0%, 2=4.3%, 4=15.2%, 8=42.9%, 16=36.6%, 32=0.0%, >=64=0.0%
+[compute-96-15] out: [compute-96-16] out:      | 99.99th=[978944]
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-16] out: [compute-96-15] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.9%, 32=3.3%, 64=0.0%, >=64=0.0%
+[compute-96-16] out:      issued    : total=r=0/w=229457/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-16] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-16] out: 
+[compute-96-16] out: Run status group 0 (all jobs):
+[compute-96-16] out:     bw (KB  /s): min=  200, max=23752, per=100.00%, avg=15630.97, stdev=5831.46
+  WRITE: io=917828KB, aggrb=15296KB/s, minb=15296KB/s, maxb=15296KB/s, mint=60004msec, maxt=60004msec
+[compute-96-16] out: 
+[compute-96-16] out: Disk stats (read/write):
+[compute-96-15] out: [compute-96-16] out:     lat (msec) : 2=1.23%, 4=62.91%, 10=34.65%, 20=0.69%, 50=0.08%
+  sda: ios=0/57, merge=0/34, ticks=0/2, in_queue=2, util=0.00%
+[compute-96-15] out:     lat (msec) : 100=0.04%, 250=0.13%, 500=0.17%, 750=0.05%, 1000=0.03%
+[compute-96-15] out:     lat (msec) : 2000=0.01%
+[compute-96-15] out:   cpu          : usr=1.24%, sys=0.22%, ctx=22309, majf=0, minf=3013
+[compute-96-15] out:   IO depths    : 1=1.0%, 2=4.4%, 4=15.3%, 8=42.9%, 16=36.4%, 32=0.0%, >=64=0.0%
+[compute-96-15] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-15] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.8%, 32=3.4%, 64=0.0%, >=64=0.0%
+[compute-96-15] out:      issued    : total=r=0/w=224704/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-15] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-15] out: 
+[compute-96-15] out: Run status group 0 (all jobs):
+[compute-96-15] out:   WRITE: io=898816KB, aggrb=14979KB/s, minb=14979KB/s, maxb=14979KB/s, mint=60003msec, maxt=60003msec
+[compute-96-15] out: 
+[compute-96-15] out: Disk stats (read/write):
+[compute-96-15] out:   sda: ios=0/49, merge=0/32, ticks=0/111, in_queue=111, util=0.19%
+
+[compute-96-18] out: 
+[compute-96-18] out: mytest: (groupid=0, jobs=1): err= 0: pid=31759: Fri Sep  9 14:09:41 2016
+[compute-96-16] out: [compute-96-18] out: 
+  write: io=812460KB, bw=13541KB/s, iops=3385, runt= 60002msec
+[compute-96-18] out:     slat (usec): min=0, max=26, avg= 0.13, stdev= 0.44
+[compute-96-18] out:     clat (msec): min=1, max=1000, avg= 6.17, stdev=30.31
+[compute-96-18] out:      lat (msec): min=1, max=1000, avg= 6.17, stdev=30.31
+[compute-96-18] out:     clat percentiles (msec):
+[compute-96-18] out:      |  1.00th=[    3],  5.00th=[    3], 10.00th=[    3], 20.00th=[    4],
+[compute-96-18] out:      | 30.00th=[    4], 40.00th=[    4], 50.00th=[    4], 60.00th=[    5],
+[compute-96-18] out:      | 70.00th=[    5], 80.00th=[    6], 90.00th=[    7], 95.00th=[    9],
+[compute-96-18] out:      | 99.00th=[   13], 99.50th=[   44], 99.90th=[  494], 99.95th=[  824],
+[compute-96-18] out:      | 99.99th=[  996]
+[compute-96-18] out:     bw (KB  /s): min=  152, max=23496, per=100.00%, avg=14127.29, stdev=5570.47
+[compute-96-18] out:     lat (msec) : 2=0.81%, 4=50.31%, 10=47.16%, 20=1.12%, 50=0.13%
+[compute-96-18] out:     lat (msec) : 100=0.03%, 250=0.16%, 500=0.18%, 750=0.05%, 1000=0.05%
+[compute-96-18] out:     lat (msec) : 2000=0.01%
+[compute-96-18] out:   cpu          : usr=1.13%, sys=0.22%, ctx=18435, majf=0, minf=2993
+[compute-96-18] out:   IO depths    : 1=1.2%, 2=4.8%, 4=15.9%, 8=42.5%, 16=35.5%, 32=0.0%, >=64=0.0%
+[compute-96-18] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-18] out:      complete  : 0=0.0%, 4=94.7%, 8=0.1%, 16=1.6%, 32=3.6%, 64=0.0%, >=64=0.0%
+[compute-96-18] out:      issued    : total=r=0/w=203115/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-18] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-18] out: 
+[compute-96-18] out: Run status group 0 (all jobs):
+[compute-96-18] out:   WRITE: io=812460KB, aggrb=13540KB/s, minb=13540KB/s, maxb=13540KB/s, mint=60002msec, maxt=60002msec
+[compute-96-18] out: 
+[compute-96-18] out: Disk stats (read/write):
+[compute-96-18] out:   sda: ios=0/65, merge=0/37, ticks=0/7, in_queue=7, util=0.01%
+
+[compute-96-18] out: 
+
+[compute-96-15] out: 
+
+
+[compute-96-12] out: 
+[compute-96-12] out: mytest: (groupid=0, jobs=1): err= 0: pid=24859: Fri Sep  9 14:09:41 2016
+[compute-96-12] out:   write: io=906364KB, bw=15106KB/s, iops=3776, runt= 60002msec
+[compute-96-12] out:     slat (usec): min=0, max=28, avg= 0.11, stdev= 0.40
+[compute-96-12] out:     clat (msec): min=1, max=1018, avg= 5.53, stdev=28.25
+[compute-96-12] out:      lat (msec): min=1, max=1018, avg= 5.53, stdev=28.25
+[compute-96-12] out:     clat percentiles (usec):
+[compute-96-12] out:      |  1.00th=[ 1960],  5.00th=[ 2352], 10.00th=[ 2576], 20.00th=[ 2800],
+[compute-96-12] out:      | 30.00th=[ 3024], 40.00th=[ 3216], 50.00th=[ 3440], 60.00th=[ 3760],
+[compute-96-12] out:      | 70.00th=[ 4256], 80.00th=[ 5152], 90.00th=[ 6240], 95.00th=[ 7136],
+[compute-96-12] out:      | 99.00th=[10560], 99.50th=[28544], 99.90th=[448512], 99.95th=[708608],
+[compute-96-12] out:      | 99.99th=[970752]
+[compute-96-12] out:     bw (KB  /s): min=  168, max=24352, per=100.00%, avg=15626.16, stdev=6073.97
+[compute-96-12] out:     lat (msec) : 2=1.15%, 4=64.58%, 10=33.14%, 20=0.58%, 50=0.09%
+[compute-96-12] out:     lat (msec) : 100=0.05%, 250=0.14%, 500=0.18%, 750=0.03%, 1000=0.04%
+[compute-96-12] out:     lat (msec) : 2000=0.01%
+[compute-96-12] out:   cpu          : usr=1.24%, sys=0.21%, ctx=23351, majf=0, minf=3505
+[compute-96-12] out:   IO depths    : 1=1.0%, 2=4.3%, 4=15.2%, 8=42.9%, 16=36.5%, 32=0.0%, >=64=0.0%
+[compute-96-12] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-12] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.8%, 32=3.4%, 64=0.0%, >=64=0.0%
+[compute-96-12] out:      issued    : total=r=0/w=226591/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-12] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-12] out: 
+[compute-96-12] out: Run status group 0 (all jobs):
+[compute-96-12] out:   WRITE: io=906364KB, aggrb=15105KB/s, minb=15105KB/s, maxb=15105KB/s, mint=60002msec, maxt=60002msec
+[compute-96-12] out: 
+[compute-96-12] out: Disk stats (read/write):
+[compute-96-12] out:   sda: ios=0/59, merge=0/37, ticks=0/169, in_queue=169, util=0.27%
+[compute-96-12] out: 
+
+[compute-96-11] out: 
+[compute-96-11] out: mytest: (groupid=0, jobs=1): err= 0: pid=29743: Fri Sep  9 14:09:41 2016
+[compute-96-11] out:   write: io=869260KB, bw=14487KB/s, iops=3621, runt= 60001msec
+[compute-96-11] out:     slat (usec): min=0, max=23, avg= 0.12, stdev= 0.41
+[compute-96-11] out:     clat (msec): min=1, max=1016, avg= 5.76, stdev=29.53
+[compute-96-11] out:      lat (msec): min=1, max=1016, avg= 5.76, stdev=29.53
+[compute-96-11] out:     clat percentiles (usec):
+[compute-96-11] out:      |  1.00th=[ 1928],  5.00th=[ 2416], 10.00th=[ 2640], 20.00th=[ 2928],
+[compute-96-11] out:      | 30.00th=[ 3152], 40.00th=[ 3376], 50.00th=[ 3632], 60.00th=[ 3920],
+[compute-96-11] out:      | 70.00th=[ 4448], 80.00th=[ 5344], 90.00th=[ 6496], 95.00th=[ 7456],
+[compute-96-11] out:      | 99.00th=[10816], 99.50th=[31104], 99.90th=[493568], 99.95th=[716800],
+[compute-96-11] out:      | 99.99th=[978944]
+[compute-96-11] out:     bw (KB  /s): min=  288, max=24728, per=100.00%, avg=14986.01, stdev=5882.34
+[compute-96-11] out:     lat (msec) : 2=1.37%, 4=60.53%, 10=36.87%, 20=0.69%, 50=0.10%
+[compute-96-11] out:     lat (msec) : 100=0.03%, 250=0.14%, 500=0.17%, 750=0.04%, 1000=0.04%
+[compute-96-11] out:     lat (msec) : 2000=0.01%
+[compute-96-11] out:   cpu          : usr=1.19%, sys=0.23%, ctx=21392, majf=0, minf=2507
+[compute-96-11] out:   IO depths    : 1=1.1%, 2=4.4%, 4=15.4%, 8=42.7%, 16=36.5%, 32=0.0%, >=64=0.0%
+[compute-96-11] out:      submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+[compute-96-11] out:      complete  : 0=0.0%, 4=94.6%, 8=0.2%, 16=1.8%, 32=3.4%, 64=0.0%, >=64=0.0%
+[compute-96-11] out:      issued    : total=r=0/w=217315/d=0, short=r=0/w=0/d=0, drop=r=0/w=0/d=0
+[compute-96-11] out:      latency   : target=0, window=0, percentile=100.00%, depth=21
+[compute-96-11] out: 
+[compute-96-11] out: Run status group 0 (all jobs):
+[compute-96-11] out:   WRITE: io=869260KB, aggrb=14487KB/s, minb=14487KB/s, maxb=14487KB/s, mint=60001msec, maxt=60001msec
+[compute-96-11] out: 
+[compute-96-11] out: Disk stats (read/write):
+[compute-96-11] out:   sda: ios=0/55, merge=0/46, ticks=0/812, in_queue=812, util=1.36%
+[compute-96-11] out: 
+
+
+Done.
