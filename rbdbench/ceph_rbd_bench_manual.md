@@ -12,23 +12,31 @@
 
 注意，测试必须在机器的每一块磁盘上同时进行，因为如果只跑在一块磁盘上，结果就是这一块盘独占RAID cache，这与我们实际跑IO时的情况是不一样的。
 注意，在测试读时，请通过```echo 3 > /proc/sys/vm/drop_caches```清空page cache，否则在写完就进行读测试，读的全部都是page cache，结果毫无意义。
+
 注意，在测试时，不要过大的增加iodepth等参数，否则延迟会达到无法接受的地步，可以确定一个标杆是99% io在延迟为12ms。进行fio测试时，不要看average的延迟，99%等数据。后续的所有使用fio进行的测试，都是使用这种指标进行的。
+
 注意，因为SSD是采用裸盘的方式被osd当做journal使用，因此相关测试最好在ceph上线之前进行。
+
 注意，因为RBD使用了巨大的raid cache，因此随机写iops要比读要好很多，不要被惊到。我这边测得随机写iops单盘能有1000左右，而随机读只有大概170左右。
 
 3.1、单盘4k随机写iops
+
 ```fio -sync=1 -direct=1 -iodepth=64 -thread -rw=randwrite -bs=4k -size=30G -numjobs=1 -runtime=300 -group_reporting  -name=test -filename=/var/lib/ceph/osd/ceph-$i/disktest/1.txt -ioengine=sync```
 
 3.2、单盘4k随机读iops
+
 ```fio -sync=1 -direct=1 -iodepth=64 -thread -rw=randread -bs=4k -size=30G -numjobs=1 -runtime=300 -group_reporting  -name=test -filename=/var/lib/ceph/osd/ceph-$i/disktest/1.txt -ioengine=sync```
 
 3.3、单盘4m顺序写吞吐量
+
 ```fio -sync=1 -direct=1 -iodepth=64 -thread -rw=write -bs=4m -size=30G -numjobs=1 -runtime=300 -group_reporting  -name=test -filename=/var/lib/ceph/osd/ceph-$i/disktest/1.txt -ioengine=sync```
 
 3.4、单盘4m顺序读吞吐量
+
 ```fio -sync=1 -direct=1 -iodepth=64 -thread -rw=read -bs=4m -size=30G -numjobs=1 -runtime=300 -group_reporting  -name=test -filename=/var/lib/ceph/osd/ceph-$i/disktest/1.txt -ioengine=sync```
 
 4.单机ceph性能指标测试
+
 单机ceph性能指标是通过fio的rbd engine测得的，要限制所有的IO全部压在一台机器上，需要创建新的crush rule(注意，单机测试必须要做，某台服务器可能会存在性能显著差于其他服务器的情况，这种情况应该发现的越早越好，另外，为了节省时间，所有的服务器可以同时进行压测，以下都是以一台服务器为例)：
 
 ```ceph osd crush rule create-simple only10 compute-96-10 osd firstn```
@@ -50,6 +58,7 @@
 ```
 ceph osd blacklist ls
 ```
+
 对于这种情况，关闭这个fio实例并重新启动一个即可。
 
 4.1、4k随机写iops
@@ -83,6 +92,7 @@ ceph osd blacklist ls
 并发的对每个host进行压测时，能够得到一个巨大的随机写iops(香港的机器测得大约是600k左右)，然而这个值没有实际意义，主要原因在于，因为把IO落到同一个host的多个osd上，相对于完全屏蔽了网络IO对性能的影响，作为一个分布式的存储系统，通过把数据分割、打散到多台服务器上，才达到更高的可用性和可靠性，而打散意味着服务器之间交互需要通过网络，因此在进行benchamrk时，有必要做一下针对rack的压测。
 
 注意，针对rack的压测可以同时进行，因为IO是以rack为单位进行隔离的，IO不会在rack之间流动，相互之间不会有影响。
+
 注意，针对rack的压测必须要进行，不能漏掉，这对于得到一个合理的性能数值十分重要。
 
 rack级别的压测跟前述针对单机的压测类似，首先需要创建基于一个rack的crush rule，以host为单位进行隔离:
@@ -108,8 +118,10 @@ rack级别的压测跟前述针对单机的压测类似，首先需要创建基�
 注意，要根据实际情况去调整两个最重要的参数：一是fio实例个数，二是每个fio实例的iodepth，在99% IO延迟为12ms内进行调整，目标就是把总iops测到最高。
 
 7.关于测试脚本和香港集群的测试数据
+
 请参考```./cephop```目录提供的fabfile.py脚本和两个数据分析脚本，另外，```./cephop/rackresult```和```./cephop./clusterresult```提供了香港集群的随机写测试数据.
 
 8.关于破坏性测试和服务器压测
+
 除了性能测试之外，还需要测试服务器重启、服务器crash、机架掉电等情况，具体的指标是所有pg恢复为active状态所消耗的时间。
 
