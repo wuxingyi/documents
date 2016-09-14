@@ -61,6 +61,8 @@ ceph osd blacklist ls
 
 对于这种情况，关闭这个fio实例并重新启动一个即可。
 
+注意，在进行host测试时，并不会存在一个基准值，即每一个host的iops应该是多少，因为性能数据随着机器批次的不同存在较大差异，比如我在测试中发现香港的机器比北京的和北美的都要好不少(香港单机大概6000，而北美和北京只有4000左右)，我们衡量某一个host的性能好不好的标准就是跟这个集群的其他机器对比，即只做横向的对比.
+
 4.1、4k随机写iops
 ```fio -sync=1 -direct=1 -iodepth=64 -thread -rw=randwrite -ioengine=rbd -bs=4k -size=100G -numjobs=1 -runtime=180 -pool=only102 -rbdname=hehe2 -clientname=admin -group_reporting -name=mytest```
 
