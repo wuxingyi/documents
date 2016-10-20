@@ -289,6 +289,41 @@ ceph osd pool set rbd min_size 1
 ```
 之后，就是通过把起不来的osd out掉，此时crush算法会重新选择另外两个osd存储这个pg，这样数据会重新进入到backfill状态并最终恢复。
 
+12.数据盘替换(RBD场景下)
+数据盘替换按以下流程进行:
+```
+1.暂时注释掉/etc/ceph/ceph.conf的下面这一行：
+osd crush update on start = false
+2.关闭osd,删除auth,crush等
+systemctl stop  ceph-osd@274
+ceph osd out osd.274
+ceph osd crush remove osd.274
+ceph osd rm  osd.274
+ceph auth del osd.274
+3.使用gdisk命令删除对象journal盘上的原有对应分区,下面的例子是删除sdh的分区1
+sgdisk -d 1 /dev/sdh
+4.创建新的osd,并拉起osd进程
+ceph-deploy osd create --zap-disk 10.248.8.52:/dev/sde:/dev/sdh
+5.恢复/etc/ceph/ceph.conf
+```
+
+13.日志盘替换(RBD场景下)
+在我们的线上环境中，一块ssd都对应着两到三块hdd，因此需要对每一个hdd重复上述步骤,$partition是分区编号,一般从1开始.
+日志盘替换按以下流程进行:
+```
+1.获取osd的journal uuid($i为osd id):
+journal_uuid=$(cat /var/lib/ceph/osd/ceph-$i/journal_uuid)
+2.清空新日志盘上的所有分区
+/usr/sbin/ceph zap /dev/sdh
+3.在新的日志盘上创建日志分区(注:此时创建的分区编号为1):
+sgdisk --new=$partition:0:+5120M --change-name=1:'ceph journal' --partition-guid=$partition:$journal_uuid --typecode=$partition:$journal_uuid --mbrtogpt -- /dev/sdh
+4.创建软链接,并更改用户权限
+ln -s /dev/disk/by-partuuid/$journal_uuid /var/lib/ceph/osd/ceph-$i/journal
+chown ceph:ceph /dev/disk/by-partuuid/$journal_uuid
+5.拉起osd
+systemctl start ceph-osd@$i
+```
+
 三、严重级别
 严重级别操作具有危险性，特别是涉及到操作pg的元数据，因此需要谨慎。
 1.恶劣版的incomplete pg
