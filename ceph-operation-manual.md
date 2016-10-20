@@ -314,7 +314,7 @@ ceph-deploy osd create --zap-disk 10.248.8.52:/dev/sde:/dev/sdh
 1.获取osd的journal uuid($i为osd id):
 journal_uuid=$(cat /var/lib/ceph/osd/ceph-$i/journal_uuid)
 2.清空新日志盘上的所有分区
-/usr/sbin/ceph zap /dev/sdh
+/usr/sbin/ceph-disk zap /dev/sdh
 3.在新的日志盘上创建日志分区(注:此时创建的分区编号为1):
 sgdisk --new=$partition:0:+5120M --change-name=1:'ceph journal' --partition-guid=$partition:$journal_uuid --typecode=$partition:$journal_uuid --mbrtogpt -- /dev/sdh
 4.创建软链接,并更改用户权限
