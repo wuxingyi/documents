@@ -151,3 +151,20 @@ rack级别的压测跟前述针对单机的压测类似，首先需要创建基�
 
 除了性能测试之外，还需要测试服务器重启、服务器crash、机架掉电等情况，具体的指标是所有pg恢复为active状态所消耗的时间。
 
+9.关于使用fio模拟真实块设备的方法
+
+在真实的应用场景中，会对每一块rbd块设备进行QoS限速，比如限制磁盘吞吐量为50MB/s, iops为500，在没有配置QoS的情况下，  
+由于存在io抢占的情况，可能会造成某些块设备io延迟大幅波动的情况，导致较难测出集群实际的总吞吐和iops, 这种情况下，  
+我们可以使用fio的限速功能对每一个rbd块设备进行限速:
+
+```
+[root@LetvFDXJT92 round2]# fio --cmdhelp|grep rate
+rate                    : Set bandwidth rate
+rate_iops               : Limit IO used to this number of IO operations/sec
+```
+
+使用方式就是在fio命令行之后加上一句:
+
+```
+-rate 50M -rate_iops 500
+```
