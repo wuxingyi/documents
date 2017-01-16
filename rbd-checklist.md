@@ -33,3 +33,11 @@ ceph osd df或者ceph osd tree可以看到crush weight
 12.是否已经添加了watchceph监控项，用以进行短信、电话告警
 
 13.是否对ceph-osd@.service设置了taskset CPU限制
+
+14.是否添加了admin socket和日志，用以查看qemu进程的rbd使用情况，并收集重要日志。
+需在```/etc/ceph/ceph.conf```下添加：
+```
+[client]
+admin socket = /var/run/ceph/rbd-client-$pid.asok
+log file = /var/log/ceph/rbd-client-$pid.log
+```
