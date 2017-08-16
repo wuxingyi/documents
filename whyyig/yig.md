@@ -2,7 +2,7 @@
 #  Yet another Index Gateway
 
 Yig是S3协议兼容的分布式对象存储系统。它脱胎于开源软件[ceph](http://docs.ceph.com/docs/master/radosgw/), 在多年的商业化运维中，
-针对运维中出现的问题和功能上的新需求，重新实现了一遍radosgw用以解决一下问题：
+针对运维中出现的问题和功能上的新需求，重新实现了一遍radosgw用以解决以下问题：
 
 1. 单bucket下面文件数目的限制
 2. 大幅度提高小文件的存储能力
@@ -94,7 +94,7 @@ radosgw使用这个API做原子的操作，或者记录日志。
 因为S3的写入都是新文件，没有覆盖或者更新的情况，所有不用写journal，数据直接下盘。 
 
 
-## ceph在rebalence时，对在线环境是否影响很大？
+## ceph在rebalance时，对在线环境是否影响很大？
 
 简单的回答；很大
 
@@ -168,7 +168,7 @@ SAS盘上面。
 1.  默认的kvstore并没有打开布隆过滤器，需要在ceph的配置文件中配置打开，否则读性能会很差
 2.  在Ceph的replicatePG层，每次写object之前，都会尝试读取原Object, 然后在写入。这个对于rbd这种大文件的应用影响不大，但是对于小文件写入就非常糟糕。
 所以我们在rados的请求中加入的一个新的FLAG: LIBRADOS_OP_FLAG_FADVISE_NEWOBJ, 在replicatedPG中会检查是否有这个FLAG,如果有，就不会尝试读取不存在的小文件
-通过这个patch，可以极大的提升小文件的写入性能和cpu的利用率。
+通过这个patch，可以极大的提升小文件的写入性能和降低cpu的利用率。
 
 
 
@@ -182,7 +182,7 @@ SAS盘上面。
 
 ### 性能测试
 1. ceph cluster性能测试原始ceph性能，使用[rados bench](http://tracker.ceph.com/projects/ceph/wiki/Benchmark_Ceph_Cluster_Performance)测试4k小文件的随机读写。
-2. 使用[wrk](https://github.com/wg/wrk)配合lua脚本测试S3 API写入4k小文件。
+2. 使用[wrk](https://github.com/wg/wrk)配合lua脚本测试S3 API
 3. 使用[ycsb](https://github.com/brianfrankcooper/YCSB)测试S3 API性能
 
 部分性能测试数据：
