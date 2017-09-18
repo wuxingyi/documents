@@ -210,19 +210,21 @@ Recovery算法:
 证明需要参考[Database System Implementation](http://infolab.stanford.edu/~ullman/dscb.html)其中[18.1 Serial and Serializable Schedules]的内容. 
 简单证明：
 
+有2个thread, 一个在恢复H1对象，另一个在写入新的H1对象
+
 ```
 Normal  Thread: Write(C1), Write(C2), Put(H1)
 Recovery Thead: Write(C3), Write(C4), CheckAndPut(H1)
 ```
 
-因为在recovery中，我们最害怕用户写入正在recovery的数据，这样很容易造成数据不一致, 在上述的例子中正常的用户
-，对H1写入2对象C1和C2, 而recovery thread却在恢复H1的对应的C3和C4. 我们希望即使normal thread
-和recovery thread同时发生，但是最终结果也是按照[recovery thread] ===> [normal thread]的安全顺序。
+因为在recovery中，我们最害怕这种情况, 一个用户写入正在做recovery的对象，这样就很容易造成数据不一致, 
+在上述的例子中正常的用户 ，对H1写入2个Ceph对象C1和C2, 而recovery thread却在恢复H1的对应的C3和C4. 我们希望即使normal thread
+和recovery thread同时发生，但是最终结果也能达成[recovery thread] ===> [normal thread]的安全顺序。
 
 由于C1, C2, C3, C4是不同的对象，所以即使是写入，他们之间执行顺序并不影响最终结果. 问题的关键是在于
 normal thread和recovery thread在写相同的H1, 这个顺序如何保证？可以看到前面的算法，我们对
-Write(H1)会带上一个GUID，决定他们的安全顺序. 从这个证明也可以推断出，如果是写多个HBase行, GUID不能保证
-1个以上的CheckAndPut和Put可以序列化执行，必须依赖分布式锁.
+Write(H1)会带上一个GUID，决定他们的安全顺序. 从这个证明也可以推断出: 在yig的recovery算法中，如果是写多个HBase行, 只有GUID并不能保证
+1个以上的CheckAndPut和Put可以序列化执行，而必须依赖分布式锁.
 
 ## yig的journal算法优化
 
@@ -288,6 +290,6 @@ Checkpoint的算法不变.
 + https://github.com/twitter/snowflake snowflake算法
 + https://www.informatik.hu-berlin.de/de/forschung/gebiete/wbi/teaching/archive/ws1213/vl_dbs2/14_recovery.pdf 数据库的recovery算法
 + http://docs.ceph.com/docs/hammer/rados/api/ Ceph的rados API
-+ https://hbase.apache.org/devapidocs/org/apache/hadoop/hbase/client/HTable.html#checkAndMutate-byte:A-byte:A-byte:A-org.apache.hadoop.hbase.filter.CompareFilter.CompareOp-byte:A-org.apache.hadoop.hbase.client.RowMutations-  HBase支持行级别的原子操作
++ https://hbase.apache.org/devapidocs/org/apache/hadoop/hbase/client/HTable.html Base支持行级别的原子操作
 + https://github.com/semiosis/s3-parallel-multipart-uploader S3利用multipart API, 并发上传大文件
 + http://product.dangdang.com/20846769.html 数据库系统实现, 并发控制
