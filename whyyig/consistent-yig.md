@@ -43,7 +43,7 @@ BODY
 可以从这里面清楚得看到ObjectName, partNumber， uploadID这几个需要的数据. 所以针对一个13MB的问题，需要发送3次
 这个的http请求才可以完成上传,分别上传5MB, 5MB, 3MB
 
-3. 最后一步，S3客户端发现所有的part请求都已经成功, 发起[complate upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html)
+3. 最后一步，S3客户端发现所有的part请求都已经成功, 发起[complete upload](http://docs.aws.amazon.com/AmazonS3/latest/API/mpUploadComplete.html)
 
 所以只有上面3个步骤全部做完，才可以说一个文件上传完成. 所以调用的API次数多了很多，但是它可以很好的支持断点续传和并发上传.
 
@@ -204,7 +204,7 @@ Recovery算法:
 (WRITE Ceph object0), (WRITE Ceph object1), ..., (Put HBase row1);
 ```
 
-其中只要保证多次Ceph写入的是不同object，并且只能写*一次*BHase row. 那么这个recovery算法就可以安全的在分布式环境运行，不用停服。这个跟传统存储replay journal需要umount或者停服之间最大的区别
+其中只要保证多次Ceph写入的是不同object，并且只能写*一次*HBase row. 那么这个recovery算法就可以安全的在分布式环境运行，不用停服。这个跟传统存储replay journal需要umount或者停服之间最大的区别
 
 
 证明需要参考[Database System Implementation](http://infolab.stanford.edu/~ullman/dscb.html)其中[18.1 Serial and Serializable Schedules]的内容. 
@@ -247,7 +247,7 @@ Write(H1)会带上一个GUID，决定他们的安全顺序. 从这个证明也�
 1. yig接受请求，针对myfavoriteMovie.mp4生成一个唯一的全局唯一的oid;
 2. 生成一个全局单调递增的GUID号, 如3344, 在journal中记录一行[T3344:Start] , 这里
 3. 在journal中接着记录[T3344:create Ceph object oid], 说明将要在Ceph中写入新文件oid
-6. 调用Ceph的rados接口radoWrite(oid, buf, bufsize), 开始写入数据
+6. 调用Ceph的rados接口radosWrite(oid, buf, bufsize), 开始写入数据
 7. 如果Ceph写入成功，写入HBase, 记录myfavoriteMovie.mp4对应Ceph文件为oid:1233:12，并且带上这次transaction的GUID号
 8.a 如果写入Ceph或者HBase有任何一个出现问题，进行回滚操作，删除中间上传了一半的Ceph文件, 在journal中记录[T3322:abort]
     返回用户失败
