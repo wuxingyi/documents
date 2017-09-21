@@ -6,7 +6,7 @@
 通过他们可以跟后端的ceph集群通信，iscsi initiator则完全不依赖于任何的ceph相关的lib，  
 另外，通过两个target导出同一个rbd image，可以实现target的HA，这就需要运行两个target，同时在initiator上运行multipath。  
 
-![](media/arch.png){width="6.427083333333333in"  height="4.572916666666667in"}
+![](media/arch.png)
 
 ## 1.系统准备：
 
@@ -14,7 +14,7 @@
 在这个release中下面这个patch起了决定性作用，如果不合入这个patch，initiator将会把两个不同portal导出的同一个的lun看成两个不同的lun，  
 从而multipath也就不可能成功了，本人研究这个方案时，在这个地方卡了很久，直到在lrbd代码中看到tpg\_enabled\_sendtargets是问题的关键，才去查找相关kerneld的path。  
 
-![](media/patch.png){width="6.770833333333333in" height="0.14583333333333334in"}
+![](media/patch.png)
 
 ## 2.安装工具包：
 
@@ -135,12 +135,11 @@ Parameter generate_node_acls is now '1'.
 
 通过targetcli验证一下结果：  
 
-![](media/result27.png){width="6.770833333333333in" height="2.75in"}
+![](media/result27.png)
 
 而在192.168.0.32上，disable掉的则是tgp1：  
 
-![](media/result32.png){width="6.770833333333333in"
-height="2.7395833333333335in"}
+![](media/result32.png)
 
 ## 7.启动initiator上的multipathd进程：
 
@@ -185,19 +184,19 @@ Login to [iface: default, target: iqn.1994-05.com.redhat:37d4cea93db4, portal: 1
 
 通过fdisk可以看到：  
 
-![](media/fdisk.png){width="6.770833333333333in" height="3.8020833333333335in"}
+![](media/fdisk.png)
 
 可以看到两个块设备sdb和sdc，但是呢，sdb和sdc都不能被直接操作(不能被mkfs等操作)，因为multipath已经把它俩合成了一个新的设备，即/dev/mapper/mpatha.   
 此时运行```multipath -ll```，可以看到：  
 
-![](media/centos7_multipath.png){width="6.770833333333333in" height="1.5625in"}
+![](media/centos7_multipath.png)
 
 现在就可以正常的操作/dev/mapper/mpatha这个块设备了。  
 initiator对用户的操作系统没有要求，也不需要运行ceph及ceph的client，本人在centos 7和ubuntu 16.04上验证均通过，只需要initiator上运行了multipathd即可.  
 ubuntu 16.04如下：
 
-![](media/ubuntu_multipath.png){width="6.770833333333333in" height="2.6666666666666665in"}
+![](media/ubuntu_multipath.png)
 
 ## 8.windows上的initiator配置
 
-类似的，windows上也可以选择类似的方式来打开MPIO，具体方式可以参考suse提供的文档：https://www.suse.com/documentation/ses-2/book\_storage\_admin/data/ceph\_iscsi\_connect.html
+类似的，windows上也可以选择类似的方式来打开MPIO，具体方式可以参考[suse提供的文档](https://www.suse.com/documentation/ses-2/book_storage_admin/data/ceph_iscsi_connect.html)
