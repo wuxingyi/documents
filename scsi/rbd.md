@@ -12,7 +12,7 @@
 
 要顺利部署出支持multipath的iscsi gateway，第一步是把部署需要部署iscsi gateway的节点的kernel升级到至少3.10.0-514.6.2.el7(发布于2017年2月)，  
 在这个release中下面这个patch起了决定性作用，如果不合入这个patch，initiator将会把两个不同portal导出的同一个的lun看成两个不同的lun，  
-从而multipath也就不可能成功了，本人研究这个方案时，在这个地方卡了很久，直到在lrbd代码中看到tpg\_enabled\_sendtargets是问题的关键，才去查找相关kerneld的path。  
+从而multipath也就不可能成功了，本人研究这个方案时，在这个地方卡了很久，直到在lrbd代码中看到```tpg_enabled_sendtargets```是问题的关键，才去查找相关kerneld的path。  
 
 ![](media/patch.png)
 
@@ -81,11 +81,11 @@ yum install iscsi-initiator\* device-mapper-multipath -y
 
 ```
 imagename=wuxingyi
-rbd create \$imagename --size 2048
-rbd feature disable \$imagename deep-flatten
-rbd feature disable \$imagename fast-diff
-rbd feature disable \$imagename object-map
-rbd feature disable \$imagename exclusive-lock
+rbd create $imagename --size 2048
+rbd feature disable $imagename deep-flatten
+rbd feature disable $imagename fast-diff
+rbd feature disable $imagename object-map
+rbd feature disable $imagename exclusive-lock
 ```
 
 ## 6.使用lrbd工具
@@ -144,7 +144,7 @@ Parameter generate_node_acls is now '1'.
 ## 7.启动initiator上的multipathd进程：
 
 ```
-mpathconf --enable --with\_multipathd y
+mpathconf --enable --with_multipathd y
 systemctl start multipathd
 ```
 
@@ -195,7 +195,7 @@ Login to [iface: default, target: iqn.1994-05.com.redhat:37d4cea93db4, portal: 1
 initiator对用户的操作系统没有要求，也不需要运行ceph及ceph的client，本人在centos 7和ubuntu 16.04上验证均通过，只需要initiator上运行了multipathd即可.  
 ubuntu 16.04如下：
 
-![](media/ubuntu_multipath.png)
+![](media/ubuntu_multpath.png)
 
 ## 8.windows上的initiator配置
 
