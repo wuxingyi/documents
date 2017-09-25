@@ -215,3 +215,6 @@ systemctl start haproxy
 
 ## 11. 验证服务
 可通过curl验证，不赘述。
+
+## 12. 修改pool的pg_num和pgp_num  
+rgw需要使用的pool中有几个是自动生成的，需要修改pool的pg_num和pgp_num  
