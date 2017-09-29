@@ -171,27 +171,31 @@ BODY
 
 ## yig生成GUID的算法
 
-可以看到recovery算法，强烈需要一个全局单调递增的UID, 这个GUID的生成算法采用[Snowflake算法](http://www.lanindex.com/twitter-snowflake%EF%BC%8C64%E4%BD%8D%E8%87%AA%E5%A2%9Eid%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/), 简单得说就是用时间戳加机器ID得方式生成一个数字。我们用GUID为每一个transaction编号。
+可以看到recovery算法，强烈需要一个全局单调递增的UID, 这个GUID的生成算法采用[Snowflake算法](http://www.lanindex.com/twitter-snowflake%EF%BC%8C64%E4%BD%8D%E8%87%AA%E5%A2%9Eid%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/), 简单得说就是用时间戳加机器ID的 方式生成一个数字。我们用这个数字为每一个transaction编号, 把这个数字叫做GUID
 
 
 ## yig journal的Checkpoint实现
 
-为了防止journal无限制的增大, 和增加recovery的时间. 比如yig如果跑了1个星期后crash, 那么重启yig后，就需要读取一个星期的所有jouranl, 进行恢复，时间太长。 和数据库的实现类似，我们也需要在journal中增加Checkpoint的算法. 保证journal足够短. 通常我们每过半个小时做一次Checkpoint
+每一个yig的写请求都会增长journal, 为了防止journal无限制的增大, 导致过长的recovery的时间. 比如yig如果跑了1个星期后crash, 那么重启yig后，就需要读取一个星期的所有jouranl, crash后yig做recovery时间会很长. 和数据库的实现类似，我们也需要在journal中增加Checkpoint的算法. 保证journal足够短. 通常我们每过半个小时做一次Checkpoint
 
 算法:
 
 ```
 Checkpoint算法:
 
-读取当前正在进行的transaction的GUID, 如[17,18,21,45,46], 然后把这个list写入journal
+yig一直维护一个列表, 里面是当前所有正在进行的transaction的GUID。 Checkpoint算法每过固定时间运行一次，
+读取当前正在进行的transaction的GUID, 如[17,18,21,45,46], 然后把这个列表的内容写入journal. 
+在journal里面记录成[Checkpoint:17,18,21,45,46]
 
 Recovery算法:
 
-在正常的recovery的，从后向前读取中，读到看到第一个Checkpoint为止, 恢复这个Checkpoint之后的
-记录的所有transaction和这个List中的transcation. 因为可以看到,比如list是[17,18,21,45,46], 
-那么所有GUID小于17的transcation一定都已经成功的commit了.
-
+在recovery时，也是从后向前读取journal，读到看到第一个Checkpoint为止, 恢复这个Checkpoint之后的
+记录的所有transaction和这个Checkpoint List中的transcation. 
+因为可以看到, 比如读到的Checkpoint list是 [17,18,21,45,46], 那么说明所有GUID小于17的transcation
+一定都已经成功的commit了, 就不需要再向Journal前面找了.
 ```
+
+我们通常会没10分钟运行一次checkpoint,所以每次yig重启, 只用恢复最近10分钟的journal, 这样也保证了,
 
 ## yig为什么能实现无锁的recovery?
 
@@ -283,6 +287,29 @@ Checkpoint的算法不变.
 类似的GUID来实现. 因为在这个场景中，没有对hbase多行一致性的要求, 所以也不用给[primaryRow加锁](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36726.pdf)，
 最终的算法实现也非常简单
 
+
+### 删除流程 
+
+增加删除流程,用类似于redo log的方式
+
+```
+1. yig接受请求，在log中记录[T3344:delete myfavoriteMovie.mp4 and oid]
+2. 在log中记录[T3344: move oid to gc]
+3. 执行HBase操作，删除myfavoriteMovie.mp4
+4. 执行HBase操作，在gc表里面增加oid一行
+5. 返回用户操作成功
+```
+
+### 删除的recovery流程
+
+```
+从前向后读取log, 如果log中有[move oid to gc]的项目，这个就是需要做redo的项目
+在hbase中执行删除myfavoriteMovie.mp4和在gc表里面增加oid一行,注意在recovery时要比较GUID,
+如果当前HBase中的GUID大，则不执行删除
+
+```
+
+redo log的checkpoint方式与undo log的checkpoint方式相同 
 
 # 参考资料
 
