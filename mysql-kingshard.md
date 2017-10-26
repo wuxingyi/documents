@@ -73,13 +73,13 @@ Kingshard提供两个配置文件，分别对应于分表模式和不分表模�
 确认每个node上的mysql server都在运行后，启动kingshard(在kingshard的目录内)
 ./bin/kingshard -config=etc/unshard.yaml
 
-##测试系统
+## 测试系统
 使用mysql -u kingshar -pkingshard -P9696 连接到kingshard，执行不同的sql语句，可以在kingshard的log中显示对应的去向。
 
-##相关
+## 相关
 深入理解mysql master-slave replication，请参照链接：
-【1】http://www.orczhou.com/index.php/2011/07/why-and-how-mysql-5-5-semi-sync-replication/
-【2】https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html
-【3】http://blog.csdn.net/hguisu/article/details/7325124
-【4】https://dev.mysql.com/doc/refman/5.7/en/replication.html
-【5】https://github.com/flike/kingshard/blob/master/doc/KingDoc/kingshard_install_document.mc
+【1】 http://www.orczhou.com/index.php/2011/07/why-and-how-mysql-5-5-semi-sync-replication/
+【2】 https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html
+【3】 http://blog.csdn.net/hguisu/article/details/7325124
+【4】 https://dev.mysql.com/doc/refman/5.7/en/replication.html
+【5】 https://github.com/flike/kingshard/blob/master/doc/KingDoc/kingshard_install_document.mc
